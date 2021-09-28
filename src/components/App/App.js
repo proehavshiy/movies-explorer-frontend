@@ -24,6 +24,9 @@ function App() {
         <Route path="/signup">
           <h1>регистрация</h1>
         </Route>
+        <Route path="*">
+          <h1>404 page</h1>
+        </Route>
       </Switch>
     </div>
   );
