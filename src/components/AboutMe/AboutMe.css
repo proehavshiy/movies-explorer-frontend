@@ -1,15 +1,15 @@
-.footer {
+.landing__person {
 
 }
 
 @media screen and (max-width: 768px) {
-  .footer {
+  .landing__person {
 
   }
 }
 
 @media screen and (max-width: 320px) {
-  .footer {
+  .landing__person {
 
   }
 }
