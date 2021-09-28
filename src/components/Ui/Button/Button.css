@@ -1,0 +1,23 @@
+.page__button {
+  width: 76px;
+  height: 32px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+@media screen and (max-width: 768px) {
+  .page__button {
+
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__button {
+
+  }
+}
