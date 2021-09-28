@@ -1,5 +1,7 @@
 .landing__promo {
-
+  display: flex;
+  flex-direction: column;
+  background: #F3C1F8 url(../../images/pic_promo_background.svg) no-repeat center;
 }
 
 @media screen and (max-width: 768px) {
