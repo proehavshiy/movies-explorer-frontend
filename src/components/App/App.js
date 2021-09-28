@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+import Main from '../Main/Main';
 
 function App() {
   return (
     <div className="page">
       <Switch>
         <Route exact path="/">
-          <h1>«О проекте»</h1>
+          <Main />
         </Route>
         <Route path="/movies">
           <h1>«Фильмы»</h1>
