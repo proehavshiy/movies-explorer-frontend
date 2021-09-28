@@ -1,9 +1,14 @@
 import React from 'react';
 import './Main.css';
 
+import Header from '../Header/Header';
+
 function Main() {
   return (
-    <h1>«О проекте»</h1>
+    <>
+      <Header />
+      <h1>«О проекте»</h1>
+    </>
   );
 }
 
