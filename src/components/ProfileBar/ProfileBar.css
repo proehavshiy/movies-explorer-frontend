@@ -1,0 +1,31 @@
+.header__profile-bar {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .header__profile-bar {
+
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__profile-bar {
+  }
+}
+
+.header__profile {
+  margin-right: 13px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.header__profile-icon {
+  width: 30px;
+  height: 30px;
+  background: #F9F9F9 url(../../images/login-icon.svg) no-repeat center;
+  background-size: 10.38px 10.67px;
+  border-radius: 6px;
+}
