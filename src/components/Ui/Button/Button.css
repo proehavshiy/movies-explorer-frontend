@@ -1,6 +1,8 @@
 .page__button {
-  width: 76px;
-  height: 32px;
+  /* width: 76px;
+  height: 32px; */
+  padding: 8px 20px;
+  border: none;
   background: #000000;
   color: #FFFFFF;
   border-radius: 3px;
@@ -8,6 +10,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -18,6 +21,8 @@
 
 @media screen and (max-width: 320px) {
   .page__button {
-
+    padding: 5px 12px;
+    font-size: 10px;
+    line-height: 1.6;
   }
 }

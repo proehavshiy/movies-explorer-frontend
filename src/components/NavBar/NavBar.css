@@ -1,0 +1,27 @@
+.header__nav-bar {
+
+}
+
+.header__movies {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: right;
+}
+
+.header__movies:nth-child(1) {
+  font-weight: 500;
+  margin-right: 16px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .header__nav-bar {
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__nav-bar {
+  }
+}

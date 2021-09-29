@@ -1,0 +1,30 @@
+.header__auth-bar {
+
+}
+
+@media screen and (max-width: 768px) {
+  .header__auth-bar {
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__auth-bar {
+  }
+}
+
+.header__register {
+  margin-right: 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: right;
+}
+
+@media screen and (max-width: 320px) {
+  .header__register {
+    margin-right: 14px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}

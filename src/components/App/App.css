@@ -8,3 +8,8 @@
   background: #FFFFFF;
   color: #000000;
 }
+
+.page__link {
+  color: #000000;
+  text-decoration: none;
+}
