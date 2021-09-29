@@ -2,6 +2,40 @@
   margin-left: 64px;
 }
 
+@media screen and (max-width: 768px) {
+  .header__nav-bar {
+    display: none;
+    /* margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.3; */
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__nav-bar {
+  }
+}
+
+.header__nav-bar-wrapper{
+
+}
+
+/* @media screen and (max-width: 768px) {
+  .header__nav-bar-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 67.7083%;
+    height: 100%;
+    background: #FFFFFF;
+  }
+} */
+
 .header__movies {
   font-style: normal;
   font-weight: normal;
@@ -13,15 +47,4 @@
 .header__movies:nth-child(1) {
   font-weight: 500;
   margin-right: 16px;
-}
-
-
-@media screen and (max-width: 768px) {
-  .header__nav-bar {
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .header__nav-bar {
-  }
 }

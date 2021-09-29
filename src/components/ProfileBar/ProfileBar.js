@@ -8,8 +8,7 @@ function ProfileBar() {
       <NavLink className="header__profile page__link" activeClassName="selected" to="/profile">
         Аккаунт
       </NavLink>
-      <div className="header__profile-icon" />
-
+      <button className="header__profile-button" type="button" aria-label="кнопка открыть профиль" />
     </div>
   );
 }

@@ -22,10 +22,28 @@
   line-height: 1.14;
 }
 
-.header__profile-icon {
+@media screen and (max-width: 768px) {
+  .header__profile {
+    display: none;
+  }
+}
+
+.header__profile-button {
+  margin: 0;
+  padding: 0;
   width: 30px;
   height: 30px;
   background: #F9F9F9 url(../../images/login-icon.svg) no-repeat center;
   background-size: 10.38px 10.67px;
+  border: none;
   border-radius: 6px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .header__profile-button {
+    width: 44px;
+    height: 44px;
+    background: url(../../images/burger-icon.svg) no-repeat center;
+  }
 }
