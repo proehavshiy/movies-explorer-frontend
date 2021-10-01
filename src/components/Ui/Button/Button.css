@@ -1,8 +1,12 @@
 .page__button {
-  /* width: 76px;
-  height: 32px; */
-  padding: 8px 20px;
+  padding: 0;
+  background: none;
   border: none;
+  cursor: pointer;
+}
+
+.page__button_enter {
+  padding: 8px 20px;
   background: #000000;
   color: #FFFFFF;
   border-radius: 3px;
@@ -10,8 +14,32 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  cursor: pointer;
 }
+
+@media screen and (max-width: 320px) {
+  .page__button_enter {
+    padding: 5px 12px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+.page__button_back {
+  color: #000000;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+@media screen and (max-width: 320px) {
+  .page__button_back {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .page__button {
@@ -19,10 +47,4 @@
   }
 }
 
-@media screen and (max-width: 320px) {
-  .page__button {
-    padding: 5px 12px;
-    font-size: 10px;
-    line-height: 1.6;
-  }
-}
+

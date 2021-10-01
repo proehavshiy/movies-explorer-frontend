@@ -3,6 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           <h1>регистрация</h1>
         </Route>
         <Route path="*">
-          <h1>404 page</h1>
+          <ErrorPage />
         </Route>
       </Switch>
     </div>
