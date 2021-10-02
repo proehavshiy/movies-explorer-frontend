@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Header from '../Header/Header';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Register from '../Register/Register';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         </Route>
         <Route path="/movies">
           <Header />
-          <h1>«Фильмы»</h1>
+          <Movies />
         </Route>
         <Route path="/saved-movies">
           <Header />
@@ -26,9 +27,11 @@ function App() {
           <h1>страница с профилем пользователя</h1>
         </Route>
         <Route path="/signin">
+          <Header />
           <h1>авторизация</h1>
         </Route>
         <Route path="/signup">
+          <Header />
           <Register />
         </Route>
         <Route path="*">

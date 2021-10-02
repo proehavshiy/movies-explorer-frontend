@@ -1,5 +1,5 @@
 .header__auth-bar {
-
+  z-index: 2;
 }
 
 @media screen and (max-width: 768px) {

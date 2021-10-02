@@ -9,6 +9,12 @@
   color: #000000;
 }
 
+@media screen and (max-width: 768px) {
+  .page_freezed {
+    overflow: hidden;
+  }
+}
+
 .page__link {
   color: #000000;
   text-decoration: none;

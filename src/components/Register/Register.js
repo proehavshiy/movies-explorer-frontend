@@ -2,7 +2,6 @@
 import React from 'react';
 import './Register.css';
 import PropTypes from 'prop-types';
-import Header from '../Header/Header';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
@@ -20,7 +19,6 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
 
   return (
     <div className="register">
-      <Header />
       <PageWithForm
         name="register"
         submitText={isSubmitting ? 'Зарегистрироваться' : 'Регистрация...'}
