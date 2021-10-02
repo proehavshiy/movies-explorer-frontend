@@ -41,6 +41,18 @@
 }
 
 
+.page__button_submit {
+  padding: 15px 0 15px 0;
+  background: #000000;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
 @media screen and (max-width: 768px) {
   .page__button {
 

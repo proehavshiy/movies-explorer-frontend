@@ -7,7 +7,13 @@ function AuthBar() {
   return (
     <div className="header__auth-bar">
       <NavLink className="header__register page__link" activeClassName="selected" to="/signup">Регистрация</NavLink>
-      <Button />
+      <Button
+        text="Войти"
+        btnStyle="enter"
+        type="button"
+        disabled={false}
+        onClick={null}
+      />
     </div>
   );
 }

@@ -10,7 +10,7 @@ function ErrorPage() {
       <p className="error__subtitle">Страница не найдена</p>
       <Button
         text="Назад"
-        ButtonType="back"
+        btnStyle="back"
         onClick={useHistory().goBack}
       />
     </div>

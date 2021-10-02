@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <h1>авторизация</h1>
         </Route>
         <Route path="/signup">
-          <h1>регистрация</h1>
+          <Register />
         </Route>
         <Route path="*">
           <ErrorPage />
