@@ -1,4 +1,5 @@
 .landing {
+  flex: 1 1 auto;
   min-width: 320px;
   display: grid;
   grid-row: 6;

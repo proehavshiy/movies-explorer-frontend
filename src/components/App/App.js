@@ -5,7 +5,9 @@ import Main from '../Main/Main';
 import Header from '../Header/Header';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
+import Footer from '../Footer/Footer';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Main />
+          <Footer />
         </Route>
         <Route path="/movies">
           <Header />
@@ -27,7 +30,7 @@ function App() {
           <h1>страница с профилем пользователя</h1>
         </Route>
         <Route path="/signin">
-          <h1>авторизация</h1>
+          <Login />
         </Route>
         <Route path="/signup">
           <Register />
