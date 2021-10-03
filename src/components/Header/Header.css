@@ -29,11 +29,11 @@ max-width: 1140px;
 margin: 0 70px;
 }
 
-.container_auth {
+/* .container_auth {
   height: 217px;
   max-width: 396px;
   margin: 0 auto;
-}
+} */
 
 /* контентный контейнер шапки */
 .header__body {
@@ -44,7 +44,7 @@ margin: 0 70px;
   height: 74px;
 }
 
-.header__body_auth {
+/* .header__body_auth {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -53,7 +53,7 @@ margin: 0 70px;
 
 .header__body_auth a {
   margin-bottom: 40px;
-}
+} */
 
 .header__title {
   margin: 0;

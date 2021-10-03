@@ -1,7 +1,10 @@
 .logo {
   flex: 0 0 38px;
+  z-index: 3;
+}
+
+.logo__image {
   border-radius: 50%;
-  display: block;
 }
 
 @media screen and (max-width: 768px) {

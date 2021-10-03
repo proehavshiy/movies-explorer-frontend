@@ -5,8 +5,8 @@ import logo from '../../images/logo.png';
 
 function Logo() {
   return (
-    <Link to="/" style={{ zIndex: '3' }}>
-      <img className="logo" src={logo} alt="лого" />
+    <Link to="/" className="logo">
+      <img className="logo__image" src={logo} alt="лого" />
     </Link>
   );
 }

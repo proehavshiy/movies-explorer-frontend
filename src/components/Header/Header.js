@@ -4,7 +4,7 @@ import React from 'react';
 // import { Route, Switch } from 'react-router-dom';
 import './Header.css';
 import {
-  Switch, Route, Link, useLocation,
+  Switch, Route, Link,
 } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import AuthBar from '../AuthBar/AuthBar';
@@ -13,23 +13,10 @@ import AuthBar from '../AuthBar/AuthBar';
 
 function Header() {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = React.useState(false);
-  const location = useLocation().pathname;
-  console.log('location:', location);
   function handleBurgerClick() {
     setIsOpenBurgerMenu(!isOpenBurgerMenu);
   }
 
-  const authHeadings = {
-    checkLocation: location === '/signin' || location === '/signup',
-    signin: {
-      path: '/signin',
-      heading: 'Рады видеть!',
-    },
-    signup: {
-      path: '/signup',
-      heading: 'Добро пожаловать!',
-    },
-  };
   // запрет скролла при открытом попапе
   React.useEffect(() => {
     const body = document.querySelector('body');
@@ -37,13 +24,10 @@ function Header() {
   }, [isOpenBurgerMenu]);
   return (
     <div className="header">
-      <div className={`container ${authHeadings.checkLocation && 'container_auth'}`}>
-        <div className={`header__body ${isOpenBurgerMenu && 'header__body_fogging'} ${authHeadings.checkLocation && 'header__body_auth'}`}>
+      <div className="container">
+        <div className={`header__body ${isOpenBurgerMenu && 'header__body_fogging'}`}>
           <Logo />
           <Switch>
-            <Route path={['/signin', '/signup']}>
-              <h1 className="header__title">{(location === authHeadings.signin.path && authHeadings.signin.heading) || (location === authHeadings.signup.path && authHeadings.signup.heading)}</h1>
-            </Route>
             <Route exact path="/">
               <AuthBar />
             </Route>

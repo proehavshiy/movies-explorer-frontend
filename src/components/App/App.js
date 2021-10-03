@@ -27,11 +27,9 @@ function App() {
           <h1>страница с профилем пользователя</h1>
         </Route>
         <Route path="/signin">
-          <Header />
           <h1>авторизация</h1>
         </Route>
         <Route path="/signup">
-          <Header />
           <Register />
         </Route>
         <Route path="*">

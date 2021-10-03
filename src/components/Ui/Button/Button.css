@@ -53,9 +53,10 @@
   color: #FFFFFF;
 }
 
-@media screen and (max-width: 768px) {
-  .page__button {
-
+@media screen and (max-width: 450px) {
+  .page__button_submit {
+    font-size: 12px;
+    line-height: 15px;
   }
 }
 
