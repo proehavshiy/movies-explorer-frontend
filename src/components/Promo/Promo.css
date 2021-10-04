@@ -1,17 +1,20 @@
-.landing__promo {
+.landing__promo-wrapper {
+  background: #F3C1F8 url(../../images/pic_promo_background.svg) no-repeat 50% 40%;;
+  height: 524px;
   display: flex;
   flex-direction: column;
-  background: #F3C1F8 url(../../images/pic_promo_background.svg) no-repeat center;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@media screen and (max-width: 768px) {
-  .landing__promo {
-
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .landing__promo {
-
-  }
+.landing__heading {
+  margin: 184px 0 0 0;
+  width: 730px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #000000;
 }

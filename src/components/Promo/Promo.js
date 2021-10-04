@@ -1,14 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import Header from '../Header/Header';
-import NavTab from '../NavTab/NavTab';
 import './Promo.css';
 
 function Promo() {
   return (
-    <div className="landing__promo">
-      <Header />
-      <p>Promo - компонент с вёрсткой баннера страницы «О проекте»</p>
-      <NavTab />
+    <div className="landing__promo-wrapper">
+      <h1 className="landing__heading">
+        Учебный проект студента факультета Веб-разработки.
+      </h1>
     </div>
   );
 }

@@ -1,15 +1,30 @@
 .landing__nav {
+  height: 66px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  background: #000000;
+}
+
+.landing__link-wrapper {
+  margin-right: 40px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+
 
 }
 
-@media screen and (max-width: 768px) {
-  .landing__nav {
-
-  }
+.landing__link-wrapper:last-of-type {
+  margin-right: 0;
 }
 
-@media screen and (max-width: 320px) {
-  .landing__nav {
-
-  }
+.landing__link {
+  color: #FFFFFF;
+  text-decoration-line: underline;
 }
