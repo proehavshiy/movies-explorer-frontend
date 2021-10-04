@@ -1,3 +1,8 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
 .landing {
   flex: 1 1 auto;
   min-width: 320px;
@@ -7,22 +12,7 @@
 
 .landing__about-project {
   height: 608px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
   padding: 110px 70px;
-}
-
-.landing__about-project-heading {
-  margin: 0;
-  padding-bottom: 23px;
-  border-bottom: 1px solid #000000;
-
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 27px;
-  letter-spacing: -0.04em;
 }
 
 .landing__about-project-card-wrapper {
@@ -88,4 +78,79 @@
 }
 .landing__about-project-timeline_4 {
   color: #A0A0A0;
+}
+
+
+/* блок технологии */
+.landing__techs {
+  padding: 100px 70px;
+  background: #F5F5F5;
+  justify-content: space-between;
+}
+
+.landing__techs-text {
+  margin: 90px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing__techs-title {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  /* identical to box height, or 116% */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.landing__techs-subtitle {
+  margin: 26px 0 0 0;
+  width: 460px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.landing__techs-items-block {
+  margin: 100px 0 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 90px);
+  grid-auto-columns: 90px;
+  grid-auto-rows: 60px;
+  gap: 0 10px;
+  justify-content: center;
+
+  list-style: none;
+}
+
+.landing__techs-item {
+  padding: 22px 0;
+  box-sizing: border-box;
+
+  background: #E8E8E8;
+  border-radius: 10px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+
+}
+.landing__techs-item:last-of-type {
+  margin: 0;
 }
