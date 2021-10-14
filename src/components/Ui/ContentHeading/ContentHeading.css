@@ -1,0 +1,14 @@
+.section__content-heading {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  /* identical to box height, or 116% */
+
+  letter-spacing: -0.04em;
+}
+
+.section__content-heading_text-align-center {
+  text-align: center;
+}
