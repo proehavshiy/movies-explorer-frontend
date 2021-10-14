@@ -10,24 +10,34 @@ import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   return (
     <div className="page">
       <Switch>
         <Route exact path="/">
-          <Header />
+          <Header
+            isLoggedIn={isLoggedIn}
+          />
           <Main />
           <Footer />
         </Route>
         <Route path="/movies">
-          <Header />
+          <Header
+            isLoggedIn={isLoggedIn}
+          />
           <Movies />
         </Route>
         <Route path="/saved-movies">
-          <Header />
+          <Header
+            isLoggedIn={isLoggedIn}
+          />
           <h1>«Сохранённые фильмы»</h1>
         </Route>
         <Route path="/profile">
-          <Header />
+          <Header
+            isLoggedIn={isLoggedIn}
+          />
           <h1>страница с профилем пользователя</h1>
         </Route>
         <Route path="/signin">

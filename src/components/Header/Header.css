@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center; */
-  position: relative;
+  position: absolute;
   width: 100%;
   top: 0;
   left: 0;
@@ -25,7 +25,7 @@
 }
 
 .container {
-max-width: 1140px;
+/* max-width: 1140px; */
 margin: 0 70px;
 }
 
@@ -84,7 +84,7 @@ margin: 0 70px;
 }
 
 .header__list_nav {
-  margin-right: 28.4375vw;
+  margin-right: calc(50vw - 276px);
 }
 
 .header__list_nav li:first-of-type {

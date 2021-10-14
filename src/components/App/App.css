@@ -1,12 +1,25 @@
 .page {
   min-width: 320px;
   height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
   background: #FFFFFF;
   color: #000000;
+}
+
+.page__link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.page__main-content-wrapper {
+  /* padding-top: 74px; */
+  margin-top: 74px;
 }
 
 @media screen and (max-width: 768px) {
@@ -15,7 +28,34 @@
   }
 }
 
-.page__link {
-  color: #000000;
-  text-decoration: none;
+.page__section-landing {
+  margin: 0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .page__section-landing {
+  margin: 0 50px;
+}
+}
+
+@media screen and (max-width: 320px) {
+  .page__section-landing {
+  margin: 0 18px;
+  }
+}
+
+.page__section-films {
+  margin: 0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .page__section-films {
+  margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__section-films {
+  margin: 0 10px;
+  }
 }

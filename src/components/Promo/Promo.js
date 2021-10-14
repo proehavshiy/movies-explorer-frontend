@@ -4,7 +4,7 @@ import './Promo.css';
 
 function Promo() {
   return (
-    <div className="landing__promo-wrapper">
+    <div className="landing__promo-wrapper landing__promo-wrapper_padding_top">
       <h1 className="landing__heading">
         Учебный проект студента факультета Веб-разработки.
       </h1>
