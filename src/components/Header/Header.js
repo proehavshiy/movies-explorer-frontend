@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import './Header.css';
@@ -13,6 +15,12 @@ function Header({ isLoggedIn }) {
     setIsOpenBurgerMenu(!isOpenBurgerMenu);
   }
 
+  // закрытие бургерного меню по клику вне меню
+  function closeBurgerOnLayout(evt) {
+    if (evt.target === evt.currentTarget) {
+      setIsOpenBurgerMenu(false);
+    }
+  }
   // запрет скролла при открытом попапе
   React.useEffect(() => {
     const body = document.querySelector('body');
@@ -21,7 +29,7 @@ function Header({ isLoggedIn }) {
   return (
     <div className="header">
       <div className="container">
-        <div className={`header__body ${isOpenBurgerMenu && 'header__body_fogging'}`}>
+        <div className={`header__body ${isOpenBurgerMenu && 'header__body_fogging'}`} onClick={closeBurgerOnLayout}>
           <Logo />
           {!isLoggedIn && <AuthBar />}
           {isLoggedIn && (
@@ -32,6 +40,7 @@ function Header({ isLoggedIn }) {
               />
               <NavBar
                 isOpen={isOpenBurgerMenu}
+                onClose={setIsOpenBurgerMenu}
                 path={{
                   mainPagePath: '/',
                   moviesPath: '/movies',
