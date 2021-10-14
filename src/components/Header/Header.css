@@ -1,10 +1,4 @@
 .header {
-  /* height: 74px;
-  padding: 0 70px;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; */
   position: absolute;
   width: 100%;
   top: 0;
@@ -65,214 +59,21 @@ margin: 0 70px;
   line-height: 29px;
 }
 
-.header__burger {
-  display: none;
-}
 
-.header__menu {
-  display: flex;
-}
-
-@media screen and (max-width:768px) {
-  .header__menu {
-    position: fixed;
-    top: 0%;
-    right: -200%;
-    width: calc( 520px / 1 );
-    height: 100%;
-    background-color: #FFFFFF;
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    justify-content: space-between;
-    transition: all .6s ease 0s;
-  }
-}
-
-
-.header__list {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  z-index: 2;
-  margin-right: calc(50vw - 276px);
-}
-
-@media screen and (max-width: 768px) {
-  .header__list {
-    margin: 159px 0 0 0;
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .header__list {
-    margin: 144px 0 0 0;
-  }
-}
-
-/* лишки в меню навигации */
-.header__list li:first-of-type {
-  display: none;
-}
-@media screen and (max-width: 768px) {
-  .header__list li:first-of-type {
-    display: block;
-  }
-  .header__list li {
-    margin: 0 0 28px 0;
-  }
-  .header__list li:last-of-type {
-    margin: 0 0 0 0;
-  }
-}
-/* отступ между Фильмы и Сохраненные фильмы */
-.header__list li:nth-of-type(2) {
-  margin-right: 16px;
-}
-@media screen and (max-width: 768px) {
-  .header__list li:nth-of-type(2) {
-    margin-right: 0;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .header__list li {
-    margin: 0 0 24px 0;
-  }
-}
-
-.header__link {
-  font-style: normal;
-}
-.header__link_navigation {
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  text-align: right;
-}
-
-.header__link_navigation_accent {
-  font-weight: 500;
-}
-
-/* .header__link_account {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  z-index: 2;
-} */
-
-/* кнопка Аккаунт */
-.account-button {
-  margin: 0;
-  padding: 0;
-  width: 100px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  z-index: 2;
-}
-
-@media screen and (max-width: 768px) {
-  .account-button_margin-bottom {
-    margin-bottom: 92px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .account-button_margin-bottom {
-    margin-bottom: 48px;
-  }
-}
-
-.account-button__subtitle {
-  margin: 0;
-  padding: 0 13px 0 0;
-}
-
-.account-button__icon {
-  width: 30px;
-  height: 30px;
-  background: #F9F9F9 url(../../images/login-icon.svg) no-repeat center;
-  background-size: 10.38px 10.67px;
-  border-radius: 6px;
-}
 
 @media screen and (max-width: 768px) {
   .container {
     margin: 0 30px;
 }
 
-  .header__burger {
-    display: block;
-    position: relative;
-    width: 44px;
-    height: 44px;
-    padding: 10px 8px;
-    box-sizing: border-box;
-    border: none;
-    background-color: transparent;
-    z-index: 5;
-  }
 
-  .header__burger span {
-    background-color: #000000;
-    position: absolute;
-    left: 8px;
-    top: 20px;
-    width: 28px;
-    height: 3px;
-    transition: all .3s ease 0s;
-  }
-  .header__burger::before,
-  .header__burger::after {
-    content: '';
-    background-color: #000000;
-    position: absolute;
-    left: 8px;
-    width: 28px;
-    height: 3px;
-    transition: all .3s ease 0s;
-  }
-  .header__burger::before {
-    top: 10px;
-  }
-  .header__burger::after {
-    top: 30px;
-  }
 
-  .header__burger_opened::before {
-    transform: rotate(45deg);
-    top: 20px;
-    transition: all .3s ease 0s;
-  }
 
-  .header__burger_opened::after {
-    transform: rotate(-45deg);
-    top: 20px;
-    transition: all .3s ease 0s;
-  }
 
-  .header__burger_opened span {
-    transform: scale(0);
-    transition: all .3s ease 0s;
-  }
+
+
+
+
   /* тень под попапом меню скрыта*/
   .header__body::after {
     content: '';
@@ -292,21 +93,10 @@ margin: 0 70px;
     opacity: .3;
   }
 
-  .header__menu_opened {
-    right: 0;
-    transition: all .3s ease 0s;
-  }
 
 
-.header__link_navigation {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-}
-.header__link_navigation_accent {
-  padding-bottom: 4px;
-  border-bottom: 2px solid #000000;
-}
+
+
 }
 
 @media screen and (max-width: 320px) {
@@ -321,17 +111,5 @@ margin: 0 70px;
   }
   .header__body_fogging:after{
     content: none;
-  }
-  .header__menu {
-    position: fixed;
-    top: -100%;
-    right: 0%;
-    width: 100%;
-    height: 100%;
-    transition: all .3s ease 0s;
-  }
-  .header__menu_opened {
-    top: 0%;
-    transition: all .3s ease 0s;
   }
 }

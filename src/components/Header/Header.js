@@ -1,17 +1,11 @@
-/* eslint-disable max-len */
-/* eslint-disable react/self-closing-comp */
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
-// import { Route, Switch } from 'react-router-dom';
 import './Header.css';
-import {
-  // Switch, Route,
-  Link,
-} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../Logo/Logo';
 import AuthBar from '../AuthBar/AuthBar';
-// import NavBar from '../NavBar/NavBar';
-// import ProfileBar from '../ProfileBar/ProfileBar';
+import NavBar from '../NavBar/NavBar';
+import Burger from '../Burger/Burger';
 
 function Header({ isLoggedIn }) {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = React.useState(false);
@@ -32,26 +26,25 @@ function Header({ isLoggedIn }) {
           {!isLoggedIn && <AuthBar />}
           {isLoggedIn && (
             <>
-              <button className={`header__burger ${isOpenBurgerMenu && 'header__burger_opened'}`} onClick={handleBurgerClick} type="button" aria-label="кнопка открыть меню">
-                <span></span>
-              </button>
-              <nav className={`header__menu ${isOpenBurgerMenu && 'header__menu_opened'} `}>
-                <ul className="header__list">
-                  <li>
-                    <Link className="header__link header__link_navigation page__link" to="/">Главная</Link>
-                  </li>
-                  <li>
-                    <Link className="header__link header__link_navigation header__link_navigation_accent  page__link" to="/movies">Фильмы</Link>
-                  </li>
-                  <li>
-                    <Link className="header__link header__link_navigation page__link" to="/saved-movies">Сохранённые фильмы</Link>
-                  </li>
-                </ul>
-                <Link className="header__link page__link account-button account-button_margin-bottom" to="/profile">
-                  <p className="account-button__subtitle">Аккаунт</p>
-                  <div className="account-button__icon"></div>
-                </Link>
-              </nav>
+              <Burger
+                isOpen={isOpenBurgerMenu}
+                onClick={handleBurgerClick}
+              />
+              <NavBar
+                isOpen={isOpenBurgerMenu}
+                path={{
+                  mainPagePath: '/',
+                  moviesPath: '/movies',
+                  savedMoviesPath: '/saved-movies',
+                  profilePath: '/profile',
+                }}
+                titles={{
+                  mainPageTitle: 'Главная',
+                  moviesTitle: 'Фильмы',
+                  savedMoviesTitle: 'Сохранённые фильмы',
+                  profileTitle: 'Аккаунт',
+                }}
+              />
             </>
           )}
         </div>
