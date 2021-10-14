@@ -113,7 +113,7 @@ margin: 0 70px;
   font-weight: 500;
 }
 
-.header__link_account {
+/* .header__link_account {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -121,22 +121,36 @@ margin: 0 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+  z-index: 2;
+} */
 
-.header__link-subtitle {
-  padding-right: 13px;
-}
-
-.header__account-button {
+.account-button {
   margin: 0;
   padding: 0;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  z-index: 2;
+}
+
+.account-button__subtitle {
+  margin: 0;
+  padding: 0 13px 0 0;
+}
+
+.account-button__icon {
   width: 30px;
   height: 30px;
   background: #F9F9F9 url(../../images/login-icon.svg) no-repeat center;
   background-size: 10.38px 10.67px;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
