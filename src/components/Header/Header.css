@@ -73,6 +73,25 @@ margin: 0 70px;
   display: flex;
 }
 
+@media screen and (max-width:768px) {
+  .header__menu {
+    position: fixed;
+    top: 0%;
+    right: -200%;
+    width: calc( 520px / 1 );
+    height: 100%;
+    background-color: #FFFFFF;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    justify-content: space-between;
+    transition: all .6s ease 0s;
+  }
+}
+
+
 .header__list {
   list-style: none;
   display: flex;
@@ -81,22 +100,51 @@ margin: 0 70px;
   padding: 0;
   position: relative;
   z-index: 2;
-}
-
-.header__list_nav {
   margin-right: calc(50vw - 276px);
 }
 
-.header__list_nav li:first-of-type {
+@media screen and (max-width: 768px) {
+  .header__list {
+    margin: 159px 0 0 0;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header__list {
+    margin: 144px 0 0 0;
+  }
+}
+
+/* лишки в меню навигации */
+.header__list li:first-of-type {
   display: none;
 }
-
-.header__list li {
-  margin: 0 16px 0 0;
+@media screen and (max-width: 768px) {
+  .header__list li:first-of-type {
+    display: block;
+  }
+  .header__list li {
+    margin: 0 0 28px 0;
+  }
+  .header__list li:last-of-type {
+    margin: 0 0 0 0;
+  }
+}
+/* отступ между Фильмы и Сохраненные фильмы */
+.header__list li:nth-of-type(2) {
+  margin-right: 16px;
+}
+@media screen and (max-width: 768px) {
+  .header__list li:nth-of-type(2) {
+    margin-right: 0;
+  }
 }
 
-.header__list li:last-of-type {
-  margin: 0;
+@media screen and (max-width: 500px) {
+  .header__list li {
+    margin: 0 0 24px 0;
+  }
 }
 
 .header__link {
@@ -124,6 +172,7 @@ margin: 0 70px;
   z-index: 2;
 } */
 
+/* кнопка Аккаунт */
 .account-button {
   margin: 0;
   padding: 0;
@@ -138,6 +187,18 @@ margin: 0 70px;
   font-size: 14px;
   line-height: 16px;
   z-index: 2;
+}
+
+@media screen and (max-width: 768px) {
+  .account-button_margin-bottom {
+    margin-bottom: 92px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .account-button_margin-bottom {
+    margin-bottom: 48px;
+  }
 }
 
 .account-button__subtitle {
@@ -230,51 +291,13 @@ margin: 0 70px;
     transition: opacity 0.4s ease;
     opacity: .3;
   }
-  .header__menu {
-    position: fixed;
-    top: 0%;
-    right: -200%;
-    width: calc( 520px / 1 );
-    height: 100%;
-    background-color: #FFFFFF;
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    justify-content: space-between;
-    transition: all .6s ease 0s;
-  }
+
   .header__menu_opened {
     right: 0;
     transition: all .3s ease 0s;
   }
-  .header__list {
-    display: block;
-  }
 
-  .header__list:first-of-type {
-    margin: 159px 0 0 0;
-  }
-  .header__list:last-of-type {
-    margin: 40px 0 92px 0;
-    display: flex;
-    align-items: center;
-  }
-  .header__list:last-of-type li {
-    margin: 0 0 0 0;
-  }
-  .header__list:last-of-type li:first-of-type{
-    margin: 0 13px 0 0;
-  }
-  .header__list li {
-    margin: 0 0 28px 0;
-    text-align: center;
-  }
 
-.header__list_nav li:first-of-type {
-  display: block;
-}
 .header__link_navigation {
   font-weight: 500;
   font-size: 18px;
@@ -310,14 +333,5 @@ margin: 0 70px;
   .header__menu_opened {
     top: 0%;
     transition: all .3s ease 0s;
-  }
-  .header__list:first-of-type {
-    margin: 144px 0 0 0;
-  }
-  .header__list:last-of-type {
-    margin: 20px 0 48px 0;
-  }
-  .header__list li {
-    margin: 0 0 24px 0;
   }
 }

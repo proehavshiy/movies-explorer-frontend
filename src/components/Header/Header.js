@@ -36,7 +36,7 @@ function Header({ isLoggedIn }) {
                 <span></span>
               </button>
               <nav className={`header__menu ${isOpenBurgerMenu && 'header__menu_opened'} `}>
-                <ul className="header__list header__list_nav">
+                <ul className="header__list">
                   <li>
                     <Link className="header__link header__link_navigation page__link" to="/">Главная</Link>
                   </li>
@@ -47,7 +47,7 @@ function Header({ isLoggedIn }) {
                     <Link className="header__link header__link_navigation page__link" to="/saved-movies">Сохранённые фильмы</Link>
                   </li>
                 </ul>
-                <Link className="header__link page__link account-button" to="/profile">
+                <Link className="header__link page__link account-button account-button_margin-bottom" to="/profile">
                   <p className="account-button__subtitle">Аккаунт</p>
                   <div className="account-button__icon"></div>
                 </Link>
