@@ -6,6 +6,7 @@
   z-index: 50;
 }
 
+
 /* плашка шапки */
 .header::before {
   content: '';
@@ -14,20 +15,24 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: gold; */
   z-index: 2;
 }
 
 .container {
-/* max-width: 1140px; */
 margin: 0 70px;
 }
 
-/* .container_auth {
-  height: 217px;
-  max-width: 396px;
-  margin: 0 auto;
-} */
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container {
+    margin: 0 15px;
+  }
+}
 
 /* контентный контейнер шапки */
 .header__body {
@@ -38,42 +43,7 @@ margin: 0 70px;
   height: 74px;
 }
 
-/* .header__body_auth {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 70px 0 0 0;
-}
-
-.header__body_auth a {
-  margin-bottom: 40px;
-} */
-
-.header__title {
-  margin: 0;
-  padding: 0;
-  z-index: 2;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-}
-
-
-
 @media screen and (max-width: 768px) {
-  .container {
-    margin: 0 30px;
-}
-
-
-
-
-
-
-
-
-
   /* тень под попапом меню скрыта*/
   .header__body::after {
     content: '';
@@ -87,29 +57,24 @@ margin: 0 70px;
     z-index: 3;
     transition: opacity 0.4s ease;
   }
-  /* тень под попапом меню появляется при открытии меню */
-  .header__body_fogging:after{
-    transition: opacity 0.4s ease;
-    opacity: .3;
-  }
-
-
-
-
-
-}
-
-@media screen and (max-width: 320px) {
-  .container {
-    margin: 0 15px;
-  }
 }
 
 @media screen and (max-width: 600px) {
   .header__body::after {
     content: none;
   }
-  .header__body_fogging:after{
+}
+
+@media screen and (max-width: 768px) {
+  /* тень под попапом меню появляется при открытии меню */
+  .header__body_style_fogging:after{
+    transition: opacity 0.4s ease;
+    opacity: .3;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header__body_style_fogging:after{
     content: none;
   }
 }

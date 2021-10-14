@@ -29,7 +29,7 @@ function Header({ isLoggedIn }) {
   return (
     <div className="header">
       <div className="container">
-        <div className={`header__body ${isOpenBurgerMenu && 'header__body_fogging'}`} onClick={closeBurgerOnLayout}>
+        <div className={`header__body ${isOpenBurgerMenu && 'header__body_style_fogging'}`} onClick={closeBurgerOnLayout}>
           <Logo />
           {!isLoggedIn && <AuthBar />}
           {isLoggedIn && (
