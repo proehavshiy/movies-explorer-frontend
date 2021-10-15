@@ -17,9 +17,8 @@
   text-decoration: none;
 }
 
-.page__main-content-wrapper {
-  /* padding-top: 74px; */
-  margin-top: 74px;
+.page__main-content-padding-top {
+  padding-top: 74px;
 }
 
 @media screen and (max-width: 768px) {

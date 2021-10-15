@@ -1,24 +1,42 @@
-.landing__promo-wrapper {
-  background: #F3C1F8 url(../../images/pic_promo_background.svg) no-repeat 50% 56%;;
-  height: 524px;
+.landing__promo {
+  background: #F3C1F8 url(../../images/pic_promo_background.svg) no-repeat 50% 56%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-.landing__promo-wrapper_padding_top {
-  padding-top: 74px;
+@media screen and (max-width: 424px) {
+  .landing__promo {
+    background-size: 77.5%;
+  }
 }
 
 .landing__heading {
-  margin: 184px 0 0 0;
-  width: 730px;
-  font-style: normal;
-  font-weight: normal;
+  margin: 184px 0 224px 0;
+  max-width: 730px;
+  font-style: inherit;
+  font-weight: inherit;
   font-size: 50px;
   line-height: 58px;
   text-align: center;
   letter-spacing: -0.04em;
   color: #000000;
 }
+
+@media screen and (max-width: 768px) {
+  .landing__heading {
+    margin: 326px 0 342px 0;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .landing__heading {
+    margin: 207px 0 246px 0;
+    width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
+
+

@@ -4,10 +4,13 @@
   box-sizing: border-box;
 }
 .landing {
-  flex: 1 1 auto;
-  min-width: 320px;
+  /* flex: 1 1 auto; */
   display: grid;
-  grid-row: 6;
+}
+
+.landing__text {
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .landing__about-project {

@@ -4,7 +4,7 @@ import './SectionHeading.css';
 
 function SectionHeading({ headingText }) {
   return (
-    <h2 className="section__heading">
+    <h2 className="landing__section-heading landing__section-heading_style_border-bottom">
       {headingText}
     </h2>
   );

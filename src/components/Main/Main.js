@@ -3,9 +3,9 @@ import React from 'react';
 import './Main.css';
 
 import Promo from '../Promo/Promo';
-import NavTab from '../NavTab/NavTab';
-import SectionHeading from '../Ui/SectionHeading/SectionHeading';
-import ContentHeading from '../Ui/ContentHeading/ContentHeading';
+// import NavTab from '../NavTab/NavTab';
+// import SectionHeading from '../Ui/SectionHeading/SectionHeading';
+// import ContentHeading from '../Ui/ContentHeading/ContentHeading';
 // import AboutProject from '../AboutProject/AboutProject';
 // import Techs from '../Techs/Techs';
 // import AboutMe from '../AboutMe/AboutMe';
@@ -14,8 +14,10 @@ import ContentHeading from '../Ui/ContentHeading/ContentHeading';
 function Main() {
   return (
     <div className="landing">
-      <Promo />
-      <NavTab />
+      <Promo
+        headingText="Учебный проект студента факультета Веб-разработки."
+      />
+      {/* <NavTab />
       <section className="section landing__about-project">
         <SectionHeading
           headingText="О проекте"
@@ -57,7 +59,6 @@ function Main() {
           <div className="landing__techs-text">
             <ContentHeading
               headingText="7 технологий"
-              isCenterAlign
             />
             <p className="landing__techs-subtitle">
               На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
@@ -138,7 +139,7 @@ function Main() {
           </div>
         </div>
 
-      </section>
+      </section> */}
       {/* <Promo />
       <AboutProject />
       <Techs />

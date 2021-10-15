@@ -11,7 +11,7 @@ import Footer from '../Footer/Footer';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   return (
     <div className="page">
       <Switch>

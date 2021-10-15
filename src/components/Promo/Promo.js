@@ -1,15 +1,19 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import './Promo.css';
+import PropTypes from 'prop-types';
 
-function Promo() {
+function Promo({ headingText }) {
   return (
-    <div className="landing__promo-wrapper landing__promo-wrapper_padding_top">
+    <div className="landing__promo page__main-content-padding-top">
       <h1 className="landing__heading">
-        Учебный проект студента факультета Веб-разработки.
+        {headingText}
       </h1>
     </div>
   );
 }
+
+Promo.propTypes = {
+  headingText: PropTypes.string.isRequired,
+};
 
 export default Promo;

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ContentHeading.css';
 
-function ContentHeading({ headingText, isCenterAlign }) {
+function ContentHeading({ headingText }) {
   return (
-    <h3 className={`section__content-heading ${isCenterAlign && 'section__content-heading_text-align-center'}`}>
+    <h3 className="landing__content-heading">
       {headingText}
     </h3>
   );
@@ -12,11 +12,6 @@ function ContentHeading({ headingText, isCenterAlign }) {
 
 ContentHeading.propTypes = {
   headingText: PropTypes.string.isRequired,
-  isCenterAlign: PropTypes.bool,
-};
-
-ContentHeading.defaultProps = {
-  isCenterAlign: false,
 };
 
 export default ContentHeading;
