@@ -3,7 +3,7 @@ import React from 'react';
 import './Main.css';
 
 import Promo from '../Promo/Promo';
-// import NavTab from '../NavTab/NavTab';
+import NavTab from '../NavTab/NavTab';
 // import SectionHeading from '../Ui/SectionHeading/SectionHeading';
 // import ContentHeading from '../Ui/ContentHeading/ContentHeading';
 // import AboutProject from '../AboutProject/AboutProject';
@@ -17,8 +17,23 @@ function Main() {
       <Promo
         headingText="Учебный проект студента факультета Веб-разработки."
       />
-      {/* <NavTab />
-      <section className="section landing__about-project">
+      <NavTab
+        links={{
+          link1: {
+            heading: 'О проекте',
+            path: '/',
+          },
+          link2: {
+            heading: 'Технологии',
+            path: '/',
+          },
+          link3: {
+            heading: 'Студент',
+            path: '/',
+          },
+        }}
+      />
+      {/* <section className="section landing__about-project">
         <SectionHeading
           headingText="О проекте"
         />
@@ -138,13 +153,7 @@ function Main() {
             </ul>
           </div>
         </div>
-
       </section> */}
-      {/* <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio /> */}
     </div>
   );
 }
