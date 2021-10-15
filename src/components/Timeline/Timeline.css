@@ -1,0 +1,57 @@
+.timeline {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* grid-template-rows: repeat(auto-fill, minmax(min-content, 80%)); */
+  grid-template-columns: 20% 80%;
+  list-style: none;
+}
+
+@media screen and (max-width: 600px) {
+  .timeline {
+    grid-template-columns: 35% 65%;
+  }
+}
+
+.timeline__cell {
+  margin: 0;
+  padding: 9px 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+/* первая ячейка в нечетной колонке  */
+.timeline__col:nth-of-type(2n+1) .timeline__cell:first-of-type {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+/* вторая ячейка в нечетной колонке  */
+.timeline__col:nth-of-type(2n+1) .timeline__cell:last-of-type {
+  color: #A0A0A0;
+}
+
+/* первая ячейка в четной колонке  */
+.timeline__col:nth-of-type(2n) .timeline__cell:first-of-type {
+  background: #F2F2F2;
+}
+
+/* вторая ячейка в четной колонке  */
+.timeline__col:nth-of-type(2n) .timeline__cell:last-of-type {
+  color: #A0A0A0;
+}
+/*
+@media screen and (max-width: 768px) {
+  .landing__about {
+
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .landing__about {
+
+  }
+} */

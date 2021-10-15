@@ -5,6 +5,7 @@ import './Main.css';
 import Promo from '../Promo/Promo';
 import NavTab from '../NavTab/NavTab';
 // import SectionHeading from '../Ui/SectionHeading/SectionHeading';
+import AboutProject from '../AboutProject/AboutProject';
 // import ContentHeading from '../Ui/ContentHeading/ContentHeading';
 // import AboutProject from '../AboutProject/AboutProject';
 // import Techs from '../Techs/Techs';
@@ -33,6 +34,7 @@ function Main() {
           },
         }}
       />
+      <AboutProject />
       {/* <section className="section landing__about-project">
         <SectionHeading
           headingText="О проекте"
@@ -65,8 +67,8 @@ function Main() {
           <p className="landing__about-project-timeline landing__about-project-timeline_3">Back-end</p>
           <p className="landing__about-project-timeline landing__about-project-timeline_4">Front-end</p>
         </div>
-      </section>
-      <section className="section landing__techs">
+      </section> */}
+      {/* <section className="section landing__techs">
         <SectionHeading
           headingText="Технологии"
         />

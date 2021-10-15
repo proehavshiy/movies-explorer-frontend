@@ -7,7 +7,20 @@
   letter-spacing: -0.04em;
 }
 
+@media screen and (max-width: 424px) {
+  .landing__section-heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 .landing__section-heading_style_border-bottom {
   padding-bottom: 23px;
   border-bottom: 1px solid #000000;
+}
+
+@media screen and (max-width: 424px) {
+  .landing__section-heading_style_border-bottom {
+    padding-bottom: 28px;
+  }
 }

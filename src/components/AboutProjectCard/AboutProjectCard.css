@@ -1,0 +1,24 @@
+.about-project-card {
+  margin: 0 50px 0 0;
+}
+
+.about-project-card:last-of-type {
+  margin: 0;
+}
+
+.about-project-card__heading {
+  margin: 0 0 26px 0;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about-project-card__description {
+  margin: 0;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 12px;
+  line-height: 18px;
+}
