@@ -7,6 +7,13 @@
   letter-spacing: -0.04em;
 }
 
+@media screen and (max-width: 424px) {
+  .landing__content-heading {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+
 .landing__content-heading_style_text-align-center {
   text-align: center;
 }

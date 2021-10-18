@@ -1,15 +1,69 @@
-.landing__techs {
-
+/* блок технологии */
+.techs {
+  padding: 100px 0;
 }
 
 @media screen and (max-width: 768px) {
-  .landing__techs {
-
+  .techs {
+    padding: 90px 0;
   }
 }
 
-@media screen and (max-width: 320px) {
-  .landing__techs {
+@media screen and (max-width: 424px) {
+  .techs {
+    padding: 70px 0;
+  }
+}
 
+.techs__content-wrapper {
+  margin: 90px 0 0 0;
+  display: grid;
+  grid-gap: 100px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__content-wrapper {
+    margin: 80px 0 0 0;
+    grid-gap: 83px 0;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .techs__content-wrapper {
+    margin: 60px 0 0 0;
+    grid-gap: 50px 0;
+  }
+}
+
+.techs__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.techs__subtitle {
+  margin: 26px 0 0 0;
+  max-width: 460px;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__subtitle {
+    margin: 22px 0 0 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .techs__subtitle {
+    margin: 24px 0 0 0;
+    font-size: 11px;
+    line-height: 16px;
   }
 }

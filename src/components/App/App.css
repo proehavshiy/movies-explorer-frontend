@@ -12,6 +12,10 @@
   color: #000000;
 }
 
+.page__section_background-color_grey {
+  background: #F5F5F5;
+}
+
 .page__link {
   color: #000000;
   text-decoration: none;
@@ -33,8 +37,8 @@
 
 @media screen and (max-width: 768px) {
   .page__section-landing {
-  margin: 0 50px;
-}
+    margin: 0 50px;
+  }
 }
 
 @media screen and (max-width: 320px) {
