@@ -23,38 +23,3 @@
   font-size: 14px;
   line-height: 20px;
 }
-
-
-
-/* секция about me */
-
-.landing__about-me {
-  padding: 110px 70px 125px;
-}
-
-.landing__about-me-content-wrapper {
-  margin: 66px 0 0 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
-  row-gap: 101px;
-}
-
-.landing__about-me-bio {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  column-gap: 270px;
-}
-
-
-.landing__about-me-bio-right {
-  margin: 0;
-  width: 270px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.landing__about-me-bio-right-image {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}

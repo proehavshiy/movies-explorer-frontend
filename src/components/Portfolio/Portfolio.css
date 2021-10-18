@@ -1,15 +1,47 @@
-.landing__portfolio {
-
+.portfolio__heading {
+  margin: 0;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 18px;
+  line-height: 20px;
+  color: #A0A0A0;
 }
 
 @media screen and (max-width: 768px) {
-  .landing__portfolio {
-
+  .portfolio__heading {
+    font-size: 14px;
   }
 }
 
-@media screen and (max-width: 320px) {
-  .landing__portfolio {
+.portfolio__list {
+  margin: 50px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
 
+@media screen and (max-width: 424px) {
+  .portfolio__list {
+    margin: 40px 0 0 0;
   }
+}
+
+.portfolio__link-wrapper {
+  margin: 0 0 20px 0;
+  padding: 0 0 19px 0;
+  border-bottom: 1px solid #E8E8E8;
+  background: url(../../images/text__COLOR_font-main.svg) no-repeat 99% 35%;
+}
+
+.portfolio__link {
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: #000000;
+}
+
+.portfolio__name {
+  margin: 0;
 }
