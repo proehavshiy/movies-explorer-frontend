@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   display: grid;
-  /* grid-template-rows: repeat(auto-fill, minmax(min-content, 80%)); */
   grid-template-columns: 20% 80%;
   list-style: none;
 }
@@ -14,13 +13,24 @@
 }
 
 .timeline__cell {
-  margin: 0;
+  margin: 0 0 6px 0;
   padding: 9px 0;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
   text-align: center;
+}
+
+.timeline__cell:last-of-type {
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .timeline__cell {
+    font-size: 11px;
+    line-height: 13px;
+  }
 }
 
 /* первая ячейка в нечетной колонке  */
@@ -43,15 +53,3 @@
 .timeline__col:nth-of-type(2n) .timeline__cell:last-of-type {
   color: #A0A0A0;
 }
-/*
-@media screen and (max-width: 768px) {
-  .landing__about {
-
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .landing__about {
-
-  }
-} */

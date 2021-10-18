@@ -1,8 +1,20 @@
-.about-project-card {
+.about-project-card_style_magrin {
   margin: 0 50px 0 0;
 }
 
-.about-project-card:last-of-type {
+@media screen and (max-width: 768px) {
+  .about-project-card_style_magrin {
+    margin: 0 40px 0 0;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .about-project-card_style_magrin {
+    margin: 0 0 56px 0;
+  }
+}
+
+.about-project-card_style_magrin:last-of-type {
   margin: 0;
 }
 
@@ -15,10 +27,38 @@
   letter-spacing: -0.04em;
 }
 
+@media screen and (max-width: 768px) {
+  .about-project-card__heading {
+    margin: 0 0 22px 0;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .about-project-card__heading {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 .about-project-card__description {
   margin: 0;
   font-style: inherit;
   font-weight: inherit;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project-card__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .about-project-card__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
 }

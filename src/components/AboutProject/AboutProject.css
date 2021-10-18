@@ -1,6 +1,17 @@
 .landing__about-project {
-  /* height: 608px; */
   padding: 110px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .landing__about-project {
+    padding: 90px 0;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .landing__about-project {
+    padding: 70px 0;
+  }
 }
 
 .landing__card-wrapper {
@@ -9,48 +20,25 @@
   flex-direction: row;
 }
 
+@media screen and (max-width: 424px) {
+  .landing__card-wrapper {
+    margin-top: 60px;
+    flex-direction: column;
+  }
+}
+
 .landing__timeline-wrapper {
   margin: 110px 0 0 0;
 }
 
-.timeline {
-  display: grid;
-  grid-template-columns: 228px 1fr;
-  grid-template-rows: repeat(2, 1fr);
-  row-gap: 6px;
-}
-
-.landing__about-project-timeline {
-  margin: 0;
-  padding: 9px 0;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-}
-
-.landing__about-project-timeline_1 {
-  background: #000000;
-  color: #FFFFFF;
-}
-.landing__about-project-timeline_2 {
-  background: #F2F2F2;
-}
-.landing__about-project-timeline_3 {
-  color: #A0A0A0;
-}
-.landing__about-project-timeline_4 {
-  color: #A0A0A0;
-}
 @media screen and (max-width: 768px) {
-  .landing__about {
-
+  .landing__timeline-wrapper {
+    margin-top: 93px;
   }
 }
 
-@media screen and (max-width: 320px) {
-  .landing__about {
-
+@media screen and (max-width: 424px) {
+  .landing__timeline-wrapper {
+    margin-top: 60px;
   }
 }
