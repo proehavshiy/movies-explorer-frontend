@@ -36,12 +36,19 @@ Techs.propTypes = {
   sectionHeading: PropTypes.string.isRequired,
   contentHeading: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  skills: PropTypes.arrayOf(PropTypes.string),
+  skills: PropTypes.arrayOf(PropTypes.shape({
+    skill: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })),
 };
 
 Techs.defaultProps = {
   skills: [
-    'HTML', 'CSS', 'JS', 'React', 'Git',
+    { skill: 'HTML', id: 1 },
+    { skill: 'CSS', id: 2 },
+    { skill: 'JS', id: 3 },
+    { skill: 'React', id: 4 },
+    { skill: 'Git', id: 5 },
   ],
 };
 

@@ -16,7 +16,20 @@
 
 .landing {
   /* flex: 1 1 auto; */
-  display: grid;
+  /* display: grid; */
+  margin-bottom: 105px;
+}
+
+@media screen and (max-width: 768px) {
+  .landing {
+    margin-bottom: 71px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .landing {
+    margin-bottom: 50px;
+  }
 }
 
 .landing__text {

@@ -1,12 +1,24 @@
 .about-me {
-  padding: 110px 0 125px;
+  padding: 110px 0 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+  padding: 90px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .about-me {
+  padding: 70px 0 0 0;
+  }
 }
 
 .about-me__content-wrapper {
   margin: 66px 0 0 0;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, min-content);
   grid-gap: 100px;
 }
 
@@ -25,25 +37,27 @@
 
 .about-me__bio {
   display: grid;
-  grid-template-columns: 1fr min-content;
+  grid-template-columns: 1fr 270px;
   grid-gap: 21.093vw;
 }
 
 @media screen and (max-width: 1024px) {
   .about-me__bio {
+    grid-template-columns: 1fr 255px;
     grid-gap: 6.38vw;
-  }
-}
-
-@media screen and (max-width: 424px) {
-  .about-me__bio {
-    grid-gap: 40px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .about-me__bio {
     grid-template-columns: 1fr;
+    grid-template-rows: 352px 1fr;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .about-me__bio {
+    grid-gap: 40px;
   }
 }
 
@@ -153,27 +167,27 @@
 
 .about-me__photo-wrapper {
   margin: 0;
-  max-width: 270px;
-  width: 21.093vw;
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
 }
 
-@media screen and (max-width: 1024px) {
-  .about-me__photo-wrapper {
-    width: 33.2vw;
-  }
+.about-me__photo-wrapper::after {
+  content: '';
+  display: block;
+  padding-bottom: 120.5%;
 }
 
 @media screen and (max-width: 600px) {
   .about-me__photo-wrapper {
-    max-width: 100%;
     width: 100%;
-    height: 110vw;
   }
 }
 
 .about-me__photo {
+  position: absolute;
+  top: 0;
+  left: 0;
   object-fit: cover;
   width: 100%;
   height: 100%;

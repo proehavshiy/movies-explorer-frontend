@@ -1,6 +1,5 @@
 .page {
   min-width: 320px;
-  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;

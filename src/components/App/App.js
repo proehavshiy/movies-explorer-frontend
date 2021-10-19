@@ -8,10 +8,12 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
+import mainPageContent from '../../utils/pageContent/mainPageContent';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   return (
     <div className="page">
       <Switch>
@@ -19,7 +21,9 @@ function App() {
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <Main />
+          <Main
+            content={mainPageContent}
+          />
           <Footer />
         </Route>
         <Route path="/movies">

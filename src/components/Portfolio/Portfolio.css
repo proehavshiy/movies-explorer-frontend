@@ -7,7 +7,7 @@
   color: #A0A0A0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 425px) {
   .portfolio__heading {
     font-size: 14px;
   }
@@ -32,6 +32,16 @@
   background: url(../../images/text__COLOR_font-main.svg) no-repeat 99% 35%;
 }
 
+.portfolio__link-wrapper:last-of-type {
+  margin: 0 0 0 0;
+}
+
+@media screen and (max-width: 424px) {
+  .portfolio__link-wrapper {
+    background-size: 11px;
+  }
+}
+
 .portfolio__link {
   font-style: inherit;
   font-weight: inherit;
@@ -40,6 +50,19 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio__link {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
 }
 
 .portfolio__name {

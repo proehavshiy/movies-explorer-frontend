@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 function Timeline({ data }) {
   return (
     <ul className="timeline">
-      {data.map((col, index) => (
-        <li className="timeline__col" key={index}>
+      {data.map((col) => (
+        <li className="timeline__col" key={col.id}>
           <p className="timeline__cell">{col.time}</p>
           <p className="timeline__cell">{col.duty}</p>
         </li>
@@ -17,12 +17,11 @@ function Timeline({ data }) {
 }
 
 Timeline.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      time: PropTypes.string.isRequired,
-      duty: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    time: PropTypes.string.isRequired,
+    duty: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default Timeline;

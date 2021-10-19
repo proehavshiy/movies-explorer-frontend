@@ -1,42 +1,52 @@
-/* eslint-disable max-len */
 import React from 'react';
 import './AboutProject.css';
+import PropTypes from 'prop-types';
 import SectionHeading from '../Ui/SectionHeading/SectionHeading';
 import AboutProjectCard from '../AboutProjectCard/AboutProjectCard';
 import Timeline from '../Timeline/Timeline';
 
-function AboutProject() {
+function AboutProject({ sectionHeading, cards, timeline }) {
   return (
     <section className="section landing__about-project">
       <SectionHeading
-        headingText="О проекте"
+        headingText={sectionHeading}
       />
       <div className="landing__card-wrapper">
-        <AboutProjectCard
-          heading="Дипломный проект включал 5 этапов"
-          description="Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки."
-        />
-        <AboutProjectCard
-          heading="На выполнение диплома ушло 5 недель"
-          description="У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься."
-        />
+        {
+          cards.map((card) => (
+            <AboutProjectCard
+              key={card.id}
+              heading={card.heading}
+              description={card.description}
+            />
+          ))
+        }
       </div>
       <div className="landing__timeline-wrapper">
         <Timeline
-          data={[
-            {
-              time: '1 неделя',
-              duty: 'Back-end',
-            },
-            {
-              time: '4 недели',
-              duty: 'Front-end',
-            },
-          ]}
+          data={timeline}
         />
       </div>
     </section>
   );
 }
+
+AboutProject.propTypes = {
+  sectionHeading: PropTypes.string,
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    heading: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })).isRequired,
+  timeline: PropTypes.arrayOf(PropTypes.shape({
+    time: PropTypes.string.isRequired,
+    duty: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })).isRequired,
+};
+
+AboutProject.defaultProps = {
+  sectionHeading: 'О проекте',
+};
 
 export default AboutProject;
