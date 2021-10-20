@@ -1,6 +1,7 @@
 .page-with-form {
     display: flex;
     justify-content: center;
+    height: 100vh;
   }
 
   .page-with-form__container {
@@ -53,6 +54,7 @@
 }
 
 .form {
+  padding: 0 0 70px 0;
   width: 100%;
   height: 100%;
   font-family: inherit;
@@ -126,6 +128,11 @@
   font-weight: normal;
   font-size: 13px;
   line-height: 16px;
+}
+
+.form__button-section {
+  display: flex;
+  flex-direction: column;
 }
 
 .form__redirection {

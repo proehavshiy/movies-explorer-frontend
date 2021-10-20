@@ -26,17 +26,19 @@ function PageWithForm({
         </div>
         <form className="form" onSubmit={onSubmit} name={`${name}-form`} noValidate autoComplete="off">
           {children}
-          <Button
-            text={submitText}
-            btnStyle="submit"
-            type="submit"
-            disabled={!submitButtonState}
-            onClick={null}
-          />
-          <p className="form__redirection">
-            {textContent.redirectionTitle}
-            <Link to={textContent.redirectionLink} className="form__link page__button">{textContent.redirectionText}</Link>
-          </p>
+          <section className="form__button-section">
+            <Button
+              text={submitText}
+              btnStyle="submit"
+              type="submit"
+              disabled={!submitButtonState}
+              onClick={null}
+            />
+            <p className="form__redirection">
+              {textContent.redirectionTitle}
+              <Link to={textContent.redirectionLink} className="form__link page__button">{textContent.redirectionText}</Link>
+            </p>
+          </section>
         </form>
       </div>
     </div>
