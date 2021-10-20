@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React, { useCallback } from 'react';
 
 // кастомный хук по управляемой валидации инпутов

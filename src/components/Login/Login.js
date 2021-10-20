@@ -1,9 +1,12 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import './Login.css';
 import PropTypes from 'prop-types';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
+import FormFieldset from '../FormFieldset/FormFieldset';
 
 // eslint-disable-next-line no-unused-vars
 function Login({ onRegister, isSubmitting, serverRequestStatus }) {
@@ -20,32 +23,44 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
   return (
     <div className="login">
       <PageWithForm
-        name="login"
+        heading="Рады видеть!"
+        formName="login"
         submitText={isSubmitting ? 'Войти' : 'Вход...'}
-        // eslint-disable-next-line react/jsx-no-bind
         onSubmit={handleSubmit}
         submitButtonState={isValid}
+        redirectionSection={{
+          link: '/signup',
+          title: 'Ещё не зарегистрированы?',
+          linkText: 'Регистрация',
+        }}
       >
-        <fieldset className="form__profile-information">
-          <section className="form__input-section">
-            <label className="form__input-label" htmlFor="email">
-              E-mail
-            </label>
-            <input className={`form__input ${errors.email && 'form__input_error'}`} value={values.email || ''} onChange={handleChangeInput} id="email" type="email" name="email" required minLength={6} maxLength={30} />
-            <span className={`form__input-error ${errors.email && 'form__input-error_active'}`}>
-              {errors.email}
-            </span>
-          </section>
-          <section className="form__input-section">
-            <label className="form__input-label" htmlFor="password">
-              Пароль
-            </label>
-            <input className={`form__input ${errors.password && 'form__input_error'}`} value={values.password || ''} onChange={handleChangeInput} id="password" type="password" name="password" required minLength={8} />
-            <span className={`form__input-error ${errors.password && 'form__input-error_active'}`}>
-              {errors.password}
-            </span>
-          </section>
-        </fieldset>
+        <FormFieldset
+          inputs={[
+            {
+              labelName: 'E-mail',
+              inputName: 'email',
+              inputType: 'email',
+              onChange: handleChangeInput,
+              error: errors.email,
+              inputValue: values.email,
+              isRequired: true,
+              minLength: 6,
+              maxLength: 30,
+              id: 1,
+            },
+            {
+              labelName: 'Пароль',
+              inputName: 'password',
+              inputType: 'password',
+              onChange: handleChangeInput,
+              error: errors.password,
+              inputValue: values.password,
+              isRequired: true,
+              minLength: 8,
+              id: 2,
+            },
+          ]}
+        />
       </PageWithForm>
     </div>
   );

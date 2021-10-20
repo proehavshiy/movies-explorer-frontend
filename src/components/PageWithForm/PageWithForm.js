@@ -1,30 +1,23 @@
 import React from 'react';
 import './PageWithForm.css';
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../Ui/Button/Button';
 import Logo from '../Logo/Logo';
 
 function PageWithForm({
-  name, submitText, onSubmit, submitButtonState, children,
+  heading, isLogo, formName, submitText, onSubmit, submitButtonState, children, redirectionSection,
 }) {
-  const { pathname } = useLocation();
-  const textContent = {
-    headingText: (pathname === '/signup' && 'Добро пожаловать!') || (pathname === '/signin' && 'Рады видеть!'),
-    redirectionLink: (pathname === '/signup' && '/signin') || (pathname === '/signin' && '/signup'),
-    redirectionTitle: (pathname === '/signup' && 'Уже зарегистрированы?') || (pathname === '/signin' && 'Ещё не зарегистрированы?'),
-    redirectionText: (pathname === '/signup' && 'Войти') || (pathname === '/signin' && 'Регистрация'),
-  };
   return (
     <div className="page-with-form">
       <div className="page-with-form__container">
-        <div className="page-with-form__top">
-          <Logo />
+        <div className="page-with-form__header">
+          {isLogo && <Logo />}
           <h1 className="page-with-form__heading">
-            {textContent.headingText}
+            {heading}
           </h1>
         </div>
-        <form className="form" onSubmit={onSubmit} name={`${name}-form`} noValidate autoComplete="off">
+        <form className="form" onSubmit={onSubmit} name={`${formName}-form`} noValidate autoComplete="off">
           {children}
           <section className="form__button-section">
             <Button
@@ -34,10 +27,12 @@ function PageWithForm({
               disabled={!submitButtonState}
               onClick={null}
             />
-            <p className="form__redirection">
-              {textContent.redirectionTitle}
-              <Link to={textContent.redirectionLink} className="form__link page__button">{textContent.redirectionText}</Link>
-            </p>
+            {redirectionSection && (
+              <p className="form__redirection">
+                {redirectionSection.title}
+                <Link to={redirectionSection.link} className="form__link page__button">{redirectionSection.linkText}</Link>
+              </p>
+            )}
           </section>
         </form>
       </div>
@@ -46,15 +41,25 @@ function PageWithForm({
 }
 
 PageWithForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  submitText: PropTypes.string.isRequired,
-  onSubmit: PropTypes.string.isRequired,
-  submitButtonState: PropTypes.string,
-  children: PropTypes.string.isRequired,
+  heading: PropTypes.string.isRequired,
+  isLogo: PropTypes.bool,
+  formName: PropTypes.string.isRequired,
+  submitText: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
+  submitButtonState: PropTypes.bool,
+  children: PropTypes.element.isRequired,
+  redirectionSection: PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    linkText: PropTypes.string.isRequired,
+  }),
 };
 
 PageWithForm.defaultProps = {
+  isLogo: true,
+  submitText: 'Отправить',
   submitButtonState: false,
+  redirectionSection: null,
 };
 
 export default PageWithForm;
