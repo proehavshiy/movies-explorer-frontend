@@ -43,11 +43,12 @@
   font-weight: normal;
   font-size: 13px;
   line-height: 16px;
-  transition: outline-color .2s ease;
+  transition: outline-color, color .2s ease;
 }
 
 .fieldset__input:invalid {
   outline-color: #FF4062;
+  color: #FF4062;
 }
 
 .fieldset__input-error {
