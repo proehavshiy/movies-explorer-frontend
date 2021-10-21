@@ -3,6 +3,13 @@
   background: none;
   border: none;
   cursor: pointer;
+  transition: background, color, border, .2s ease;
+}
+
+.page__button:disabled {
+  border: 1px solid #000000;
+  background: #F9F9F9;
+  color: #000000;
 }
 
 .page__button_enter {
