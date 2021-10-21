@@ -45,10 +45,18 @@ function App() {
           <h1>страница с профилем пользователя</h1>
         </Route>
         <Route path="/signin">
-          <Login />
+          <Login
+            onRegister={() => { }}
+            isSubmitting
+            serverRequestStatus="success"
+          />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register
+            onRegister={() => { }}
+            isSubmitting
+            serverRequestStatus="success"
+          />
         </Route>
         <Route path="*">
           <ErrorPage />
