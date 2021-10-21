@@ -24,7 +24,7 @@ function FormFieldset({ inputs }) {
               {labelName}
             </label>
             <input
-              className={`fieldset__input ${error && 'fieldset__input_error'}`}
+              className="fieldset__input"
               value={inputValue}
               onChange={onChange}
               id={inputName}
