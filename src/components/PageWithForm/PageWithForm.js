@@ -30,7 +30,7 @@ function PageWithForm({
             {redirectionSection && (
               <p className="form__redirection">
                 {redirectionSection.title}
-                <Link to={redirectionSection.link} className="form__link page__button">{redirectionSection.linkText}</Link>
+                <Link to={redirectionSection.link} className="form__link page__link">{redirectionSection.linkText}</Link>
               </p>
             )}
           </section>

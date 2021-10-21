@@ -18,6 +18,12 @@
 .page__link {
   color: #000000;
   text-decoration: none;
+  transition: opacity .2s ease;
+}
+
+.page__link:hover {
+  opacity: 0.6;
+  transition: opacity .2s ease;
 }
 
 .page__main-content-padding-top {
