@@ -1,6 +1,4 @@
 .error {
-  position: relative;
-
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,9 +15,8 @@
   position: relative;
   top: 50vh;
   left: 0;
-  transform: translate(0px, -50%);
+  transform: translate(0px, -54%);
 }
-
 
 .error__nav-wrapper {
   margin-bottom: 60px;
