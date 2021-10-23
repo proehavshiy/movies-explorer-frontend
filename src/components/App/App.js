@@ -9,10 +9,11 @@ import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 import mainPageContent from '../../utils/pageContent/mainPageContent';
+import Profile from '../Profile/Profile';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   return (
     <div className="page">
@@ -42,7 +43,7 @@ function App() {
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <h1>страница с профилем пользователя</h1>
+          <Profile />
         </Route>
         <Route path="/signin">
           <Login
