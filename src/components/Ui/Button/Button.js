@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
@@ -6,8 +7,7 @@ function Button({
   text, btnStyle, type, disabled, onClick,
 }) {
   return (
-    // eslint-disable-next-line react/button-has-type
-    <button className={`page__button page__button_${btnStyle}`} onClick={onClick} type={type} disabled={disabled} aria-label={`кнопка ${text}`}>{text}</button>
+    <button className={`page__button page__button_style_${btnStyle}`} onClick={onClick} type={type} disabled={disabled} aria-label={`кнопка ${text}`}>{text}</button>
   );
 }
 

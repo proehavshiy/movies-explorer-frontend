@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 import React from 'react';
 import './PageWithForm.css';
 import PropTypes from 'prop-types';
@@ -6,27 +8,34 @@ import Button from '../Ui/Button/Button';
 import Logo from '../Logo/Logo';
 
 function PageWithForm({
-  heading, isLogo, formName, submitText, onSubmit, submitButtonState, children, redirectionSection,
+  pageType, formStyle, heading, isLogo, formName, submitBtnText, onSubmit, submitButtonState, children, logoutSection, logoutBtnText, redirectionSection,
 }) {
   return (
-    <div className="page-with-form">
+    <div className={`page-with-form page-with-form_type_${pageType}`}>
       <div className="page-with-form__container">
-        <div className="page-with-form__header">
+        <div className={`page-with-form__header page-with-form__header_type_${pageType} page-with-form__header_style_${formStyle}`}>
           {isLogo && <Logo />}
-          <h1 className="page-with-form__heading">
+          <h1 className={`page-with-form__heading ${isLogo && 'page-with-form__heading_with-logo'}`}>
             {heading}
           </h1>
         </div>
-        <form className="form" onSubmit={onSubmit} name={`${formName}-form`} noValidate autoComplete="off">
+        <form className={`form form_type_${pageType}`} onSubmit={onSubmit} name={`${formName}-form`} noValidate autoComplete="off">
           {children}
-          <section className="form__button-section">
+          <section className={`form__button-section form__button-section_type_${pageType}`}>
             <Button
-              text={submitText}
-              btnStyle="submit"
+              text={submitBtnText}
+              btnStyle={formStyle}
               type="submit"
               disabled={!submitButtonState}
-              onClick={null}
             />
+            {logoutSection && (
+              <Button
+                text={logoutBtnText}
+                btnStyle="logout"
+                type="button"
+                onClick={logoutSection.onLogout}
+              />
+            )}
             {redirectionSection && (
               <p className="form__redirection">
                 {redirectionSection.title}
@@ -41,13 +50,19 @@ function PageWithForm({
 }
 
 PageWithForm.propTypes = {
+  pageType: PropTypes.oneOf(['profile', 'auth']),
+  formStyle: PropTypes.oneOf(['profile', 'auth']),
   heading: PropTypes.string.isRequired,
   isLogo: PropTypes.bool,
   formName: PropTypes.string.isRequired,
-  submitText: PropTypes.string,
+  submitBtnText: PropTypes.string,
+  logoutBtnText: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   submitButtonState: PropTypes.bool,
   children: PropTypes.element.isRequired,
+  logoutSection: PropTypes.shape({
+    onLogout: PropTypes.func.isRequired,
+  }),
   redirectionSection: PropTypes.shape({
     link: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -56,9 +71,13 @@ PageWithForm.propTypes = {
 };
 
 PageWithForm.defaultProps = {
+  pageType: 'auth',
+  formStyle: 'auth',
   isLogo: true,
-  submitText: 'Отправить',
+  submitBtnText: 'Отправить',
+  logoutBtnText: 'Выйти из аккаунта',
   submitButtonState: false,
+  logoutSection: null,
   redirectionSection: null,
 };
 

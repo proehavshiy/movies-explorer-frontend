@@ -6,18 +6,12 @@
   transition: background, color, border, opacity .2s ease;
 }
 
-.page__button:disabled {
-  border: 1px solid #000000;
-  background: #F9F9F9;
-  color: #000000;
-}
-
 .page__button:hover {
   opacity: .6;
   transition: opacity .2s ease;
 }
 
-.page__button_enter {
+.page__button_style_enter {
   padding: 8px 20px;
   background: #000000;
   color: #FFFFFF;
@@ -29,14 +23,14 @@
 }
 
 @media screen and (max-width: 320px) {
-  .page__button_enter {
+  .page__button_style_enter {
     padding: 5px 12px;
     font-size: 10px;
     line-height: 1.6;
   }
 }
 
-.page__button_back {
+.page__button_style_back {
   color: #000000;
   font-style: normal;
   font-weight: normal;
@@ -46,14 +40,14 @@
 }
 
 @media screen and (max-width: 320px) {
-  .page__button_back {
+  .page__button_style_back {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
 
-.page__button_submit {
+.page__button_style_auth {
   padding: 15px 0 15px 0;
   background: #000000;
   border-radius: 3px;
@@ -65,11 +59,52 @@
   color: #FFFFFF;
 }
 
+.page__button_style_auth:disabled {
+  border: 1px solid #000000;
+  background: #F9F9F9;
+  color: #000000;
+}
+
 @media screen and (max-width: 450px) {
-  .page__button_submit {
+  .page__button_style_auth {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
+.page__button_style_profile {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+  .page__button_style_profile {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.page__button_style_profile:disabled {
+  opacity: .9;
+}
+
+.page__button_style_logout {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #FF4062;
+}
+
+@media screen and (max-width: 425px) {
+  .page__button_style_logout {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
 

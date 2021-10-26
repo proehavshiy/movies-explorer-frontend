@@ -10,34 +10,72 @@
 .fieldset__input-section {
   margin: 0 0 40px 0;
   position: relative;
-  display: flex;
-  flex-direction: column;
+}
+
+.fieldset__input-section_style_profile {
+  border-bottom: 1px solid #E8E8E8;
 }
 
 .fieldset__input-section:last-of-type {
   margin: 0;
 }
 
+.fieldset__input-wrapper_style_auth {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldset__input-wrapper_style_profile {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 6px 0;
+}
+
 .fieldset__input-label {
-  margin-bottom: 10px;
-  font-style: normal;
+  font-style: inherit;
   font-weight: normal;
+}
+.fieldset__input-label_style_auth {
+  margin-bottom: 10px;
   font-size: 10px;
   line-height: 12px;
   color: #A0A0A0;
 }
 
+.fieldset__input-label_style_profile {
+  padding: 5px 0;
+  flex-basis: 15%;
+  flex-grow: .2;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+}
+
 .fieldset__input {
+  outline-color: #000000;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  transition: outline-color, color .2s ease;
+}
+
+.fieldset__input_style_auth {
   padding: 15px;
   background: #F9F9F9;
   outline-color: #000000;
-  border: 0;
   border-radius: 8px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 13px;
   line-height: 16px;
   transition: outline-color, color .2s ease;
+}
+
+.fieldset__input_style_profile {
+  flex-grow: .8;
+  margin: 0;
+  padding: 5px;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: right;
 }
 
 .fieldset__input:invalid {
@@ -63,4 +101,30 @@
 
 .fieldset__input-error_active {
   opacity: 1;
+}
+
+/* для мобильного лэндскейпа profile */
+@media screen and (max-width: 820px) and (max-height: 540px) {
+  .fieldset__input-section_type_profile {
+    margin: 0 0 25px 0;
+  }
+  .fieldset__input-wrapper_type_profile {
+    margin: 0;
+    height: 30px;
+  }
+  .fieldset__input-section_style_profile {
+    margin: 0 0 35px 0;
+  }
+  .fieldset__input-label_type_profile {
+    padding: 10px 0;
+    font-size: 13px;
+  }
+  .fieldset__input_type_profile {
+    font-size: 13px;
+  }
+  .fieldset__input-error_type_profile {
+    top: calc(100% + 6px);
+    font-size: 8px;
+    line-height: 10px;
+  }
 }

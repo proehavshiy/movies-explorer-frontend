@@ -24,7 +24,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
       <PageWithForm
         heading="Добро пожаловать!"
         formName="register"
-        submitText={isSubmitting ? 'Зарегистрироваться' : 'Регистрация...'}
+        submitBtnText={isSubmitting ? 'Зарегистрироваться' : 'Регистрация...'}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
         redirectionSection={{
@@ -36,6 +36,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
         <FormFieldset
           inputs={[
             {
+              inputStyle: 'auth',
               labelName: 'Имя',
               inputName: 'name',
               inputType: 'text',
@@ -48,6 +49,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
               id: 1,
             },
             {
+              inputStyle: 'auth',
               labelName: 'E-mail',
               inputName: 'email',
               inputType: 'email',
@@ -60,6 +62,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
               id: 2,
             },
             {
+              inputStyle: 'auth',
               labelName: 'Пароль',
               inputName: 'password',
               inputType: 'password',

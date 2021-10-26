@@ -23,9 +23,10 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
   return (
     <div className="login">
       <PageWithForm
+        // isLogo
         heading="Рады видеть!"
         formName="login"
-        submitText={isSubmitting ? 'Войти' : 'Вход...'}
+        submitBtnText={isSubmitting ? 'Войти' : 'Вход...'}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
         redirectionSection={{
@@ -37,6 +38,7 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
         <FormFieldset
           inputs={[
             {
+              inputStyle: 'auth',
               labelName: 'E-mail',
               inputName: 'email',
               inputType: 'email',
@@ -49,6 +51,7 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
               id: 1,
             },
             {
+              inputStyle: 'auth',
               labelName: 'Пароль',
               inputName: 'password',
               inputType: 'password',

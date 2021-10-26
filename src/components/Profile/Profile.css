@@ -108,12 +108,10 @@
 }
 
 .profile__input-error {
-  /* grid-area: error; */
   display: block;
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  /* opacity: 0; */
   overflow: hidden;
   text-overflow: ellipsis;
   font-style: normal;

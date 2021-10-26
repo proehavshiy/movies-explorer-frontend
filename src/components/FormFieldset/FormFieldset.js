@@ -7,6 +7,7 @@ function FormFieldset({ inputs }) {
     <fieldset className="fieldset">
       {inputs.map((input) => {
         const {
+          inputStyle,
           labelName,
           inputName,
           inputType,
@@ -19,22 +20,24 @@ function FormFieldset({ inputs }) {
           maxLength = null,
         } = input;
         return (
-          <section className="fieldset__input-section" key={id}>
-            <label className="fieldset__input-label" htmlFor={inputName}>
-              {labelName}
-            </label>
-            <input
-              className="fieldset__input"
-              value={inputValue}
-              onChange={onChange}
-              id={inputName}
-              type={inputType}
-              name={inputName}
-              required={isRequired}
-              minLength={minLength}
-              maxLength={maxLength}
-            />
-            <span className={`fieldset__input-error ${error && 'fieldset__input-error_active'}`}>
+          <section className={`fieldset__input-section fieldset__input-section_style_${inputStyle}`} key={id}>
+            <div className={`fieldset__input-wrapper fieldset__input-wrapper_style_${inputStyle}`}>
+              <label className={`fieldset__input-label fieldset__input-label_style_${inputStyle}`} htmlFor={inputName}>
+                {labelName}
+              </label>
+              <input
+                className={`fieldset__input fieldset__input_style_${inputStyle}`}
+                value={inputValue}
+                onChange={onChange}
+                id={inputName}
+                type={inputType}
+                name={inputName}
+                required={isRequired}
+                minLength={minLength}
+                maxLength={maxLength}
+              />
+            </div>
+            <span className={`fieldset__input-error fieldset__input-error_style_${inputStyle} ${error && 'fieldset__input-error_active'}`}>
               {error}
             </span>
           </section>
@@ -46,6 +49,7 @@ function FormFieldset({ inputs }) {
 
 FormFieldset.propTypes = {
   inputs: PropTypes.arrayOf(PropTypes.shape({
+    inputStyle: PropTypes.oneOf(['auth', 'profile']),
     labelName: PropTypes.string.isRequired,
     inputName: PropTypes.string.isRequired,
     inputType: PropTypes.oneOf([
