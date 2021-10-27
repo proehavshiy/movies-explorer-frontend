@@ -20,7 +20,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
   }
 
   return (
-    <div className="register page__main-content">
+    <main className="register page__main-content">
       <PageWithForm
         heading="Добро пожаловать!"
         formName="register"
@@ -76,7 +76,7 @@ function Register({ onRegister, isSubmitting, serverRequestStatus }) {
           ]}
         />
       </PageWithForm>
-    </div>
+    </main>
   );
 }
 

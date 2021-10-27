@@ -13,7 +13,7 @@ function Main({ content }) {
   } = content;
 
   return (
-    <div className="landing page__main-content">
+    <main className="landing page__main-content">
       <Promo
         headingText={headingText}
       />
@@ -38,7 +38,7 @@ function Main({ content }) {
         avatar={aboutMeSection.avatar}
         portfolio={aboutMeSection.portfolio}
       />
-    </div>
+    </main>
   );
 }
 
