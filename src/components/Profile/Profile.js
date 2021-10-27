@@ -25,7 +25,7 @@ function Profile({
     onLogout();
   }
   return (
-    <div className="profile page__main-content-padding-top">
+    <div className="profile page__main-content page__main-content-padding-top">
       <PageWithForm
         pageType="profile"
         formStyle="profile"

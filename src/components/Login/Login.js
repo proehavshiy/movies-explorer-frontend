@@ -21,7 +21,7 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
   }
 
   return (
-    <div className="login">
+    <div className="login page__main-content">
       <PageWithForm
         // isLogo
         heading="Рады видеть!"

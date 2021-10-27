@@ -13,7 +13,7 @@ function Main({ content }) {
   } = content;
 
   return (
-    <div className="landing">
+    <div className="landing page__main-content">
       <Promo
         headingText={headingText}
       />

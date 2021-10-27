@@ -1,5 +1,7 @@
 .page {
   min-width: 320px;
+  /* для прижатия футера к низу страницы */
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -26,7 +28,16 @@
   transition: opacity .2s ease;
 }
 
+.page__main-content {
+  /* для прижатия футера к низу страницы */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
 .page__main-content-padding-top {
+  /* отступ от хедера */
   padding-top: 74px;
 }
 

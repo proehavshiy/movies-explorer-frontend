@@ -32,12 +32,14 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Movies />
+          <Footer />
         </Route>
         <Route path="/saved-movies">
           <Header
             isLoggedIn={isLoggedIn}
           />
           <h1>«Сохранённые фильмы»</h1>
+          <Footer />
         </Route>
         <Route path="/profile">
           <Header
