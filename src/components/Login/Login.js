@@ -28,7 +28,7 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
         formName="login"
         submitBtnText={isSubmitting ? 'Войти' : 'Вход...'}
         onSubmit={handleSubmit}
-        submitButtonState={isValid}
+        submitButtonState={!isValid}
         redirectionSection={{
           link: '/signup',
           title: 'Ещё не зарегистрированы?',
