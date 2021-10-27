@@ -140,15 +140,15 @@
   cursor: pointer;
 }
 
-.search-form__invisible-checkbox:checked + .search-form__checkbox-short-films_visible {
+.search-form__checkbox-short-films_invisible:checked + .search-form__checkbox-short-films_visible {
   background: #2BE080 url(../../images/checkbox-selector.svg) no-repeat 150% 25%;
 }
 
-.search-form__invisible-checkbox:disabled + .search-form__checkbox-short-films_visible {
+.search-form__checkbox-short-films_invisible:disabled + .search-form__checkbox-short-films_visible {
   opacity: .6;
 }
 
-.search-form__invisible-checkbox:disabled:checked + .search-form__checkbox-short-films_visible {
+.search-form__checkbox-short-films_invisible:disabled:checked + .search-form__checkbox-short-films_visible {
   opacity: .6;
 }
 
