@@ -33,6 +33,7 @@
   font-style: inherit;
   font-weight: inherit;
   text-align: center;
+  outline-color: #000000;
 }
 
 @media screen and (max-width: 450px) {
