@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 import mainPageContent from '../../utils/pageContent/mainPageContent';
 import Profile from '../Profile/Profile';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -38,7 +39,7 @@ function App() {
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <h1>«Сохранённые фильмы»</h1>
+          <SavedMovies />
           <Footer />
         </Route>
         <Route path="/profile">
