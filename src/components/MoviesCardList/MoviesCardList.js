@@ -103,6 +103,54 @@ function MoviesCardList({ saveMovieSubmitStatus }) {
             <button className="movies-card__button movies-card__button_movie-save page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
           </div>
         </li>
+        <li className="movies-card">
+          <figure className="movies-card__content">
+            <figcaption className="movies-card__figcaption">
+              <h2 className="movies-card__title" title="На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́">На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́</h2>
+              <p className="movies-card__duration" title="144 минуты">144 минуты</p>
+            </figcaption>
+            <img className="movies-card__image" src="https://www.vokrug.tv/pic/product/e/7/6/a/e76a0100ea69a93f8e1439d7cfb62483.jpeg" alt="картинка карточки" />
+          </figure>
+          <div className="movies-card__button-wrapper">
+            <button className="movies-card__button movies-card__button_movie-save page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
+          </div>
+        </li>
+        <li className="movies-card">
+          <figure className="movies-card__content">
+            <figcaption className="movies-card__figcaption">
+              <h2 className="movies-card__title" title="На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́">На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́</h2>
+              <p className="movies-card__duration" title="144 минуты">144 минуты</p>
+            </figcaption>
+            <img className="movies-card__image" src="https://www.vokrug.tv/pic/product/e/7/6/a/e76a0100ea69a93f8e1439d7cfb62483.jpeg" alt="картинка карточки" />
+          </figure>
+          <div className="movies-card__button-wrapper">
+            <button className="movies-card__button movies-card__button_movie-save page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
+          </div>
+        </li>
+        <li className="movies-card">
+          <figure className="movies-card__content">
+            <figcaption className="movies-card__figcaption">
+              <h2 className="movies-card__title" title="На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́">На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́</h2>
+              <p className="movies-card__duration" title="144 минуты">144 минуты</p>
+            </figcaption>
+            <img className="movies-card__image" src="https://www.vokrug.tv/pic/product/e/7/6/a/e76a0100ea69a93f8e1439d7cfb62483.jpeg" alt="картинка карточки" />
+          </figure>
+          <div className="movies-card__button-wrapper">
+            <button className="movies-card__button movies-card__button_movie-save page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
+          </div>
+        </li>
+        <li className="movies-card">
+          <figure className="movies-card__content">
+            <figcaption className="movies-card__figcaption">
+              <h2 className="movies-card__title" title="На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́">На Дериба́совской хоро́шая пого́да, или На Бра́йтон-Бич опя́ть иду́т дожди́</h2>
+              <p className="movies-card__duration" title="144 минуты">144 минуты</p>
+            </figcaption>
+            <img className="movies-card__image" src="https://www.vokrug.tv/pic/product/e/7/6/a/e76a0100ea69a93f8e1439d7cfb62483.jpeg" alt="картинка карточки" />
+          </figure>
+          <div className="movies-card__button-wrapper">
+            <button className="movies-card__button movies-card__button_movie-save page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
+          </div>
+        </li>
       </ul>
       <div className="movies-card-list__button-container">
         <button className="movies-card__button movies-card__button_load-more-cards page__button" type="button" aria-label="кнопка Загрузить больше карточек">Ещё</button>
