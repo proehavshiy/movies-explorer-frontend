@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
@@ -9,6 +10,7 @@ function Movies() {
       <SearchForm
         onSubmit={() => { }}
       />
+      <MoviesCardList />
     </main>
   );
 }

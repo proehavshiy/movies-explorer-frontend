@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-undef */
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchForm.css';
