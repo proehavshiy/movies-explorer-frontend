@@ -10,7 +10,7 @@ function AboutMe({
 }) {
   const { name, position, aboutMe } = personBio;
   return (
-    <section className="section about-me">
+    <section className="section about-me" id="about-me">
       <SectionHeading
         headingText={sectionHeading}
       />

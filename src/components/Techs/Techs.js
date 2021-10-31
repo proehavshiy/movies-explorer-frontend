@@ -9,7 +9,7 @@ function Techs({
   sectionHeading, contentHeading, description, skills,
 }) {
   return (
-    <div className="page__section page__section_background-color_grey">
+    <div className="page__section page__section_background-color_grey" id="techs">
       <section className="section techs">
         <SectionHeading
           headingText={sectionHeading}

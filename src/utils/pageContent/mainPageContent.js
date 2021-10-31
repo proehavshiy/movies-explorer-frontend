@@ -4,17 +4,17 @@ const mainPageContent = {
     links: [
       {
         heading: 'О проекте',
-        path: '/',
+        path: '/#aboutProject',
         id: 1,
       },
       {
         heading: 'Технологии',
-        path: '/',
+        path: '/#techs',
         id: 2,
       },
       {
         heading: 'Студент',
-        path: '/',
+        path: '/#about-me',
         id: 3,
       },
     ],

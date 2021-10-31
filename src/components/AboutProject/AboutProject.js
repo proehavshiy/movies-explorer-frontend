@@ -7,7 +7,7 @@ import Timeline from '../Timeline/Timeline';
 
 function AboutProject({ sectionHeading, cards, timeline }) {
   return (
-    <section className="section landing__about-project">
+    <section className="section landing__about-project" id="aboutProject">
       <SectionHeading
         headingText={sectionHeading}
       />
