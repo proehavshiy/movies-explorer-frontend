@@ -9,7 +9,7 @@ function NavTab({ links }) {
       {
         links.map((link) => (
           <li className="landing__link-wrapper" key={link.id}>
-            <Link className="landing__link" to={link.path}>
+            <Link className="landing__link page__link" to={link.path}>
               {link.heading}
             </Link>
           </li>

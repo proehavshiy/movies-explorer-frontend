@@ -11,7 +11,7 @@ function Portfolio({ heading, data }) {
       <ul className="portfolio__list">
         {
           data.map((item) => (
-            <li className="portfolio__link-wrapper" key={item.id}>
+            <li className="portfolio__link-wrapper page__link" key={item.id}>
               <a className="portfolio__link" href={item.link}>
                 <p className="portfolio__name">
                   {item.name}

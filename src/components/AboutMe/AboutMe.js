@@ -30,7 +30,7 @@ function AboutMe({
               {
                 personalLinks.map((item) => (
                   <li className="about-me__personal-link-wrapper" key={item.id}>
-                    <a className="about-me__personal-link" href={item.link}>
+                    <a className="about-me__personal-link page__link" href={item.link}>
                       {item.socialNetwork}
                     </a>
                   </li>

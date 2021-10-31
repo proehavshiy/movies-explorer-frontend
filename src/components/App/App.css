@@ -21,6 +21,7 @@
   color: #000000;
   text-decoration: none;
   transition: opacity .2s ease;
+  cursor: pointer;
 }
 
 .page__link:hover {
