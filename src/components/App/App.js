@@ -46,7 +46,10 @@ function App() {
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <Profile />
+          <Profile
+            onSubmit={() => { }}
+            onLogout={() => { }}
+          />
         </Route>
         <Route path="/signin">
           <Login
