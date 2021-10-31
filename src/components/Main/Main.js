@@ -7,10 +7,10 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 
-function Main({ content }) {
+function Main({ staticContent }) {
   const {
     headingText, navTabSection, aboutProjectSection, techsSection, aboutMeSection,
-  } = content;
+  } = staticContent;
 
   return (
     <main className="landing page__main-content">
@@ -43,7 +43,7 @@ function Main({ content }) {
 }
 
 Main.propTypes = {
-  content: PropTypes.shape({
+  staticContent: PropTypes.shape({
     headingText: PropTypes.string.isRequired,
     navTabSection: PropTypes.shape({
       links: PropTypes.arrayOf(PropTypes.shape({

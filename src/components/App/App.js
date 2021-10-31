@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+// компоненты
 import Main from '../Main/Main';
 import Header from '../Header/Header';
 import ErrorPage from '../ErrorPage/ErrorPage';
@@ -8,9 +9,14 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
-import mainPageContent from '../../utils/pageContent/mainPageContent';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+// статичный контент страниц
+import mainPageContent from '../../utils/staticPageContent/mainPageContent';
+import moviesMockCards from '../../utils/staticPageContent/moviesPageContent';
+import profilePageContent from '../../utils/staticPageContent/profilePageContent';
+import loginPageContent from '../../utils/staticPageContent/loginPageContent';
+import registerPageContent from '../../utils/staticPageContent/registerPageContent';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -24,7 +30,7 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Main
-            content={mainPageContent}
+            staticContent={mainPageContent}
           />
           <Footer />
         </Route>
@@ -32,14 +38,20 @@ function App() {
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <Movies />
+          <Movies
+            onSearchFormSubmit={() => { }}
+            cardsData={moviesMockCards}
+          />
           <Footer />
         </Route>
         <Route path="/saved-movies">
           <Header
             isLoggedIn={isLoggedIn}
           />
-          <SavedMovies />
+          <SavedMovies
+            onSearchFormSubmit={() => { }}
+            cardsData={moviesMockCards}
+          />
           <Footer />
         </Route>
         <Route path="/profile">
@@ -47,22 +59,26 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Profile
-            onSubmit={() => { }}
-            onLogout={() => { }}
+            onSubmit={() => console.log('onSubmitMock')}
+            onLogout={() => console.log('onLogoutMock')}
+            userName="Виталий"
+            staticContent={profilePageContent}
           />
         </Route>
         <Route path="/signin">
           <Login
-            onRegister={() => { }}
+            onLogin={() => console.log('onLoginMock')}
             isSubmitting
             serverRequestStatus="success"
+            staticContent={loginPageContent}
           />
         </Route>
         <Route path="/signup">
           <Register
-            onRegister={() => { }}
+            onRegister={() => console.log('onRegisterMock')}
             isSubmitting
             serverRequestStatus="success"
+            staticContent={registerPageContent}
           />
         </Route>
         <Route path="*">

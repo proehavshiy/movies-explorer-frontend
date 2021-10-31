@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -8,32 +9,29 @@ import PageWithForm from '../PageWithForm/PageWithForm';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
-// eslint-disable-next-line no-unused-vars
-function Login({ onRegister, isSubmitting, serverRequestStatus }) {
+function Login({
+  onLogin, isSubmitting, serverRequestStatus, staticContent,
+}) {
+  const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
   const {
-    // eslint-disable-next-line no-unused-vars
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    onLogin();
   }
 
   return (
     <main className="login page__main-content">
       <PageWithForm
-        // isLogo
-        heading="Рады видеть!"
+        heading={heading}
         formName="login"
-        submitBtnText={isSubmitting ? 'Войти' : 'Вход...'}
+        submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
-        redirectionSection={{
-          link: '/signup',
-          title: 'Ещё не зарегистрированы?',
-          linkText: 'Регистрация',
-        }}
+        redirectionSection={redirectionSection}
       >
         <FormFieldset
           inputs={[
@@ -72,9 +70,21 @@ function Login({ onRegister, isSubmitting, serverRequestStatus }) {
 }
 
 Login.propTypes = {
-  onRegister: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
   serverRequestStatus: PropTypes.string,
+  staticContent: PropTypes.shape({
+    heading: PropTypes.string.isRequired,
+    submitBtnText: PropTypes.shape({
+      default: PropTypes.string.isRequired,
+      isLoading: PropTypes.string.isRequired,
+    }).isRequired,
+    redirectionSection: PropTypes.shape({
+      link: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      linkText: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 Login.defaultProps = {

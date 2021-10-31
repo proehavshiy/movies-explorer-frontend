@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
@@ -7,31 +8,29 @@ import PageWithForm from '../PageWithForm/PageWithForm';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
-// eslint-disable-next-line no-unused-vars
-function Register({ onRegister, isSubmitting, serverRequestStatus }) {
+function Register({
+  onRegister, isSubmitting, serverRequestStatus, staticContent,
+}) {
+  const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
   const {
-    // eslint-disable-next-line no-unused-vars
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    onRegister();
   }
 
   return (
     <main className="register page__main-content">
       <PageWithForm
-        heading="Добро пожаловать!"
+        heading={heading}
         formName="register"
-        submitBtnText={isSubmitting ? 'Зарегистрироваться' : 'Регистрация...'}
+        submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
-        redirectionSection={{
-          link: '/signin',
-          title: 'Уже зарегистрированы?',
-          linkText: 'Войти',
-        }}
+        redirectionSection={redirectionSection}
       >
         <FormFieldset
           inputs={[
@@ -87,6 +86,18 @@ Register.propTypes = {
   onRegister: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
   serverRequestStatus: PropTypes.string,
+  staticContent: PropTypes.shape({
+    heading: PropTypes.string.isRequired,
+    submitBtnText: PropTypes.shape({
+      default: PropTypes.string.isRequired,
+      isLoading: PropTypes.string.isRequired,
+    }).isRequired,
+    redirectionSection: PropTypes.shape({
+      link: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      linkText: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 Register.defaultProps = {

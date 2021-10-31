@@ -7,12 +7,11 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
-// eslint-disable-next-line no-unused-vars
 function Profile({
-  userName, onSubmit, onLogout, isSubmitting,
+  userName, onSubmit, onLogout, isSubmitting, staticContent,
 }) {
+  const { submitBtnText, logoutBtnText } = staticContent;
   const {
-    // eslint-disable-next-line no-unused-vars
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
 
@@ -24,6 +23,7 @@ function Profile({
     evt.preventDefault();
     onLogout();
   }
+
   return (
     <main className="profile page__main-content page__main-content-padding-top">
       <PageWithForm
@@ -32,8 +32,8 @@ function Profile({
         heading={`Привет, ${userName}!`}
         isLogo={false}
         formName="profile"
-        submitBtnText={isSubmitting.forSubmitBtn ? 'Редактировать' : 'Редактирование...'}
-        logoutBtnText={isSubmitting.forLogoutBtn ? 'Выйти из аккаунта' : 'Выход...'}
+        submitBtnText={isSubmitting.forSubmitBtn ? submitBtnText.default : submitBtnText.isLoading}
+        logoutBtnText={isSubmitting.forLogoutBtn ? logoutBtnText.default : logoutBtnText.isLoading}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
         logoutSection={{
@@ -85,6 +85,16 @@ Profile.propTypes = {
     forSubmitBtn: PropTypes.bool.isRequired,
     forLogoutBtn: PropTypes.bool.isRequired,
   }),
+  staticContent: PropTypes.shape({
+    submitBtnText: PropTypes.shape({
+      default: PropTypes.string.isRequired,
+      isLoading: PropTypes.string.isRequired,
+    }).isRequired,
+    logoutBtnText: PropTypes.shape({
+      default: PropTypes.string.isRequired,
+      isLoading: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 Profile.defaultProps = {
