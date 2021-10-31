@@ -1,4 +1,4 @@
-.page__button {
+.button {
   padding: 0;
   background: none;
   border: none;
@@ -6,12 +6,12 @@
   transition: background, color, border, opacity .2s ease;
 }
 
-.page__button:hover {
-  opacity: .6;
+.button:hover {
+  opacity: .8;
   transition: opacity .2s ease, background-color .2s ease;
 }
 
-.page__button_style_enter {
+.button_type_enter {
   padding: 8px 20px;
   background: #000000;
   color: #FFFFFF;
@@ -23,14 +23,14 @@
 }
 
 @media screen and (max-width: 320px) {
-  .page__button_style_enter {
+  .button_type_enter {
     padding: 5px 12px;
     font-size: 10px;
     line-height: 1.6;
   }
 }
 
-.page__button_style_back {
+.button_type_back {
   color: #000000;
   font-style: normal;
   font-weight: normal;
@@ -40,14 +40,14 @@
 }
 
 @media screen and (max-width: 320px) {
-  .page__button_style_back {
+  .button_type_back {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
 
-.page__button_style_auth {
+.button_type_auth {
   padding: 15px 0 15px 0;
   background: #000000;
   border-radius: 3px;
@@ -59,20 +59,20 @@
   color: #FFFFFF;
 }
 
-.page__button_style_auth:disabled {
+.button_type_auth:disabled {
   border: 1px solid #000000;
   background: #F9F9F9;
   color: #000000;
 }
 
 @media screen and (max-width: 450px) {
-  .page__button_style_auth {
+  .button_type_auth {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
-.page__button_style_profile {
+.button_type_profile {
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
@@ -81,17 +81,17 @@
 }
 
 @media screen and (max-width: 425px) {
-  .page__button_style_profile {
+  .button_type_profile {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
-.page__button_style_profile:disabled {
+.button_type_profile:disabled {
   opacity: .9;
 }
 
-.page__button_style_logout {
+.button_type_logout {
   margin: 0;
   font-style: normal;
   font-weight: 500;
@@ -102,9 +102,95 @@
 }
 
 @media screen and (max-width: 425px) {
-  .page__button_style_logout {
+  .button_type_logout {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
+.button_type_default-movie-card {
+  width: 100px;
+  height: 29px;
+
+  background: #F9F9F9;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 12px;
+  text-align: center;
+  color: inherit;
+  border-radius: 30px;
+  line-height: 0.92;
+}
+
+.button_type_default-movie-card:disabled {
+  background: #F9F9F9;
+  border: 1px solid #000000;
+  opacity: .3;
+  filter: invert(1);
+}
+
+.button_type_added-to-fav-movie-card {
+  width: 100px;
+  height: 29px;
+
+  border-radius: 30px;
+
+  background: #FF4062 url(../../../images/save-movie-icon.svg) no-repeat center;
+}
+
+.button_type_added-to-fav-movie-card:disabled {
+  background: transparent url(../../../images/save-movie-icon.svg) no-repeat center;
+  border: 1px solid #F9F9F9;
+  opacity: .3;
+  filter: invert(1);
+}
+
+.button_type_delete-from-fav-movie-card {
+  width: 100px;
+  height: 29px;
+
+  background: #F9F9F9;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 12px;
+  text-align: center;
+  color: inherit;
+
+  border-radius: 30px;
+
+  background: #F9F9F9 url(../../../images/delete-movie-icon.svg) no-repeat center;
+  transition: background-color .2s ease;
+}
+
+.button_type_delete-from-fav-movie-card:disabled {
+  background: #F9F9F9 url(../../../images/delete-movie-icon.svg) no-repeat center;
+  border: 1px solid #000000;
+  opacity: .3;
+  filter: invert(1);
+}
+
+.button_type_load-more-cards {
+  flex-grow: 1;
+
+  padding: 9px 0;
+
+  border-radius: 6px;
+
+  background: #F9F9F9;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: 500;
+  line-height: 15px;
+  font-size: 12px;
+  text-align: center;
+  color: inherit;
+}
+
+.button_type_load-more-cards:disabled {
+  background: #F9F9F9;
+  border: 1px solid #000000;
+  opacity: .3;
+  filter: invert(1);
+}

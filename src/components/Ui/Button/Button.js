@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import './Button.css';
 
 function Button({
-  text, btnStyle, type, disabled, onClick,
+  text, label, btnStyle, type, disabled, onClick,
 }) {
   return (
-    <button className={`page__button page__button_style_${btnStyle}`} onClick={onClick} type={type} disabled={disabled} aria-label={`кнопка ${text}`}>{text}</button>
+    <button className={`button button_type_${btnStyle}`} onClick={onClick} type={type} disabled={disabled} aria-label={label}>{text}</button>
   );
 }
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
+  label: PropTypes.string,
   btnStyle: PropTypes.string.isRequired,
   type: PropTypes.string,
   disabled: PropTypes.bool,
@@ -20,6 +21,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  label: 'кнопка',
   type: 'button',
   disabled: false,
   onClick: null,

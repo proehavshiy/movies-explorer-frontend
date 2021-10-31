@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import './MoviesCardList.css';
 import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Button from '../Ui/Button/Button';
 
 function MoviesCardList({ typeOfList, cardsData }) {
   return (
@@ -20,7 +22,13 @@ function MoviesCardList({ typeOfList, cardsData }) {
       </ul>
       {typeOfList === 'default' && (
         <div className="movies-card-list__button-container">
-          <button className="movies-card__button movies-card__button_load-more-cards page__button" type="button" aria-label="кнопка Загрузить больше карточек">Ещё</button>
+          <Button
+            text="Ещё"
+            label="кнопка Загрузить больше карточек"
+            btnStyle="load-more-cards"
+            disabled={false}
+            onClick={() => { }}
+          />
         </div>
       )}
     </section>

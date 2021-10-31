@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
+import Button from '../Ui/Button/Button';
 
 function MoviesCard({
   cardType, isFavourite, name, duration, image,
@@ -33,11 +37,21 @@ function MoviesCard({
       </figure>
       <div className="movies-card__button-wrapper">
         {cardType === 'default' ? (
-          <button className={`movies-card__button movies-card__button_type_default ${isCardAddedToFavourites && 'movies-card__button_saved '} page__button`} onClick={handleDefaultCard} type="button" aria-label="кнопка Сохранить">
-            {!isCardAddedToFavourites && 'Сохранить'}
-          </button>
+          <Button
+            text={!isCardAddedToFavourites ? 'Сохранить' : ''}
+            label="кнопка Сохранить"
+            btnStyle={isCardAddedToFavourites ? 'added-to-fav-movie-card' : 'default-movie-card'}
+            disabled={false}
+            onClick={handleDefaultCard}
+          />
         ) : (
-          <button className="movies-card__button movies-card__button_type_chosen page__button" type="button" aria-label="кнопка Удалить из избранного" />
+          <Button
+            text=""
+            label="кнопка Удалить из избранного"
+            btnStyle="delete-from-fav-movie-card"
+            disabled={false}
+            onClick={() => { }}
+          />
         )}
       </div>
     </li>
