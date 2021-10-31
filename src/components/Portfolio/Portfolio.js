@@ -12,7 +12,7 @@ function Portfolio({ heading, data }) {
         {
           data.map((item) => (
             <li className="portfolio__link-wrapper page__link" key={item.id}>
-              <a className="portfolio__link" href={item.link}>
+              <a className="portfolio__link" target="_blank" rel="noreferrer" href={item.link}>
                 <p className="portfolio__name">
                   {item.name}
                 </p>

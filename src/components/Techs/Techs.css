@@ -47,7 +47,7 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.43;
   text-align: center;
   letter-spacing: -0.04em;
 }
@@ -56,7 +56,7 @@
   .techs__subtitle {
     margin: 22px 0 0 0;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 1.5;
   }
 }
 
@@ -64,6 +64,6 @@
   .techs__subtitle {
     margin: 24px 0 0 0;
     font-size: 11px;
-    line-height: 16px;
+    line-height: 1.45;
   }
 }

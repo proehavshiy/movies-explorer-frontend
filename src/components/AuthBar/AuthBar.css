@@ -2,16 +2,6 @@
   z-index: 2;
 }
 
-@media screen and (max-width: 768px) {
-  .header__auth-bar {
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .header__auth-bar {
-  }
-}
-
 .header__register {
   margin-right: 30px;
   font-style: normal;

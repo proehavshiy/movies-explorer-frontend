@@ -27,7 +27,7 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1.21;
   text-align: center;
   letter-spacing: -0.04em;
 
@@ -37,6 +37,6 @@
   .skill-feed__item {
     padding: 21px 0;
     font-size: 12px;
-    line-height: 15px;
+    line-height: 1.25;
   }
 }

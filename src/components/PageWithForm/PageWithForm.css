@@ -23,7 +23,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  line-height: 29px;
+  line-height: 1.2;
 }
 
 .page-with-form__heading_with-logo {
@@ -62,7 +62,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1.21;
   text-align: center;
   color: #A0A0A0;
 }
@@ -70,7 +70,7 @@
 @media screen and (max-width: 450px) {
   .form__redirection {
     font-size: 12px;
-    line-height: 15px;
+    line-height: 1.21;
   }
 }
 
@@ -168,7 +168,7 @@
   }
   .page-with-form__heading_type_profile {
     font-size: 20px;
-    line-height: 25px;
+    line-height: 1.25;
   }
   .form_type_profile {
     margin: 0 0 20px 0;
@@ -191,7 +191,7 @@
   .page-with-form__heading_with-logo {
     margin: 0 0 0 20px;
     font-size: 20px;
-    line-height: 25px;
+    line-height: 1.25;
   }
   .form_type_auth {
     margin: 0 0 20px 0;

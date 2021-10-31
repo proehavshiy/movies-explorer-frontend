@@ -40,7 +40,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 140px;
-  line-height: 169px;
+  line-height: 1.2;
   text-align: center;
   color: #000000;
 }
@@ -48,7 +48,7 @@
 @media screen and (max-width: 425px) {
   .error__heading {
     font-size: 80px;
-    line-height: 97px;
+    line-height: 1.21;
   }
 }
 
@@ -57,7 +57,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 1.19;
   text-align: center;
   color: #000000;
 }
@@ -66,7 +66,7 @@
   .error__subtitle {
     margin: 10px 0 0 0;
     font-size: 12px;
-    line-height: 15px;
+    line-height: 1.25;
   }
 }
 
@@ -74,7 +74,7 @@
 @media screen and (max-width: 820px) and (max-height: 540px) {
   .error__heading {
     font-size: 120px;
-    line-height: 120px;
+    line-height: 1;
   }
     .error__nav-wrapper {
     margin-bottom: 30px;

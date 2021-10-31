@@ -18,7 +18,7 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 50px;
-  line-height: 58px;
+  line-height: 1.16;
   text-align: center;
   letter-spacing: -0.04em;
   color: #000000;
@@ -35,7 +35,7 @@
     margin: 207px 0 246px 0;
     width: 300px;
     font-size: 31px;
-    line-height: 39px;
+    line-height: 1.26;
   }
 }
 

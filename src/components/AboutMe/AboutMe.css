@@ -72,7 +72,7 @@
 @media (min-width: 425px) and (max-width: 768px) {
   .about-me__profile .landing__content-heading {
     font-size: 40px;
-    line-height: 40px;
+    line-height: 1;
   }
 }
 
@@ -82,14 +82,14 @@
   font-style: inherit;
   font-weight: 500;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 1.11;
 }
 
 @media screen and (max-width: 768px) {
   .about-me__position {
     margin: 16px 0 0 0;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 1.5;
   }
 }
 
@@ -97,28 +97,28 @@
   .about-me__position {
     margin: 20px 0 0 0;
     font-size: 11px;
-    line-height: 16px;
+    line-height: 1.45;
   }
 }
 
 .about-me__article {
   margin: 26px 0 0 0;
   font-size: 14px;
-  line-height: 22px;
+  line-height: 1.57;
 }
 
 @media screen and (max-width: 768px) {
   .about-me__article {
     margin: 20px 0 0 0;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 1.5;
   }
 }
 
 @media screen and (max-width: 424px) {
   .about-me__article {
     font-size: 11px;
-    line-height: 16px;
+    line-height: 1.45;
   }
 }
 
@@ -159,7 +159,7 @@
   font-style: inherit;
   font-weight: 500;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1.21;
   color: inherit;
   text-decoration: none;
 }

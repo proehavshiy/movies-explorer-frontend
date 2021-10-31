@@ -18,7 +18,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1.21;
   text-align: center;
 }
 
@@ -29,7 +29,7 @@
 @media screen and (max-width: 600px) {
   .timeline__cell {
     font-size: 11px;
-    line-height: 13px;
+    line-height: 1.18;
   }
 }
 

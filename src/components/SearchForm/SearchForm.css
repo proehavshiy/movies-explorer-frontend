@@ -48,7 +48,7 @@
   font-style: inherit;
   font-weight: 500;
   font-size: 28px;
-  line-height: 34px;
+  line-height: 1.21;
   text-align: center;
   color: #A0A0A0;
   transform: translate(0, 4px)
@@ -57,7 +57,7 @@
 @media screen and (max-width: 450px) {
   .search-form__input::placeholder {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
     text-align: left;
   }
 }

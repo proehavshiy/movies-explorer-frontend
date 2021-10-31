@@ -3,7 +3,7 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 1.11;
   color: #A0A0A0;
 }
 
@@ -46,7 +46,7 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 30px;
-  line-height: 50px;
+  line-height: 1.67;
   letter-spacing: -0.04em;
   text-decoration: none;
   color: #000000;
@@ -61,7 +61,7 @@
 @media screen and (max-width: 600px) {
   .portfolio__link {
     font-size: 18px;
-    line-height: 28px;
+    line-height: 1.56;
   }
 }
 

@@ -100,7 +100,7 @@
 .nav-bar__link_navigation {
   font-weight: normal;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 1.38;
   text-align: right;
 }
 
@@ -112,7 +112,7 @@
   .nav-bar__link_navigation {
     font-weight: 500;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
   }
   .nav-bar__link_accent {
     padding-bottom: 4px;
@@ -132,7 +132,7 @@
   border: none;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 1.14;
   z-index: 2;
 }
 

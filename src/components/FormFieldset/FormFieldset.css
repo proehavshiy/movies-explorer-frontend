@@ -38,7 +38,7 @@
 .fieldset__input-label_style_auth {
   margin-bottom: 10px;
   font-size: 10px;
-  line-height: 12px;
+  line-height: 1.2;
   color: #A0A0A0;
 }
 
@@ -48,7 +48,7 @@
   flex-grow: .2;
   font-weight: 500;
   font-size: 11px;
-  line-height: 13px;
+  line-height: 1.18;
 }
 
 .fieldset__input {
@@ -65,7 +65,7 @@
   outline-color: #000000;
   border-radius: 8px;
   font-size: 13px;
-  line-height: 16px;
+  line-height: 1.23;
   transition: outline-color, color .2s ease;
 }
 
@@ -74,7 +74,7 @@
   margin: 0;
   padding: 5px;
   font-size: 11px;
-  line-height: 13px;
+  line-height: 1.18;
   text-align: right;
 }
 
@@ -94,7 +94,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
-  line-height: 12px;
+  line-height: 1.2;
   color: #FF4062;
   transition: opacity, .2s ease;
 }
@@ -125,6 +125,6 @@
   .fieldset__input-error_type_profile {
     top: calc(100% + 6px);
     font-size: 8px;
-    line-height: 10px;
+    line-height: 1.25;
   }
 }

@@ -3,14 +3,14 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 22px;
-  line-height: 27px;
+  line-height: 1.23;
   letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 424px) {
   .landing__section-heading {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
   }
 }
 
