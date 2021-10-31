@@ -8,7 +8,7 @@
 
 .page__button:hover {
   opacity: .6;
-  transition: opacity .2s ease;
+  transition: opacity .2s ease, background-color .2s ease;
 }
 
 .page__button_style_enter {

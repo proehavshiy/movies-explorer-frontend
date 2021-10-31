@@ -10,7 +10,8 @@ function MoviesCardList({ typeOfList, cardsData }) {
         {cardsData.map((film) => (
           <MoviesCard
             key={film.id}
-            cardType={film.status}
+            cardType={typeOfList}
+            isFavourite={film.isFavourite}
             name={film.name}
             duration={film.duration}
             image={film.image}

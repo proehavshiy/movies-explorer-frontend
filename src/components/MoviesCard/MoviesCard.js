@@ -1,12 +1,13 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
 
 function MoviesCard({
-  cardType, name, duration, image,
+  cardType, isFavourite, name, duration, image,
 }) {
+  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(isFavourite);
+
   function converseDurationToString(num) {
     let minutes;
     const stringNum = String(num);
@@ -16,6 +17,10 @@ function MoviesCard({
     return minutes;
   }
   const stringDuration = converseDurationToString(duration);
+
+  function handleDefaultCard() {
+    setIsCardAddedToFavourites(!isCardAddedToFavourites);
+  }
 
   return (
     <li className="movies-card">
@@ -28,9 +33,11 @@ function MoviesCard({
       </figure>
       <div className="movies-card__button-wrapper">
         {cardType === 'default' ? (
-          <button className="movies-card__button movies-card__button_movie-default page__button" type="button" aria-label="кнопка Сохранить">Сохранить</button>
+          <button className={`movies-card__button movies-card__button_type_default ${isCardAddedToFavourites && 'movies-card__button_saved '} page__button`} onClick={handleDefaultCard} type="button" aria-label="кнопка Сохранить">
+            {!isCardAddedToFavourites && 'Сохранить'}
+          </button>
         ) : (
-          <button className="movies-card__button movies-card__button_movie-delete page__button" type="button" aria-label="кнопка Удалить из избранного" />
+          <button className="movies-card__button movies-card__button_type_chosen page__button" type="button" aria-label="кнопка Удалить из избранного" />
         )}
       </div>
     </li>
@@ -39,6 +46,7 @@ function MoviesCard({
 
 MoviesCard.propTypes = {
   cardType: PropTypes.oneOf(['default', 'saved']),
+  isFavourite: PropTypes.bool,
   name: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
@@ -46,6 +54,7 @@ MoviesCard.propTypes = {
 
 MoviesCard.defaultProps = {
   cardType: 'default',
+  isFavourite: false,
 };
 
 export default MoviesCard;
