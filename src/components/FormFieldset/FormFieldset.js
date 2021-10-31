@@ -15,6 +15,7 @@ function FormFieldset({ inputs }) {
           inputValue = '',
           error = '',
           id,
+          placeholder = '',
           isRequired = true,
           minLength = null,
           maxLength = null,
@@ -32,6 +33,7 @@ function FormFieldset({ inputs }) {
                 id={inputName}
                 type={inputType}
                 name={inputName}
+                placeholder={placeholder}
                 required={isRequired}
                 minLength={minLength}
                 maxLength={maxLength}
@@ -77,6 +79,7 @@ FormFieldset.propTypes = {
     id: PropTypes.number.isRequired,
     inputValue: PropTypes.string,
     error: PropTypes.string,
+    placeholder: PropTypes.string,
     isRequired: PropTypes.bool,
     minLength: PropTypes.number,
     maxLength: PropTypes.number,
