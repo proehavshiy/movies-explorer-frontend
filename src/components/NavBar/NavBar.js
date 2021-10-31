@@ -1,6 +1,6 @@
-/* eslint-disable consistent-return */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable consistent-return */
 import React from 'react';
 import './NavBar.css';
 import PropTypes from 'prop-types';
@@ -19,7 +19,7 @@ function NavBar({
   // закрытие при переходе по ссылке
   function handleClick(evt) {
     if (evt.target !== evt.currentTarget) {
-      onClose(!isOpen);
+      onClose(false);
     }
   }
 
@@ -29,7 +29,7 @@ function NavBar({
 
     const handleEscapeClose = (evt) => {
       if (evt.key === 'Escape') {
-        onClose(!isOpen);
+        onClose(false);
       }
     };
     document.addEventListener('keyup', handleEscapeClose);
