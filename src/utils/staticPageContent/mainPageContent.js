@@ -56,6 +56,8 @@ const mainPageContent = {
       { skill: 'JS', id: 3 },
       { skill: 'React', id: 4 },
       { skill: 'Git', id: 5 },
+      { skill: 'Express.js', id: 6 },
+      { skill: 'mongoDB', id: 7 },
     ],
   },
   aboutMeSection: {

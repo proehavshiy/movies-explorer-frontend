@@ -10,11 +10,11 @@ function Footer() {
           &copy;&nbsp;
           {new Date().getFullYear()}
         </p>
-        <section className="footer__links">
+        <div className="footer__links">
           <a className="footer__link page__link" href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
           <a className="footer__link page__link" href="https://github.com/proehavshiy" target="_blank" rel="noreferrer">Github</a>
           <a className="footer__link page__link" href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
-        </section>
+        </div>
       </div>
     </footer>
   );
