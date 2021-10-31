@@ -20,7 +20,7 @@ import registerPageContent from '../../utils/staticPageContent/registerPageConte
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   return (
     <div className="page">
