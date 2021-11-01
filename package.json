@@ -19,6 +19,7 @@
     "build": "react-scripts build",
     "lint": "npx eslint .",
     "start build": "serve -s build",
+    "deploy": "npm run build && scp -r ./build* proehavshiy@217.28.229.36:/home/proehavshiy/movies-explorer-frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
