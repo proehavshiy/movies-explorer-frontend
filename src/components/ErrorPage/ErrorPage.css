@@ -1,0 +1,82 @@
+.error {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error__content-wrapper {
+  position: relative;
+}
+
+/* обертка блока для постоянного расположения в центре экрана */
+.error__position-wrapper {
+  position: relative;
+  top: 50vh;
+  left: 0;
+  transform: translate(0px, -54%);
+}
+
+.error__nav-wrapper {
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .error__nav-wrapper {
+    margin-bottom: 222px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .error__nav-wrapper {
+    margin-bottom: 30px;
+  }
+}
+
+.error__heading {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 140px;
+  line-height: 1.2;
+  text-align: center;
+  color: #000000;
+}
+
+@media screen and (max-width: 425px) {
+  .error__heading {
+    font-size: 80px;
+    line-height: 1.21;
+  }
+}
+
+.error__subtitle {
+  margin: 5px 0 0 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.19;
+  text-align: center;
+  color: #000000;
+}
+
+@media screen and (max-width: 425px) {
+  .error__subtitle {
+    margin: 10px 0 0 0;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
+
+/* для мобильного лэндскейпа */
+@media screen and (max-width: 820px) and (max-height: 540px) {
+  .error__heading {
+    font-size: 120px;
+    line-height: 1;
+  }
+    .error__nav-wrapper {
+    margin-bottom: 30px;
+  }
+}

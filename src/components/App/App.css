@@ -1,0 +1,81 @@
+.page {
+  min-width: 320px;
+  /* для прижатия футера к низу страницы */
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.page__section_background-color_grey {
+  background: #F5F5F5;
+}
+
+.page__link {
+  color: #000000;
+  text-decoration: none;
+  transition: opacity .2s ease;
+  cursor: pointer;
+}
+
+.page__link:hover {
+  opacity: 0.6;
+  transition: opacity .2s ease;
+}
+
+.page__main-content {
+  /* для прижатия футера к низу страницы */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.page__main-content-padding-top {
+  /* отступ от хедера */
+  padding-top: 74px;
+}
+
+@media screen and (max-width: 768px) {
+  .page_freezed {
+    overflow: hidden;
+  }
+}
+
+.page__section-landing {
+  margin: 0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .page__section-landing {
+    margin: 0 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__section-landing {
+  margin: 0 18px;
+  }
+}
+
+.page__section-films {
+  margin: 0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .page__section-films {
+  margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__section-films {
+  margin: 0 10px;
+  }
+}
