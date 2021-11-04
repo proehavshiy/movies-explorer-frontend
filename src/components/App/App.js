@@ -12,6 +12,7 @@ import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // статичный контент страниц
 import mainPageContent from '../../utils/staticPageContent/mainPageContent';
 import moviesMockCards from '../../utils/staticPageContent/moviesPageContent';
@@ -23,7 +24,7 @@ import * as mainApi from '../../utils/MainApi';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
 
   function handleRegister(name, email, password) {
@@ -68,7 +69,10 @@ function App() {
           />
           <Footer />
         </Route>
-        <Route path="/movies">
+        <ProtectedRoute
+          path="/movies"
+          loggedIn={isLoggedIn}
+        >
           <Header
             isLoggedIn={isLoggedIn}
           />
@@ -77,8 +81,11 @@ function App() {
             cardsData={moviesMockCards}
           />
           <Footer />
-        </Route>
-        <Route path="/saved-movies">
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/saved-movies"
+          loggedIn={isLoggedIn}
+        >
           <Header
             isLoggedIn={isLoggedIn}
           />
@@ -87,8 +94,11 @@ function App() {
             cardsData={moviesMockCards}
           />
           <Footer />
-        </Route>
-        <Route path="/profile">
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/profile"
+          loggedIn={isLoggedIn}
+        >
           <Header
             isLoggedIn={isLoggedIn}
           />
@@ -98,7 +108,7 @@ function App() {
             userName="Виталий"
             staticContent={profilePageContent}
           />
-        </Route>
+        </ProtectedRoute>
         <Route path="/signin">
           <Login
             onLogin={handleLogin}

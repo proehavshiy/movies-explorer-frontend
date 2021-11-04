@@ -34,3 +34,40 @@ export function login(email, password) {
     }),
   }).then(checkResponse);
 }
+
+export function logOut() {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
+    credentials: 'include',
+  }).then(checkResponse);
+}
+
+export function getUserInfo() {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    credentials: 'include',
+  }).then(checkResponse);
+}
+
+export function updateUserInfo(name, email) {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      email,
+    }),
+  }).then(checkResponse);
+}
+
+// films
+
+export function getSavedMovies() {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'GET',
+    credentials: 'include',
+  }).then(checkResponse);
+}
