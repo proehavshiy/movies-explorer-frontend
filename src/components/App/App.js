@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
@@ -17,10 +18,25 @@ import moviesMockCards from '../../utils/staticPageContent/moviesPageContent';
 import profilePageContent from '../../utils/staticPageContent/profilePageContent';
 import loginPageContent from '../../utils/staticPageContent/loginPageContent';
 import registerPageContent from '../../utils/staticPageContent/registerPageContent';
+// api
+import * as mainApi from '../../utils/MainApi';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+
+  function handleRegister(name, email, password) {
+    mainApi.register(name, email, password)
+      .then((userData) => {
+        if (userData) {
+          console.log('зарегистрирован', userData);
+        }
+      })
+      .catch((err) => {
+        console.log('ошибка регистрации:', err);
+      })
+      .finally();
+  }
 
   return (
     <div className="page">
@@ -75,7 +91,7 @@ function App() {
         </Route>
         <Route path="/signup">
           <Register
-            onRegister={() => console.log('onRegisterMock')}
+            onRegister={handleRegister}
             isSubmitting
             serverRequestStatus="success"
             staticContent={registerPageContent}

@@ -19,7 +19,8 @@ function Register({
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onRegister();
+    if (!values.name || !values.email || !values.password) return;
+    onRegister(values.name, values.email, values.password);
   }
 
   return (
