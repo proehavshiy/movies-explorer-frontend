@@ -24,8 +24,10 @@ import * as mainApi from '../../utils/MainApi';
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isSubmitting, setIsSubmitting] = React.useState(true);
 
   function handleRegister(name, email, password) {
+    setIsSubmitting(false);
     mainApi.register(name, email, password)
       .then((userData) => {
         if (userData) {
@@ -35,10 +37,13 @@ function App() {
       .catch((err) => {
         console.log('ошибка регистрации:', err);
       })
-      .finally();
+      .finally(() => {
+        setIsSubmitting(true);
+      });
   }
 
   function handleLogin(email, password) {
+    setIsSubmitting(false);
     mainApi.login(email, password)
       .then((successfullMessage) => {
         console.log('залогинен:', successfullMessage);
@@ -46,7 +51,9 @@ function App() {
       .catch((err) => {
         console.log('ошибка логина:', err);
       })
-      .finally();
+      .finally(() => {
+        setIsSubmitting(true);
+      });
   }
 
   return (
@@ -95,7 +102,7 @@ function App() {
         <Route path="/signin">
           <Login
             onLogin={handleLogin}
-            isSubmitting
+            isSubmitting={isSubmitting}
             serverRequestStatus="success"
             staticContent={loginPageContent}
           />
@@ -103,7 +110,7 @@ function App() {
         <Route path="/signup">
           <Register
             onRegister={handleRegister}
-            isSubmitting
+            isSubmitting={isSubmitting}
             serverRequestStatus="success"
             staticContent={registerPageContent}
           />

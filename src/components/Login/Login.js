@@ -31,7 +31,7 @@ function Login({
         formName="login"
         submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={isValid}
+        submitButtonState={isValid && isSubmitting}
         redirectionSection={redirectionSection}
       >
         <FormFieldset
