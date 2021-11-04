@@ -20,7 +20,8 @@ function Login({
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onLogin();
+    if (!values.email || !values.password) return;
+    onLogin(values.email, values.password);
   }
 
   return (

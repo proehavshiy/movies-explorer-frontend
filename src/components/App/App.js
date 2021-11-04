@@ -38,6 +38,17 @@ function App() {
       .finally();
   }
 
+  function handleLogin(email, password) {
+    mainApi.login(email, password)
+      .then((successfullMessage) => {
+        console.log('залогинен:', successfullMessage);
+      })
+      .catch((err) => {
+        console.log('ошибка логина:', err);
+      })
+      .finally();
+  }
+
   return (
     <div className="page">
       <Switch>
@@ -83,7 +94,7 @@ function App() {
         </Route>
         <Route path="/signin">
           <Login
-            onLogin={() => console.log('onLoginMock')}
+            onLogin={handleLogin}
             isSubmitting
             serverRequestStatus="success"
             staticContent={loginPageContent}
