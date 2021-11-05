@@ -1,24 +1,37 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import './Profile.css';
 import PropTypes from 'prop-types';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
 function Profile({
-  userName, onSubmit, onLogout, isSubmitting, staticContent,
+  onSubmit, onLogout, isSubmitting, staticContent,
 }) {
   const { submitBtnText, logoutBtnText } = staticContent;
+  const currentUser = React.useContext(CurrentUserContext);
   const {
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
 
+  // подстановка значений в форму из контекста
+  React.useEffect(() => {
+    resetFrom({
+      name: currentUser.name,
+      email: currentUser.email,
+    }, {}, true);
+  }, [currentUser, resetFrom]);
+
   function handleSubmit(evt) {
     evt.preventDefault();
-    onSubmit();
+    onSubmit(values.name, values.email);
   }
+
   function handleLogout(evt) {
     evt.preventDefault();
     onLogout();
@@ -29,11 +42,11 @@ function Profile({
       <PageWithForm
         pageType="profile"
         formStyle="profile"
-        heading={`Привет, ${userName}!`}
+        heading={`Привет, ${currentUser.name}!`}
         isLogo={false}
         formName="profile"
-        submitBtnText={isSubmitting.forSubmitBtn ? submitBtnText.default : submitBtnText.isLoading}
-        logoutBtnText={isSubmitting.forLogoutBtn ? logoutBtnText.default : logoutBtnText.isLoading}
+        submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
+        logoutBtnText={logoutBtnText.default}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
         logoutSection={{
@@ -78,13 +91,9 @@ function Profile({
 }
 
 Profile.propTypes = {
-  userName: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
-  isSubmitting: PropTypes.shape({
-    forSubmitBtn: PropTypes.bool.isRequired,
-    forLogoutBtn: PropTypes.bool.isRequired,
-  }),
+  isSubmitting: PropTypes.bool,
   staticContent: PropTypes.shape({
     submitBtnText: PropTypes.shape({
       default: PropTypes.string.isRequired,
@@ -98,11 +107,7 @@ Profile.propTypes = {
 };
 
 Profile.defaultProps = {
-  userName: 'друг',
-  isSubmitting: {
-    forSubmitBtn: true,
-    forLogoutBtn: true,
-  },
+  isSubmitting: true,
 };
 
 export default Profile;

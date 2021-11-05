@@ -1,3 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-bind */
@@ -21,6 +24,8 @@ import moviesMockCards from '../../utils/staticPageContent/moviesPageContent';
 import profilePageContent from '../../utils/staticPageContent/profilePageContent';
 import loginPageContent from '../../utils/staticPageContent/loginPageContent';
 import registerPageContent from '../../utils/staticPageContent/registerPageContent';
+// контекст
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 // api
 import * as mainApi from '../../utils/MainApi';
 
@@ -88,79 +93,108 @@ function App() {
       });
   }
 
+  function handleChangeProfile(name, email) {
+    setIsSubmitting(false);
+    mainApi.updateUserInfo(name, email)
+      .then((updatedProfileData) => {
+        setCurrentUser(updatedProfileData);
+        console.log('обновление профиля успешно:', updatedProfileData);
+      })
+      .catch((err) => {
+        console.log('обновить данные пользователя не удалось:', err);
+      })
+      .finally(() => {
+        setIsSubmitting(true);
+      });
+  }
+
+  function handleLogOut() {
+    mainApi.logOut()
+      .then((res) => {
+        setIsLoggedIn(false);
+        history.push('/');
+        console.log('вы успешно разлогинены:', res);
+      })
+      .then((err) => {
+        console.log('разлогиниться не получилось. попробуйте позднее:', err);
+      });
+  }
+
   return (
-    <div className="page">
-      <Switch>
-        <Route exact path="/">
-          <Header
-            isLoggedIn={isLoggedIn}
-          />
-          <Main
-            staticContent={mainPageContent}
-          />
-          <Footer />
-        </Route>
-        <ProtectedRoute
-          path="/movies"
-          loggedIn={isLoggedIn}
-        >
-          <Header
-            isLoggedIn={isLoggedIn}
-          />
-          <Movies
-            onSearchFormSubmit={() => { }}
-            cardsData={moviesMockCards}
-          />
-          <Footer />
-        </ProtectedRoute>
-        <ProtectedRoute
-          path="/saved-movies"
-          loggedIn={isLoggedIn}
-        >
-          <Header
-            isLoggedIn={isLoggedIn}
-          />
-          <SavedMovies
-            onSearchFormSubmit={() => { }}
-            cardsData={moviesMockCards}
-          />
-          <Footer />
-        </ProtectedRoute>
-        <ProtectedRoute
-          path="/profile"
-          loggedIn={isLoggedIn}
-        >
-          <Header
-            isLoggedIn={isLoggedIn}
-          />
-          <Profile
-            onSubmit={() => console.log('onSubmitMock')}
-            onLogout={() => console.log('onLogoutMock')}
-            userName="Виталий"
-            staticContent={profilePageContent}
-          />
-        </ProtectedRoute>
-        <Route path="/signin">
-          <Login
-            onLogin={handleLogin}
-            isSubmitting={isSubmitting}
-            serverRequestStatus="success"
-            staticContent={loginPageContent}
-          />
-        </Route>
-        <Route path="/signup">
-          <Register
-            onRegister={handleRegister}
-            isSubmitting={isSubmitting}
-            serverRequestStatus="success"
-            staticContent={registerPageContent}
-          />
-        </Route>
-        <Route path="*">
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Switch>
+          <Route exact path="/">
+            <Header
+              isLoggedIn={isLoggedIn}
+            />
+            <Main
+              staticContent={mainPageContent}
+            />
+            <Footer />
+          </Route>
+          <ProtectedRoute
+            path="/movies"
+            loggedIn={isLoggedIn}
+          >
+            <Header
+              isLoggedIn={isLoggedIn}
+            />
+            <Movies
+              onSearchFormSubmit={() => { }}
+              cardsData={moviesMockCards}
+            />
+            <Footer />
+          </ProtectedRoute>
+          <ProtectedRoute
+            path="/saved-movies"
+            loggedIn={isLoggedIn}
+          >
+            <Header
+              isLoggedIn={isLoggedIn}
+            />
+            <SavedMovies
+              onSearchFormSubmit={() => { }}
+              cardsData={moviesMockCards}
+            />
+            <Footer />
+          </ProtectedRoute>
+          <ProtectedRoute
+            path="/profile"
+            loggedIn={isLoggedIn}
+          >
+            <Header
+              isLoggedIn={isLoggedIn}
+            />
+            <Profile
+              onSubmit={handleChangeProfile}
+              onLogout={handleLogOut}
+              isSubmitting={isSubmitting}
+              staticContent={profilePageContent}
+            />
+          </ProtectedRoute>
+          <Route path="/signin">
+            <Login
+              onLogin={handleLogin}
+              isSubmitting={isSubmitting}
+              serverRequestStatus="success"
+              staticContent={loginPageContent}
+            />
+          </Route>
+          <Route path="/signup">
+            <Register
+              onRegister={handleRegister}
+              isSubmitting={isSubmitting}
+              serverRequestStatus="success"
+              staticContent={registerPageContent}
+            />
+          </Route>
+          <Route path="*">
+            <ErrorPage />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
