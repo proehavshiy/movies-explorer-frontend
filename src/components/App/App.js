@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 // компоненты
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -26,6 +28,45 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
+  const [currentUser, setCurrentUser] = React.useState({});
+  console.log('currentUser:', currentUser);
+  const history = useHistory();
+
+  // функция авторизации пользователя
+  function authorizeUser() {
+    setIsLoggedIn(true);
+    history.push('/movies');
+  }
+
+  // получаем данные пользователя при успешной авторизации
+  React.useEffect(() => {
+    if (!isLoggedIn) return;
+
+    mainApi.getUserInfo()
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        console.log('данные пользователя получены:', userInfo);
+      }).catch((err) => {
+        console.log('не удалось получить данные пользователя:', err);
+      });
+  }, [isLoggedIn]);
+
+  function handleLogin(email, password) {
+    setIsSubmitting(false);
+    mainApi.login(email, password)
+      .then((successfullMessage) => {
+        // сюда добавить попап статуса неуспешного логина
+        console.log('залогинен:', successfullMessage);
+        authorizeUser();
+      })
+      .catch((err) => {
+        console.log('ошибка логина:', err);
+        // сюда добавить попап статуса неуспешного логина
+      })
+      .finally(() => {
+        setIsSubmitting(true);
+      });
+  }
 
   function handleRegister(name, email, password) {
     setIsSubmitting(false);
@@ -33,24 +74,14 @@ function App() {
       .then((userData) => {
         if (userData) {
           console.log('зарегистрирован', userData);
+          // сюда добавить попап статуса успешной регистрации
+          // сразу логинимся после регистрации
+          handleLogin(userData.email, password);
         }
       })
       .catch((err) => {
         console.log('ошибка регистрации:', err);
-      })
-      .finally(() => {
-        setIsSubmitting(true);
-      });
-  }
-
-  function handleLogin(email, password) {
-    setIsSubmitting(false);
-    mainApi.login(email, password)
-      .then((successfullMessage) => {
-        console.log('залогинен:', successfullMessage);
-      })
-      .catch((err) => {
-        console.log('ошибка логина:', err);
+        // сюда добавить попап статуса неуспешной регистрации
       })
       .finally(() => {
         setIsSubmitting(true);
