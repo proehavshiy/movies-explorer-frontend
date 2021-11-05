@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-undef */
 /* eslint-disable no-param-reassign */
@@ -17,6 +18,7 @@ import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // статичный контент страниц
 import mainPageContent from '../../utils/staticPageContent/mainPageContent';
@@ -34,6 +36,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [infoToolTipStatus, setInfoToolTipStatus] = React.useState({});
+  console.log('infoToolTipStatus:', infoToolTipStatus);
   console.log('currentUser:', currentUser);
   const history = useHistory();
 
@@ -62,11 +66,19 @@ function App() {
       .then((successfullMessage) => {
         // сюда добавить попап статуса неуспешного логина
         console.log('залогинен:', successfullMessage);
+        setInfoToolTipStatus({
+          type: 'success',
+          isOpened: true,
+          heading: 'Вы успешно вошли',
+        });
         authorizeUser();
       })
       .catch((err) => {
-        console.log('ошибка логина:', err);
-        // сюда добавить попап статуса неуспешного логина
+        setInfoToolTipStatus({
+          type: 'error',
+          isOpened: true,
+          heading: err === '400' ? 'Некорректные данные. Исправьте, пожалуйста' : 'Ошибка сервера. Попробуйте позднее',
+        });
       })
       .finally(() => {
         setIsSubmitting(true);
@@ -87,6 +99,11 @@ function App() {
       .catch((err) => {
         console.log('ошибка регистрации:', err);
         // сюда добавить попап статуса неуспешной регистрации
+        setInfoToolTipStatus({
+          type: 'error',
+          isOpened: true,
+          heading: err === '400' ? 'Некорректные данные. Исправьте, пожалуйста' : 'Ошибка сервера. Попробуйте позднее',
+        });
       })
       .finally(() => {
         setIsSubmitting(true);
@@ -193,6 +210,10 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
+        <InfoToolTip
+          settings={infoToolTipStatus}
+          onClose={setInfoToolTipStatus}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
