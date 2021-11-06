@@ -14,7 +14,7 @@ function InfoToolTip({ settings, onClose }) {
   if (type === 'success' && isOpened) {
     setTimeout(() => {
       onClose({});
-    }, 2000);
+    }, 1500);
   }
 
   return (

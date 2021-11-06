@@ -111,7 +111,11 @@ function App() {
   }
 
   function handleChangeProfile(name, email) {
-    setIsSubmitting(false);
+    // setIsSubmitting(false);
+    setIsSubmitting((prevState) => ({
+      ...prevState,
+      changeBtn: false,
+    }));
     mainApi.updateUserInfo(name, email)
       .then((updatedProfileData) => {
         setCurrentUser(updatedProfileData);
@@ -121,19 +125,33 @@ function App() {
         console.log('обновить данные пользователя не удалось:', err);
       })
       .finally(() => {
-        setIsSubmitting(true);
+        // setIsSubmitting(true);
+        setIsSubmitting((prevState) => ({
+          ...prevState,
+          changeBtn: true,
+        }));
       });
   }
 
   function handleLogOut() {
     mainApi.logOut()
       .then((res) => {
+        setInfoToolTipStatus({
+          type: 'success',
+          isOpened: true,
+          heading: 'Возвращайтесь снова!',
+        });
         setIsLoggedIn(false);
         history.push('/');
         console.log('вы успешно разлогинены:', res);
       })
-      .then((err) => {
+      .catch((err) => {
         console.log('разлогиниться не получилось. попробуйте позднее:', err);
+        setInfoToolTipStatus({
+          type: 'error',
+          isOpened: true,
+          heading: 'Ошибка сервера. Попробуйте позднее',
+        });
       });
   }
 
