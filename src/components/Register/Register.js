@@ -24,7 +24,7 @@ function Register({
   }
 
   return (
-    <main className="register page__main-content">
+    <main className="register page__main-content page__animation">
       <PageWithForm
         heading={heading}
         formName="register"

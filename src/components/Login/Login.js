@@ -25,7 +25,7 @@ function Login({
   }
 
   return (
-    <main className="login page__main-content">
+    <main className="login page__main-content page__animation">
       <PageWithForm
         heading={heading}
         formName="login"

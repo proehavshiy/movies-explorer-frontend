@@ -6,7 +6,7 @@ import Button from '../Ui/Button/Button';
 
 function ErrorPage({ heading, subHeading, btnText }) {
   return (
-    <div className="error">
+    <div className="error page__animation">
       <div className="error__content-wrapper">
         <div className="error__position-wrapper">
           <h1 className="error__heading">{heading}</h1>

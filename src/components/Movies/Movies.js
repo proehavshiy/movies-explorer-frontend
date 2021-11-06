@@ -6,7 +6,7 @@ import './Movies.css';
 
 function Movies({ onSearchFormSubmit, cardsData }) {
   return (
-    <main className="movies page__main-content page__main-content-padding-top">
+    <main className="movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
         onSubmit={onSearchFormSubmit}
       />

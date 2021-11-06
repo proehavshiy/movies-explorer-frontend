@@ -13,6 +13,21 @@
   color: #000000;
 }
 
+@keyframes appear{
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+.page__animation {
+  animation: appear .2s linear;
+  animation-fill-mode: both;
+  animation-delay: .2s;
+}
+
 .page__section_background-color_grey {
   background: #F5F5F5;
 }

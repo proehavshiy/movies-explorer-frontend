@@ -80,7 +80,7 @@
 
 .fieldset__input:invalid {
   outline-color: #FF4062;
-  color: #FF4062;
+  /* color: #FF4062; */
 }
 
 .fieldset__input-error {

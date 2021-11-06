@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-return-assign */
 /* eslint-disable max-len */
@@ -40,7 +41,7 @@ function Profile({
   }
 
   return (
-    <main className="profile page__main-content page__main-content-padding-top">
+    <main className="profile page__main-content page__main-content-padding-top page__animation">
       <PageWithForm
         pageType="profile"
         formStyle="profile"

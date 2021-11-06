@@ -7,7 +7,9 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import './App.css';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import {
+  Switch, Route, useHistory,
+} from 'react-router-dom';
 // компоненты
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -41,7 +43,6 @@ function App() {
   console.log('infoToolTipStatus:', infoToolTipStatus);
   console.log('currentUser:', currentUser);
   const history = useHistory();
-
   // функция авторизации пользователя
   function authorizeUser() {
     setIsLoggedIn(true);
@@ -65,12 +66,12 @@ function App() {
   function setButtonStatus(button, status) {
     setIsSubmitting((prevState) => ({
       ...prevState,
-      button: status,
+      [button]: status,
     }));
   }
 
   function handleLogin(email, password) {
-    setButtonStatus(loginBtnStatus, false);
+    setButtonStatus('loginBtnStatus', false);
     mainApi.login(email, password)
       .then((successfullMessage) => {
         // сюда добавить попап статуса неуспешного логина
@@ -90,12 +91,12 @@ function App() {
         });
       })
       .finally(() => {
-        setButtonStatus(loginBtnStatus, true);
+        setButtonStatus('loginBtnStatus', true);
       });
   }
 
   function handleRegister(name, email, password) {
-    setButtonStatus(registerBtnStatus, false);
+    setButtonStatus('registerBtnStatus', false);
     mainApi.register(name, email, password)
       .then((userData) => {
         if (userData) {
@@ -115,12 +116,12 @@ function App() {
         });
       })
       .finally(() => {
-        setButtonStatus(registerBtnStatus, true);
+        setButtonStatus('registerBtnStatus', true);
       });
   }
 
   function handleChangeProfile(name, email) {
-    setButtonStatus(changeBtnStatus, false);
+    setButtonStatus('changeBtnStatus', false);
     mainApi.updateUserInfo(name, email)
       .then((updatedProfileData) => {
         setCurrentUser(updatedProfileData);
@@ -130,12 +131,12 @@ function App() {
         console.log('обновить данные пользователя не удалось:', err);
       })
       .finally(() => {
-        setButtonStatus(changeBtnStatus, true);
+        setButtonStatus('changeBtnStatus', true);
       });
   }
 
   function handleLogOut() {
-    setButtonStatus(logoutBtnStatus, false);
+    setButtonStatus('logoutBtnStatus', false);
     mainApi.logOut()
       .then((res) => {
         setInfoToolTipStatus({
@@ -156,7 +157,7 @@ function App() {
         });
       })
       .finally(() => {
-        setButtonStatus(logoutBtnStatus, true);
+        setButtonStatus('logoutBtnStatus', true);
       });
   }
 
