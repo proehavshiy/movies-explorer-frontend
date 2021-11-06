@@ -37,7 +37,7 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
-  console.log('isSubmitting:', isSubmitting);
+  console.log('isLoggedIn:', isLoggedIn);
   const [currentUser, setCurrentUser] = React.useState({});
   const [infoToolTipStatus, setInfoToolTipStatus] = React.useState({});
   console.log('infoToolTipStatus:', infoToolTipStatus);
@@ -51,11 +51,10 @@ function App() {
 
   // получаем данные пользователя при успешной авторизации
   React.useEffect(() => {
-    if (!isLoggedIn) return;
-
     mainApi.getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
+        authorizeUser();
         console.log('данные пользователя получены:', userInfo);
       }).catch((err) => {
         console.log('не удалось получить данные пользователя:', err);

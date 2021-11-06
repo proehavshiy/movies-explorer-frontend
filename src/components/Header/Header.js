@@ -27,7 +27,7 @@ function Header({ isLoggedIn }) {
     body.style.overflow = isOpenBurgerMenu ? 'hidden' : 'auto';
   }, [isOpenBurgerMenu]);
   return (
-    <header className="header">
+    <header className="header page__animation">
       <div className="container">
         <div className={`header__body ${isOpenBurgerMenu && 'header__body_style_fogging'}`} onClick={closeBurgerOnLayout}>
           <Logo />
