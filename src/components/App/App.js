@@ -35,6 +35,7 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
+  console.log('isSubmitting:', isSubmitting);
   const [currentUser, setCurrentUser] = React.useState({});
   const [infoToolTipStatus, setInfoToolTipStatus] = React.useState({});
   console.log('infoToolTipStatus:', infoToolTipStatus);
@@ -60,8 +61,16 @@ function App() {
       });
   }, [isLoggedIn]);
 
+  // установить статус кнопки во время запроса
+  function setButtonStatus(button, status) {
+    setIsSubmitting((prevState) => ({
+      ...prevState,
+      button: status,
+    }));
+  }
+
   function handleLogin(email, password) {
-    setIsSubmitting(false);
+    setButtonStatus(loginBtnStatus, false);
     mainApi.login(email, password)
       .then((successfullMessage) => {
         // сюда добавить попап статуса неуспешного логина
@@ -81,12 +90,12 @@ function App() {
         });
       })
       .finally(() => {
-        setIsSubmitting(true);
+        setButtonStatus(loginBtnStatus, true);
       });
   }
 
   function handleRegister(name, email, password) {
-    setIsSubmitting(false);
+    setButtonStatus(registerBtnStatus, false);
     mainApi.register(name, email, password)
       .then((userData) => {
         if (userData) {
@@ -106,16 +115,12 @@ function App() {
         });
       })
       .finally(() => {
-        setIsSubmitting(true);
+        setButtonStatus(registerBtnStatus, true);
       });
   }
 
   function handleChangeProfile(name, email) {
-    // setIsSubmitting(false);
-    setIsSubmitting((prevState) => ({
-      ...prevState,
-      changeBtn: false,
-    }));
+    setButtonStatus(changeBtnStatus, false);
     mainApi.updateUserInfo(name, email)
       .then((updatedProfileData) => {
         setCurrentUser(updatedProfileData);
@@ -125,15 +130,12 @@ function App() {
         console.log('обновить данные пользователя не удалось:', err);
       })
       .finally(() => {
-        // setIsSubmitting(true);
-        setIsSubmitting((prevState) => ({
-          ...prevState,
-          changeBtn: true,
-        }));
+        setButtonStatus(changeBtnStatus, true);
       });
   }
 
   function handleLogOut() {
+    setButtonStatus(logoutBtnStatus, false);
     mainApi.logOut()
       .then((res) => {
         setInfoToolTipStatus({
@@ -152,6 +154,9 @@ function App() {
           isOpened: true,
           heading: 'Ошибка сервера. Попробуйте позднее',
         });
+      })
+      .finally(() => {
+        setButtonStatus(logoutBtnStatus, true);
       });
   }
 
@@ -204,23 +209,24 @@ function App() {
             <Profile
               onSubmit={handleChangeProfile}
               onLogout={handleLogOut}
-              isSubmitting={isSubmitting}
+              isSubmitting={{
+                changeBtnStatus: isSubmitting.changeBtnStatus ?? true,
+                logoutBtnStatus: isSubmitting.logoutBtnStatus ?? true,
+              }}
               staticContent={profilePageContent}
             />
           </ProtectedRoute>
           <Route path="/signin">
             <Login
               onLogin={handleLogin}
-              isSubmitting={isSubmitting}
-              serverRequestStatus="success"
+              isSubmitting={isSubmitting.loginBtnStatus}
               staticContent={loginPageContent}
             />
           </Route>
           <Route path="/signup">
             <Register
               onRegister={handleRegister}
-              isSubmitting={isSubmitting}
-              serverRequestStatus="success"
+              isSubmitting={isSubmitting.registerBtnStatus}
               staticContent={registerPageContent}
             />
           </Route>

@@ -10,7 +10,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
 function Login({
-  onLogin, isSubmitting, serverRequestStatus, staticContent,
+  onLogin, isSubmitting, staticContent,
 }) {
   const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
@@ -73,7 +73,6 @@ function Login({
 Login.propTypes = {
   onLogin: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
-  serverRequestStatus: PropTypes.string,
   staticContent: PropTypes.shape({
     heading: PropTypes.string.isRequired,
     submitBtnText: PropTypes.shape({
@@ -90,7 +89,6 @@ Login.propTypes = {
 
 Login.defaultProps = {
   isSubmitting: true,
-  serverRequestStatus: 'success',
 };
 
 export default Login;

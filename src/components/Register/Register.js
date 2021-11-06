@@ -9,7 +9,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
 function Register({
-  onRegister, isSubmitting, serverRequestStatus, staticContent,
+  onRegister, isSubmitting, staticContent,
 }) {
   const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
@@ -86,7 +86,6 @@ function Register({
 Register.propTypes = {
   onRegister: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
-  serverRequestStatus: PropTypes.string,
   staticContent: PropTypes.shape({
     heading: PropTypes.string.isRequired,
     submitBtnText: PropTypes.shape({
@@ -103,7 +102,6 @@ Register.propTypes = {
 
 Register.defaultProps = {
   isSubmitting: true,
-  serverRequestStatus: 'success',
 };
 
 export default Register;

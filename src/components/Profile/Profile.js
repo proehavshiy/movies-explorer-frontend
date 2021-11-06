@@ -15,7 +15,7 @@ function Profile({
   onSubmit, onLogout, isSubmitting, staticContent,
 }) {
   const { submitBtnText, logoutBtnText } = staticContent;
-  const { changeBtn, logoutBtn } = isSubmitting;
+  const { changeBtnStatus, logoutBtnStatus } = isSubmitting;
   const currentUser = React.useContext(CurrentUserContext);
   const {
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
@@ -29,35 +29,14 @@ function Profile({
     }, {}, true);
   }, [currentUser, resetFrom]);
 
-  const [state, setState] = React.useState({});
-
   function handleSubmit(evt) {
-    // setState(false);
-    setState((prevState) => ({
-      ...prevState,
-      changeBtn: false,
-    }));
     evt.preventDefault();
     onSubmit(values.name, values.email);
-    // setState(true);
-    setState((prevState) => ({
-      ...prevState,
-      changeBtn: true,
-    }));
   }
 
   function handleLogout(evt) {
-    setState((prevState) => ({
-      ...prevState,
-      logoutBtn: false,
-    }));
     evt.preventDefault();
     onLogout();
-    // setState(true);
-    setState((prevState) => ({
-      ...prevState,
-      logoutBtn: true,
-    }));
   }
 
   return (
@@ -68,8 +47,8 @@ function Profile({
         heading={`Привет, ${currentUser.name}!`}
         isLogo={false}
         formName="profile"
-        submitBtnText={state.changeBtn ? (changeBtn ? submitBtnText.default : submitBtnText.isLoading) : submitBtnText.default}
-        logoutBtnText={state.logoutBtn ? (logoutBtn ? logoutBtnText.default : logoutBtnText.isLoading) : logoutBtnText.default}
+        submitBtnText={changeBtnStatus ? submitBtnText.default : submitBtnText.isLoading}
+        logoutBtnText={logoutBtnStatus ? logoutBtnText.default : logoutBtnText.isLoading}
         onSubmit={handleSubmit}
         submitButtonState={isValid}
         logoutSection={{
@@ -117,8 +96,8 @@ Profile.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   isSubmitting: PropTypes.shape({
-    changeBtn: PropTypes.bool,
-    logoutBtn: PropTypes.bool,
+    changeBtnStatus: PropTypes.bool,
+    logoutBtnStatus: PropTypes.bool,
   }),
   staticContent: PropTypes.shape({
     submitBtnText: PropTypes.shape({
@@ -134,8 +113,8 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   isSubmitting: {
-    changeBtn: true,
-    logoutBtn: true,
+    changeBtnStatus: true,
+    logoutBtnStatus: true,
   },
 };
 
