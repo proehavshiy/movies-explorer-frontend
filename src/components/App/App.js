@@ -45,12 +45,6 @@ function App() {
   console.log('currentUser:', currentUser);
   const history = useHistory();
 
-  // функция авторизации пользователя
-  function authorizeUser() {
-    setIsLoggedIn(true);
-    history.push('/movies');
-  }
-
   // открыватель попапа
   function openInfoPopup(fetchType, result, statusCode) {
     const phrase = statusCode === '500'
@@ -63,15 +57,23 @@ function App() {
     });
   }
 
-  // получаем данные пользователя при успешной авторизации
-  React.useEffect(() => {
+  // функция авторизации пользователя
+  function authorizeUser() {
     mainApi.getUserInfo()
       .then(({ data }) => {
         setCurrentUser(data);
-        authorizeUser();
+        setIsLoggedIn(true);
       }).catch(({ result, statusCode }) => {
         openInfoPopup('getUserInfo', result, statusCode);
       });
+    history.push('/movies');
+  }
+
+  // получаем данные пользователя при успешной авторизации
+  React.useEffect(() => {
+    if (!isLoggedIn) return;
+
+    authorizeUser();
   }, []);
 
   // установить статус кнопки во время запроса
