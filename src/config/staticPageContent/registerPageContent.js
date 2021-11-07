@@ -1,4 +1,4 @@
-const registerPageContent = {
+const REGISTER_PAGE = {
   heading: 'Добро пожаловать!',
   submitBtnText: {
     default: 'Зарегистрироваться',
@@ -11,4 +11,4 @@ const registerPageContent = {
   },
 };
 
-export default registerPageContent;
+export default REGISTER_PAGE;

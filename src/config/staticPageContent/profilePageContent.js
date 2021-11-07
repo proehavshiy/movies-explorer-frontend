@@ -1,4 +1,4 @@
-const profilePageContent = {
+const PROFILE_PAGE = {
   submitBtnText: {
     default: 'Редактировать',
     isLoading: 'Редактирование...',
@@ -9,4 +9,4 @@ const profilePageContent = {
   },
 };
 
-export default profilePageContent;
+export default PROFILE_PAGE;

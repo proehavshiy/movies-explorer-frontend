@@ -23,11 +23,12 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // статичный контент страниц
-import mainPageContent from '../../utils/staticPageContent/mainPageContent';
-import moviesMockCards from '../../utils/staticPageContent/moviesPageContent';
-import profilePageContent from '../../utils/staticPageContent/profilePageContent';
-import loginPageContent from '../../utils/staticPageContent/loginPageContent';
-import registerPageContent from '../../utils/staticPageContent/registerPageContent';
+import MAIN_PAGE from '../../config/staticPageContent/mainPageContent';
+import moviesMockCards from '../../config/staticPageContent/moviesPageContent';
+import PROFILE_PAGE from '../../config/staticPageContent/profilePageContent';
+import LOGIN_PAGE from '../../config/staticPageContent/loginPageContent';
+import REGISTER_PAGE from '../../config/staticPageContent/registerPageContent';
+import STATUS_MESSAGES from '../../config/staticPageContent/statusMessages';
 // контекст
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 // api
@@ -43,23 +44,35 @@ function App() {
   console.log('infoToolTipStatus:', infoToolTipStatus);
   console.log('currentUser:', currentUser);
   const history = useHistory();
+
   // функция авторизации пользователя
   function authorizeUser() {
     setIsLoggedIn(true);
     history.push('/movies');
   }
 
+  // открыватель попапа
+  function openInfoPopup(fetchType, result, statusCode) {
+    const phrase = statusCode === '500'
+      ? STATUS_MESSAGES.default.error
+      : STATUS_MESSAGES[fetchType][result][statusCode];
+    setInfoToolTipStatus({
+      type: result,
+      isOpened: true,
+      heading: phrase,
+    });
+  }
+
   // получаем данные пользователя при успешной авторизации
   React.useEffect(() => {
     mainApi.getUserInfo()
-      .then((userInfo) => {
-        setCurrentUser(userInfo);
+      .then(({ data }) => {
+        setCurrentUser(data);
         authorizeUser();
-        console.log('данные пользователя получены:', userInfo);
-      }).catch((err) => {
-        console.log('не удалось получить данные пользователя:', err);
+      }).catch(({ result, statusCode }) => {
+        openInfoPopup('getUserInfo', result, statusCode);
       });
-  }, [isLoggedIn]);
+  }, []);
 
   // установить статус кнопки во время запроса
   function setButtonStatus(button, status) {
@@ -72,22 +85,12 @@ function App() {
   function handleLogin(email, password) {
     setButtonStatus('loginBtnStatus', false);
     mainApi.login(email, password)
-      .then((successfullMessage) => {
-        // сюда добавить попап статуса неуспешного логина
-        console.log('залогинен:', successfullMessage);
-        setInfoToolTipStatus({
-          type: 'success',
-          isOpened: true,
-          heading: 'Вы успешно вошли',
-        });
+      .then(({ result, statusCode }) => {
+        openInfoPopup('login', result, statusCode);
         authorizeUser();
       })
-      .catch((err) => {
-        setInfoToolTipStatus({
-          type: 'error',
-          isOpened: true,
-          heading: err === '400' ? 'Некорректные данные. Исправьте, пожалуйста' : 'Ошибка сервера. Попробуйте позднее',
-        });
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('login', result, statusCode);
       })
       .finally(() => {
         setButtonStatus('loginBtnStatus', true);
@@ -97,22 +100,13 @@ function App() {
   function handleRegister(name, email, password) {
     setButtonStatus('registerBtnStatus', false);
     mainApi.register(name, email, password)
-      .then((userData) => {
-        if (userData) {
-          console.log('зарегистрирован', userData);
-          // сюда добавить попап статуса успешной регистрации
-          // сразу логинимся после регистрации
-          handleLogin(userData.email, password);
+      .then(({ data }) => {
+        if (data) {
+          handleLogin(data.email, password);
         }
       })
-      .catch((err) => {
-        console.log('ошибка регистрации:', err);
-        // сюда добавить попап статуса неуспешной регистрации
-        setInfoToolTipStatus({
-          type: 'error',
-          isOpened: true,
-          heading: err === '400' ? 'Некорректные данные. Исправьте, пожалуйста' : 'Ошибка сервера. Попробуйте позднее',
-        });
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('register', result, statusCode);
       })
       .finally(() => {
         setButtonStatus('registerBtnStatus', true);
@@ -122,12 +116,12 @@ function App() {
   function handleChangeProfile(name, email) {
     setButtonStatus('changeBtnStatus', false);
     mainApi.updateUserInfo(name, email)
-      .then((updatedProfileData) => {
-        setCurrentUser(updatedProfileData);
-        console.log('обновление профиля успешно:', updatedProfileData);
+      .then(({ data, result, statusCode }) => {
+        setCurrentUser(data);
+        openInfoPopup('updateUserInfo', result, statusCode);
       })
-      .catch((err) => {
-        console.log('обновить данные пользователя не удалось:', err);
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('updateUserInfo', result, statusCode);
       })
       .finally(() => {
         setButtonStatus('changeBtnStatus', true);
@@ -137,23 +131,13 @@ function App() {
   function handleLogOut() {
     setButtonStatus('logoutBtnStatus', false);
     mainApi.logOut()
-      .then((res) => {
-        setInfoToolTipStatus({
-          type: 'success',
-          isOpened: true,
-          heading: 'Возвращайтесь снова!',
-        });
+      .then(({ result, statusCode }) => {
+        openInfoPopup('logout', result, statusCode);
         setIsLoggedIn(false);
         history.push('/');
-        console.log('вы успешно разлогинены:', res);
       })
-      .catch((err) => {
-        console.log('разлогиниться не получилось. попробуйте позднее:', err);
-        setInfoToolTipStatus({
-          type: 'error',
-          isOpened: true,
-          heading: 'Ошибка сервера. Попробуйте позднее',
-        });
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('logout', result, statusCode);
       })
       .finally(() => {
         setButtonStatus('logoutBtnStatus', true);
@@ -169,7 +153,7 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
             <Main
-              staticContent={mainPageContent}
+              staticContent={MAIN_PAGE}
             />
             <Footer />
           </Route>
@@ -213,21 +197,21 @@ function App() {
                 changeBtnStatus: isSubmitting.changeBtnStatus ?? true,
                 logoutBtnStatus: isSubmitting.logoutBtnStatus ?? true,
               }}
-              staticContent={profilePageContent}
+              staticContent={PROFILE_PAGE}
             />
           </ProtectedRoute>
           <Route path="/signin">
             <Login
               onLogin={handleLogin}
               isSubmitting={isSubmitting.loginBtnStatus}
-              staticContent={loginPageContent}
+              staticContent={LOGIN_PAGE}
             />
           </Route>
           <Route path="/signup">
             <Register
               onRegister={handleRegister}
               isSubmitting={isSubmitting.registerBtnStatus}
-              staticContent={registerPageContent}
+              staticContent={REGISTER_PAGE}
             />
           </Route>
           <Route path="*">

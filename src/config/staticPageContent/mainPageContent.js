@@ -1,4 +1,4 @@
-const mainPageContent = {
+const MAIN_PAGE = {
   headingText: 'Учебный проект студента факультета Веб-разработки.',
   navTabSection: {
     links: [
@@ -95,4 +95,4 @@ const mainPageContent = {
   },
 };
 
-export default mainPageContent;
+export default MAIN_PAGE;
