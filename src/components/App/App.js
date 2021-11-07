@@ -63,10 +63,10 @@ function App() {
       .then(({ data }) => {
         setCurrentUser(data);
         setIsLoggedIn(true);
+        history.push('/movies');
       }).catch(({ result, statusCode }) => {
         openInfoPopup('getUserInfo', result, statusCode);
       });
-    history.push('/movies');
   }
 
   // получаем данные пользователя при успешной авторизации
