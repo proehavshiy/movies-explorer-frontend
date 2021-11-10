@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/jsx-no-bind */
@@ -27,14 +30,23 @@ function MoviesCard({
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
   }
 
+  function handleClickCard(evt) {
+    const image = evt.target.dataset.clickCatcher;
+    // if (image)
+  }
+
   return (
-    <li className="movies-card">
+    <li className="movies-card" onClick={handleClickCard}>
       <figure className="movies-card__content">
         <figcaption className="movies-card__figcaption">
           <h2 className="movies-card__title" title={name}>{name}</h2>
           <p className="movies-card__duration" title={`${duration} ${stringDuration}`}>{`${duration} ${stringDuration}`}</p>
         </figcaption>
-        <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} />
+        <div className="movies-card__image-wrapper">
+          <a className="movies-card__link" href={trailerLink} target="_blank" rel="noreferrer">
+            <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} data-click-catcher />
+          </a>
+        </div>
       </figure>
       <div className="movies-card__button-wrapper">
         {cardType === 'default' ? (
