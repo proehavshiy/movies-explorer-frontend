@@ -8,12 +8,12 @@ function InfoToolTip({ settings, onClose }) {
   const { type, isOpened, heading } = settings;
 
   function handleClick(evt) {
-    if (evt.target.dataset.closeCatcher) onClose({});
+    if (evt.target.dataset.closeCatcher) onClose();
   }
 
   if (type === 'success' && isOpened) {
     setTimeout(() => {
-      onClose({});
+      onClose();
     }, 1500);
   }
 

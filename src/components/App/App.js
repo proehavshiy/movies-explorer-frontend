@@ -28,11 +28,13 @@ import moviesMockCards from '../../config/staticPageContent/moviesPageContent';
 import PROFILE_PAGE from '../../config/staticPageContent/profilePageContent';
 import LOGIN_PAGE from '../../config/staticPageContent/loginPageContent';
 import REGISTER_PAGE from '../../config/staticPageContent/registerPageContent';
-import STATUS_MESSAGES from '../../config/staticPageContent/statusMessages';
 // контекст
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 // api
 import * as mainApi from '../../utils/MainApi';
+import * as moviesApi from '../../utils/MoviesApi';
+// хуки
+import useInfoPopupSettings from '../../hooks/openInfoPopup';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -40,22 +42,10 @@ function App() {
   const [isSubmitting, setIsSubmitting] = React.useState(true);
   console.log('isLoggedIn:', isLoggedIn);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [infoToolTipStatus, setInfoToolTipStatus] = React.useState({});
-  console.log('infoToolTipStatus:', infoToolTipStatus);
-  console.log('currentUser:', currentUser);
+  const {
+    infoPopupSettings, closeInfoPopup, openInfoPopup,
+  } = useInfoPopupSettings();
   const history = useHistory();
-
-  // открыватель попапа
-  function openInfoPopup(fetchType, result, statusCode) {
-    const phrase = statusCode === '500'
-      ? STATUS_MESSAGES.default.error
-      : STATUS_MESSAGES[fetchType][result][statusCode];
-    setInfoToolTipStatus({
-      type: result,
-      isOpened: true,
-      heading: phrase,
-    });
-  }
 
   // функция авторизации пользователя
   function authorizeUser() {
@@ -167,7 +157,8 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
             <Movies
-              onSearchFormSubmit={() => { }}
+              // onSearchFormSubmit={handleSearchFormSubmit}
+              openInfoPopup={openInfoPopup}
               cardsData={moviesMockCards}
             />
             <Footer />
@@ -221,8 +212,8 @@ function App() {
           </Route>
         </Switch>
         <InfoToolTip
-          settings={infoToolTipStatus}
-          onClose={setInfoToolTipStatus}
+          settings={infoPopupSettings}
+          onClose={closeInfoPopup}
         />
       </div>
     </CurrentUserContext.Provider>

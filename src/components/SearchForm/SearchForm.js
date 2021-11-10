@@ -31,7 +31,7 @@ function SearchForm({ onSubmit }) {
               <button
                 className="search-form__submit"
                 type="submit"
-                disabled={!isValid}
+                // disabled={!isValid}
                 aria-label="кнопка найти"
               />
             </div>

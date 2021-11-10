@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable max-len */
@@ -8,7 +9,7 @@ import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, isFavourite, name, duration, image,
+  cardType, isFavourite, name, duration, image, trailerLink,
 }) {
   const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(isFavourite);
 
@@ -64,6 +65,7 @@ MoviesCard.propTypes = {
   name: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  trailerLink: PropTypes.string.isRequired,
 };
 
 MoviesCard.defaultProps = {
