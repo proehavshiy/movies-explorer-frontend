@@ -30,13 +30,8 @@ function MoviesCard({
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
   }
 
-  function handleClickCard(evt) {
-    const image = evt.target.dataset.clickCatcher;
-    // if (image)
-  }
-
   return (
-    <li className="movies-card" onClick={handleClickCard}>
+    <li className="movies-card">
       <figure className="movies-card__content">
         <figcaption className="movies-card__figcaption">
           <h2 className="movies-card__title" title={name}>{name}</h2>
@@ -44,7 +39,7 @@ function MoviesCard({
         </figcaption>
         <div className="movies-card__image-wrapper">
           <a className="movies-card__link" href={trailerLink} target="_blank" rel="noreferrer">
-            <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} data-click-catcher />
+            <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} />
           </a>
         </div>
       </figure>

@@ -9,6 +9,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 import * as moviesApi from '../../utils/MoviesApi';
+import filterResults from '../../hooks/filterResults';
 
 function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
   const cards = JSON.parse(localStorage.getItem('movies'));
@@ -28,9 +29,26 @@ function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
       setWaitingContent(Preloader);
       moviesApi.getMovies()
         .then(({ data, result, statusCode }) => {
+          // поиск фильмов по запросу из формы
+          const filteredMovies = filterResults(data, inputQuery);
+          console.log('filteredMovies:', filteredMovies);
+
+          // если по поиску не найдено фильмов,
+          // обнуляем предыдущее хранилище и выводим сообщение
+          if (filteredMovies.length === 0) {
+            localStorage.clear('movies');
+            setWaitingContent(
+              <div>
+                Ничего не найдено
+              </div>,
+            );
+          }
           // сохраняем полученные карточки в localstorage
-          localStorage.setItem('movies', JSON.stringify(data));
-          openInfoPopup('getMovies', result, statusCode);
+          if (filteredMovies.length !== 0) {
+            setWaitingContent(null);
+            localStorage.setItem('movies', JSON.stringify(filteredMovies));
+            openInfoPopup('getMovies', result, statusCode);
+          }
         })
         .catch(({ result, statusCode }) => {
           setWaitingContent(
@@ -38,9 +56,6 @@ function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
               Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз
             </div>,
           );
-        })
-        .finally(() => {
-          setWaitingContent(null);
         });
     }
   }
