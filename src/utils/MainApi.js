@@ -82,6 +82,41 @@ export function updateUserInfo(name, email) {
 
 // films
 
+export function saveMovie(
+  nameRU,
+  nameEN,
+  description,
+  director,
+  country,
+  year,
+  duration,
+  image,
+  trailer,
+  thumbnail,
+  movieId,
+) {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      nameRU,
+      nameEN,
+      description,
+      director,
+      country,
+      year,
+      duration,
+      image,
+      trailer,
+      thumbnail,
+      movieId,
+    }),
+  }).then(checkResponse);
+}
+
 export function getSavedMovies() {
   return fetch(`${BASE_URL}/movies`, {
     method: 'GET',

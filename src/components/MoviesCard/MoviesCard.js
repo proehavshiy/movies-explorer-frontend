@@ -12,9 +12,9 @@ import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, isFavourite, name, duration, image, trailerLink,
+  cardType, name, duration, image, trailerLink, onDefaultCardClick,
 }) {
-  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(isFavourite);
+  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(false);
 
   function converseDurationToString(num) {
     let minutes;
@@ -27,6 +27,7 @@ function MoviesCard({
   const stringDuration = converseDurationToString(duration);
 
   function handleDefaultCard() {
+    onDefaultCardClick(name);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
   }
 
@@ -68,16 +69,16 @@ function MoviesCard({
 
 MoviesCard.propTypes = {
   cardType: PropTypes.oneOf(['default', 'saved']),
-  isFavourite: PropTypes.bool,
   name: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   trailerLink: PropTypes.string.isRequired,
+  onDefaultCardClick: PropTypes.func,
 };
 
 MoviesCard.defaultProps = {
   cardType: 'default',
-  isFavourite: false,
+  onDefaultCardClick: () => { },
 };
 
 export default MoviesCard;

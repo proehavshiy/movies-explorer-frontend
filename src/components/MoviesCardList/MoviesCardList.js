@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
 
-function MoviesCardList({ typeOfList, cardsData }) {
+function MoviesCardList({ typeOfList, cardsData, onDefaultCardClick }) {
   return (
     <section className="movies-card-list">
       <ul ul className="movies-card-list__cards-container">
@@ -20,6 +20,7 @@ function MoviesCardList({ typeOfList, cardsData }) {
               duration={film.duration}
               image={`https://api.nomoreparties.co${film.image.url}`}
               trailerLink={film.trailerLink}
+              onDefaultCardClick={onDefaultCardClick}
             />
           ))
         }
@@ -42,6 +43,7 @@ function MoviesCardList({ typeOfList, cardsData }) {
 MoviesCardList.propTypes = {
   typeOfList: PropTypes.oneOf(['default', 'saved']),
   cardsData: PropTypes.arrayOf(PropTypes.any).isRequired,
+  onDefaultCardClick: PropTypes.func.isRequired,
 };
 
 MoviesCardList.defaultProps = {

@@ -9,9 +9,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 import * as moviesApi from '../../utils/MoviesApi';
+import { saveMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
 
-function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
+function Movies({ openInfoPopup, cardsData }) {
   const cards = JSON.parse(localStorage.getItem('movies'));
   const [waitingContent, setWaitingContent] = React.useState(null);
 
@@ -59,6 +60,43 @@ function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
         });
     }
   }
+
+  function addMovieToFavourites(nameOfFavourite) {
+    // ищем нужную карточку в localstorage и получаем ее данные
+    const favMovie = cards.find((movie) => movie.nameRU === nameOfFavourite);
+    console.log('favCard:', favMovie);
+    const {
+      nameRU,
+      nameEN,
+      description,
+      director,
+      country,
+      year,
+      duration,
+      image,
+      trailerLink,
+      id,
+    } = favMovie;
+    saveMovie(
+      nameRU,
+      nameEN,
+      description,
+      director,
+      country ?? 'Без страны',
+      year,
+      duration,
+      `https://api.nomoreparties.co${image.url}`,
+      trailerLink,
+      `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+      id,
+    )
+      .then((res) => {
+        console.log('res:', res);
+      })
+      .catch((err) => {
+        console.log('err:', err);
+      });
+  }
   return (
     <main className="movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
@@ -68,6 +106,7 @@ function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
         <MoviesCardList
           typeOfList="default"
           cardsData={cards}
+          onDefaultCardClick={addMovieToFavourites}
         />
       ) : waitingContent}
     </main>
@@ -75,7 +114,6 @@ function Movies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
 }
 
 Movies.propTypes = {
-  onSearchFormSubmit: PropTypes.func.isRequired,
   openInfoPopup: PropTypes.func,
   cardsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
