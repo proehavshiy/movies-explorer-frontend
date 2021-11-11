@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-boolean-value */
@@ -7,7 +8,7 @@ import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
 
-function MoviesCardList({ typeOfList, cardsData, onDefaultCardClick }) {
+function MoviesCardList({ typeOfList, cardsData, onCardButtonClick }) {
   return (
     <section className="movies-card-list">
       <ul ul className="movies-card-list__cards-container">
@@ -25,7 +26,8 @@ function MoviesCardList({ typeOfList, cardsData, onDefaultCardClick }) {
                 duration={film.duration}
                 image={typeOfList === 'default' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
                 trailerLink={typeOfList === 'default' ? film.trailerLink : film.trailer}
-                onDefaultCardClick={onDefaultCardClick}
+                onCardButtonClick={onCardButtonClick}
+                id={film._id}
               />
             );
           })
@@ -49,7 +51,7 @@ function MoviesCardList({ typeOfList, cardsData, onDefaultCardClick }) {
 MoviesCardList.propTypes = {
   typeOfList: PropTypes.oneOf(['default', 'saved']),
   cardsData: PropTypes.arrayOf(PropTypes.any).isRequired,
-  onDefaultCardClick: PropTypes.func.isRequired,
+  onCardButtonClick: PropTypes.func.isRequired,
 };
 
 MoviesCardList.defaultProps = {

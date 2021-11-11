@@ -12,9 +12,10 @@ import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, name, duration, image, trailerLink, onDefaultCardClick,
+  cardType, name, duration, image, trailerLink, onCardButtonClick, id,
 }) {
-  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(false);
+  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(id);
+  console.log('_id в карточке:', id);
 
   function converseDurationToString(num) {
     let minutes;
@@ -26,9 +27,12 @@ function MoviesCard({
   }
   const stringDuration = converseDurationToString(duration);
 
-  function handleDefaultCard() {
-    onDefaultCardClick(name);
+  function handleDefaultCardButtonClick() {
+    onCardButtonClick(name);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
+  }
+  function handSavedCardButtonClick() {
+    onCardButtonClick(id);
   }
 
   return (
@@ -51,7 +55,7 @@ function MoviesCard({
             label="кнопка Сохранить"
             btnStyle={isCardAddedToFavourites ? 'added-to-fav-movie-card' : 'default-movie-card'}
             disabled={false}
-            onClick={handleDefaultCard}
+            onClick={handleDefaultCardButtonClick}
           />
         ) : (
           <Button
@@ -59,7 +63,7 @@ function MoviesCard({
             label="кнопка Удалить из избранного"
             btnStyle="delete-from-fav-movie-card"
             disabled={false}
-            onClick={() => { }}
+            onClick={handSavedCardButtonClick}
           />
         )}
       </div>
@@ -73,12 +77,14 @@ MoviesCard.propTypes = {
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   trailerLink: PropTypes.string.isRequired,
-  onDefaultCardClick: PropTypes.func,
+  onCardButtonClick: PropTypes.func,
+  id: PropTypes.bool,
 };
 
 MoviesCard.defaultProps = {
   cardType: 'default',
-  onDefaultCardClick: () => { },
+  id: false,
+  onCardButtonClick: () => { },
 };
 
 export default MoviesCard;

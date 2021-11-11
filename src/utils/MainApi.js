@@ -123,3 +123,13 @@ export function getSavedMovies() {
     credentials: 'include',
   }).then(checkResponse);
 }
+
+export function deleteMovie(movieId) {
+  return fetch(`${BASE_URL}/movies/${movieId}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(checkResponse);
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable prefer-const */
 /* eslint-disable react/jsx-no-bind */
@@ -14,7 +15,10 @@ import filterResults from '../../hooks/filterResults';
 
 function Movies({ openInfoPopup, cardsData }) {
   const cards = JSON.parse(localStorage.getItem('movies'));
+  // const [cards, setCards] = React.useState(JSON.parse(localStorage.getItem('movies')));
   const [waitingContent, setWaitingContent] = React.useState(null);
+
+  console.log('cardsLocalstorage:', cards);
 
   function handleSearchFormSubmit(evt) {
     evt.preventDefault();
@@ -90,8 +94,20 @@ function Movies({ openInfoPopup, cardsData }) {
       `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
       id,
     )
-      .then((res) => {
-        console.log('res:', res);
+      .then(({ data, result, statusCode }) => {
+        console.log('res:', data);
+        // нужно добавить в карточку параметр _id, записать обратно в localstorage, чтобы потом по нему удалять карточку
+        // найти индекс карточки в массиве локалсторадж
+        const index = cards.indexOf(favMovie);
+        console.log('indexOf:', index);
+        favMovie._id = data._id;
+        favMovie.isFavourite = true;
+        console.log('id:', favMovie);
+        // setCards((prevState) => prevState.splice(index, 1, favMovie));
+        cards.splice(index, 1, favMovie);
+        // console.log('updated cards:', newCards);
+        localStorage.setItem('movies', JSON.stringify(cards));
+        console.log('обновленный локалсторедж:', JSON.parse(localStorage.getItem('movies')));
       })
       .catch((err) => {
         console.log('err:', err);
@@ -106,7 +122,7 @@ function Movies({ openInfoPopup, cardsData }) {
         <MoviesCardList
           typeOfList="default"
           cardsData={cards}
-          onDefaultCardClick={addMovieToFavourites}
+          onCardButtonClick={addMovieToFavourites}
         />
       ) : waitingContent}
     </main>
