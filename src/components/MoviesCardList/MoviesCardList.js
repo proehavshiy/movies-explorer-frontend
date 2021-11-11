@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-boolean-value */
 import React from 'react';
@@ -11,18 +12,23 @@ function MoviesCardList({ typeOfList, cardsData, onDefaultCardClick }) {
     <section className="movies-card-list">
       <ul ul className="movies-card-list__cards-container">
         {
-          cardsData.map((film) => (
-            <MoviesCard
-              key={film.id}
-              cardType={typeOfList}
-              // isFavourite={film.isFavourite}
-              name={film.nameRU}
-              duration={film.duration}
-              image={`https://api.nomoreparties.co${film.image.url}`}
-              trailerLink={film.trailerLink}
-              onDefaultCardClick={onDefaultCardClick}
-            />
-          ))
+          cardsData.map((v, index, arr) => {
+            // итерируем с конца в начало,
+            // чтобы свежие добавленные фильмы были в начале
+            const film = arr[arr.length - 1 - index];
+            return (
+              <MoviesCard
+                key={film.id}
+                cardType={typeOfList}
+                // isFavourite={film.isFavourite}
+                name={film.nameRU}
+                duration={film.duration}
+                image={typeOfList === 'default' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
+                trailerLink={typeOfList === 'default' ? film.trailerLink : film.trailer}
+                onDefaultCardClick={onDefaultCardClick}
+              />
+            );
+          })
         }
       </ul>
       {typeOfList === 'default' && (
