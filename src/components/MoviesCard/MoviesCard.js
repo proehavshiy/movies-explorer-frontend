@@ -16,7 +16,6 @@ function MoviesCard({
   cardType, name, duration, image, trailerLink, onCardButtonClick, id, onAddToFavourites, onRemoveFromFavourites,
 }) {
   const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(id);
-  console.log('_id в карточке:', id);
 
   function converseDurationToString(num) {
     let minutes;

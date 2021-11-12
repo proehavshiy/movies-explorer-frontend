@@ -172,7 +172,8 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
             <SavedMovies
-              onSearchFormSubmit={() => { }}
+              // onSearchFormSubmit={() => { }}
+              openInfoPopup={openInfoPopup}
               cardsData={moviesMockCards}
             />
             <Footer />

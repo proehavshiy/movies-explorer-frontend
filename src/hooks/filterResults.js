@@ -1,17 +1,28 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-undef */
 /* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-expressions */
 
-function filterResults(dataArray, key) {
+function filterResults(dataArray, key, isShortFilms) {
   if (!Array.isArray(dataArray)) {
     return;
   }
   const searchKey = transformString(key);
 
-  return dataArray.reduce((acc, curr) => {
+  if (isShortFilms) {
+    return sortArrByKeyword(selectShortFilms(dataArray), searchKey);
+  }
+
+  return sortArrByKeyword(dataArray, searchKey);
+}
+
+function sortArrByKeyword(array, keyword) {
+  return array.reduce((acc, curr) => {
     // объединенное название для поиска и кириллицей, и латиницей
     const movieNameENRU = transformString(curr.nameRU.concat(curr.nameEN));
-    movieNameENRU.includes(searchKey) ? acc.push(curr) : acc;
+    movieNameENRU.includes(keyword) ? acc.push(curr) : acc;
     return acc;
   }, []);
 }
@@ -26,6 +37,10 @@ function transformString(string) {
   }, []);
 
   return filteredArray.join('');
+}
+
+function selectShortFilms(films) {
+  return films.filter((movie) => movie.duration <= 40);
 }
 
 // function defineAlphabetType(string) {

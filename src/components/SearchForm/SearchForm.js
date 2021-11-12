@@ -41,7 +41,7 @@ function SearchForm({ onSubmit }) {
               <label className="search-form__input-label search-form__input-label_checkbox" htmlFor="isShortFilms">
                 <input
                   className="search-form__checkbox-short-films search-form__checkbox-short-films_invisible"
-                  value="true"
+                  // value="true"
                   id="isShortFilms"
                   type="checkbox"
                   name="isShortFilms"
