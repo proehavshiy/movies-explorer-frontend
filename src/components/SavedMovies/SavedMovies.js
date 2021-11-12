@@ -13,7 +13,7 @@ function SavedMovies({ onSearchFormSubmit, cardsData }) {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const { _id } = React.useContext(CurrentUserContext);
   console.log('currentUser!!:', _id);
-  const cards = JSON.parse(localStorage.getItem('movies'));
+  const cards = JSON.parse(localStorage.getItem(_id));
   console.log('cards ls до удалени:', cards);
 
   React.useEffect(() => {
@@ -50,11 +50,11 @@ function SavedMovies({ onSearchFormSubmit, cardsData }) {
         console.log('cardForDeletion после удаления айди', cardForDeletion);
         cards.splice(index, 1, cardForDeletion);
         // // console.log('updated cards:', newCards);
-        localStorage.setItem('movies', JSON.stringify(cards));
+        localStorage.setItem(_id, JSON.stringify(cards));
         // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
         setSavedMovies(savedMovies.filter((movie) => movie._id !== data.deletedMovie._id));
         console.log('savedMovies после удаления:', savedMovies);
-        console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem('movies')));
+        console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem(_id)));
       })
       .catch((err) => {
         console.log('deleted movie error:', err);

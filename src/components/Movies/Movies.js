@@ -13,9 +13,11 @@ import Preloader from '../Preloader/Preloader';
 import * as moviesApi from '../../utils/MoviesApi';
 import { saveMovie, deleteMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Movies({ openInfoPopup, cardsData }) {
-  const cards = JSON.parse(localStorage.getItem('movies'));
+  const { _id } = React.useContext(CurrentUserContext);
+  const cards = JSON.parse(localStorage.getItem(_id));
   // const [cards, setCards] = React.useState(JSON.parse(localStorage.getItem('movies')));
   const [waitingContent, setWaitingContent] = React.useState(null);
   const [isCardFavourite, setIsCardFavourite] = React.useState(false);
@@ -43,7 +45,7 @@ function Movies({ openInfoPopup, cardsData }) {
           // если по поиску не найдено фильмов,
           // обнуляем предыдущее хранилище и выводим сообщение
           if (filteredMovies.length === 0) {
-            localStorage.clear('movies');
+            localStorage.clear(_id);
             setWaitingContent(
               <div>
                 Ничего не найдено
@@ -53,7 +55,7 @@ function Movies({ openInfoPopup, cardsData }) {
           // сохраняем полученные карточки в localstorage
           if (filteredMovies.length !== 0) {
             setWaitingContent(null);
-            localStorage.setItem('movies', JSON.stringify(filteredMovies));
+            localStorage.setItem(_id, JSON.stringify(filteredMovies));
             openInfoPopup('getMovies', result, statusCode);
           }
         })
@@ -108,10 +110,10 @@ function Movies({ openInfoPopup, cardsData }) {
         // setCards((prevState) => prevState.splice(index, 1, favMovie));
         cards.splice(index, 1, favMovie);
         // console.log('updated cards:', newCards);
-        localStorage.setItem('movies', JSON.stringify(cards));
+        localStorage.setItem(_id, JSON.stringify(cards));
         // после добавления в избранное, карточке нужно изменить обработчик клика на удаление из избранного
         setIsCardFavourite(true);
-        console.log('обновленный локалсторедж:', JSON.parse(localStorage.getItem('movies')));
+        console.log('обновленный локалсторедж:', JSON.parse(localStorage.getItem(_id)));
       })
       .catch((err) => {
         console.log('err:', err);
@@ -138,11 +140,11 @@ function Movies({ openInfoPopup, cardsData }) {
         console.log('cardForDeletion после удаления айди', cardForDeletion);
         cards.splice(index, 1, cardForDeletion);
         // // console.log('updated cards:', newCards);
-        localStorage.setItem('movies', JSON.stringify(cards));
+        localStorage.setItem(_id, JSON.stringify(cards));
         // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
         // setSavedMovies(savedMovies.filter((movie) => movie._id !== data.deletedMovie._id));
         // console.log('savedMovies после удаления:', savedMovies);
-        console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem('movies')));
+        console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem(_id)));
       })
       .catch((err) => {
         console.log('deleted movie error:', err);
