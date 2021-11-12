@@ -42,6 +42,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = React.useState(true);
   console.log('isLoggedIn:', isLoggedIn);
   const [currentUser, setCurrentUser] = React.useState({});
+  console.log('currentUser:', currentUser);
   const {
     infoPopupSettings, closeInfoPopup, openInfoPopup,
   } = useInfoPopupSettings();

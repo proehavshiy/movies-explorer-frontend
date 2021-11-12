@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
@@ -10,6 +11,8 @@ import { getSavedMovies, deleteMovie } from '../../utils/MainApi';
 
 function SavedMovies({ onSearchFormSubmit, cardsData }) {
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const { _id } = React.useContext(CurrentUserContext);
+  console.log('currentUser!!:', _id);
   const cards = JSON.parse(localStorage.getItem('movies'));
   console.log('cards ls до удалени:', cards);
 
@@ -17,20 +20,23 @@ function SavedMovies({ onSearchFormSubmit, cardsData }) {
     getSavedMovies()
       .then(({ data, result, statusCode }) => {
         console.log('savedMovies:', data);
-        setSavedMovies(data);
+        // отфильтровываем только сохраненные данным пользователем фильмы
+        const mySavedMovies = data.filter((movie) => movie.owner === _id);
+        console.log('mySavedMovies:', mySavedMovies);
+        setSavedMovies(mySavedMovies);
       })
       .catch((err) => {
         console.log('err:', err);
       });
-  }, []);
+  }, [_id]);
 
   function deleteMovieFromFavourites(id) {
     // ищем нужную карточку в localstorage и получаем ее данные
 
     // const movieForDeletion = cards.find((movie) => movie.nameRU === nameOfRemovable);
     deleteMovie(id)
-      .then((res) => {
-        console.log('deleted movie seccess:', res);
+      .then(({ data, result, statusCode }) => {
+        console.log('deleted movie seccess:', data);
         // удалить из карточек localstorage id,
         // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
         // те синхронизировать
@@ -45,6 +51,9 @@ function SavedMovies({ onSearchFormSubmit, cardsData }) {
         cards.splice(index, 1, cardForDeletion);
         // // console.log('updated cards:', newCards);
         localStorage.setItem('movies', JSON.stringify(cards));
+        // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
+        setSavedMovies(savedMovies.filter((movie) => movie._id !== data.deletedMovie._id));
+        console.log('savedMovies после удаления:', savedMovies);
         console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem('movies')));
       })
       .catch((err) => {
