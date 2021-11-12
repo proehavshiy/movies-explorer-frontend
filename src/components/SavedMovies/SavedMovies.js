@@ -68,8 +68,9 @@ function SavedMovies({ onSearchFormSubmit, cardsData }) {
       <MoviesCardList
         typeOfList="saved"
         cardsData={savedMovies}
-        onCardButtonClick={deleteMovieFromFavourites}
-      // cardsData={cardsData.filter((movie) => movie.isFavourite === true)}
+        // onCardButtonClick={deleteMovieFromFavourites}
+        // cardsData={cardsData.filter((movie) => movie.isFavourite === true)}
+        onRemoveFromFavourites={deleteMovieFromFavourites}
       />
     </main>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable prefer-const */
@@ -10,13 +11,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 import Preloader from '../Preloader/Preloader';
 import * as moviesApi from '../../utils/MoviesApi';
-import { saveMovie } from '../../utils/MainApi';
+import { saveMovie, deleteMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
 
 function Movies({ openInfoPopup, cardsData }) {
   const cards = JSON.parse(localStorage.getItem('movies'));
   // const [cards, setCards] = React.useState(JSON.parse(localStorage.getItem('movies')));
   const [waitingContent, setWaitingContent] = React.useState(null);
+  const [isCardFavourite, setIsCardFavourite] = React.useState(false);
 
   console.log('cardsLocalstorage:', cards);
 
@@ -107,10 +109,43 @@ function Movies({ openInfoPopup, cardsData }) {
         cards.splice(index, 1, favMovie);
         // console.log('updated cards:', newCards);
         localStorage.setItem('movies', JSON.stringify(cards));
+        // после добавления в избранное, карточке нужно изменить обработчик клика на удаление из избранного
+        setIsCardFavourite(true);
         console.log('обновленный локалсторедж:', JSON.parse(localStorage.getItem('movies')));
       })
       .catch((err) => {
         console.log('err:', err);
+      });
+  }
+
+  function deleteMovieFromFavourites(id) {
+    // ищем нужную карточку в localstorage и получаем ее данные
+
+    // const movieForDeletion = cards.find((movie) => movie.nameRU === nameOfRemovable);
+    deleteMovie(id)
+      .then(({ data, result, statusCode }) => {
+        console.log('deleted movie seccess:', data);
+        // удалить из карточек localstorage id,
+        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
+        // те синхронизировать
+        const cardForDeletion = cards.find((card) => card._id === id);
+        console.log('card for delet:', cardForDeletion);
+        const index = cards.indexOf(cardForDeletion);
+        console.log('indexOf:', index);
+        delete cardForDeletion._id;
+        // favMovie._id = data._id;
+        // favMovie.isFavourite = true;
+        console.log('cardForDeletion после удаления айди', cardForDeletion);
+        cards.splice(index, 1, cardForDeletion);
+        // // console.log('updated cards:', newCards);
+        localStorage.setItem('movies', JSON.stringify(cards));
+        // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
+        // setSavedMovies(savedMovies.filter((movie) => movie._id !== data.deletedMovie._id));
+        // console.log('savedMovies после удаления:', savedMovies);
+        console.log('обновленный локалсторедж после удаления карточки:', JSON.parse(localStorage.getItem('movies')));
+      })
+      .catch((err) => {
+        console.log('deleted movie error:', err);
       });
   }
   return (
@@ -122,7 +157,9 @@ function Movies({ openInfoPopup, cardsData }) {
         <MoviesCardList
           typeOfList="default"
           cardsData={cards}
-          onCardButtonClick={addMovieToFavourites}
+          onCardButtonClick={isCardFavourite ? deleteMovieFromFavourites : addMovieToFavourites}
+          onAddToFavourites={addMovieToFavourites}
+          onRemoveFromFavourites={deleteMovieFromFavourites}
         />
       ) : waitingContent}
     </main>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -12,7 +13,7 @@ import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, name, duration, image, trailerLink, onCardButtonClick, id,
+  cardType, name, duration, image, trailerLink, onCardButtonClick, id, onAddToFavourites, onRemoveFromFavourites,
 }) {
   const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(id);
   console.log('_id в карточке:', id);
@@ -27,12 +28,14 @@ function MoviesCard({
   }
   const stringDuration = converseDurationToString(duration);
 
-  function handleDefaultCardButtonClick() {
-    onCardButtonClick(name);
+  function addToFavourites() {
+    onAddToFavourites(name);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
   }
-  function handSavedCardButtonClick() {
-    onCardButtonClick(id);
+
+  function removeFromFavourites() {
+    onRemoveFromFavourites(id);
+    setIsCardAddedToFavourites(!isCardAddedToFavourites);
   }
 
   return (
@@ -55,7 +58,7 @@ function MoviesCard({
             label="кнопка Сохранить"
             btnStyle={isCardAddedToFavourites ? 'added-to-fav-movie-card' : 'default-movie-card'}
             disabled={false}
-            onClick={handleDefaultCardButtonClick}
+            onClick={isCardAddedToFavourites ? removeFromFavourites : addToFavourites}
           />
         ) : (
           <Button
@@ -63,7 +66,7 @@ function MoviesCard({
             label="кнопка Удалить из избранного"
             btnStyle="delete-from-fav-movie-card"
             disabled={false}
-            onClick={handSavedCardButtonClick}
+            onClick={removeFromFavourites}
           />
         )}
       </div>

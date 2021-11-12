@@ -1,3 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable max-len */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-vars */
@@ -8,7 +11,7 @@ import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
 
-function MoviesCardList({ typeOfList, cardsData, onCardButtonClick }) {
+function MoviesCardList({ typeOfList, cardsData, onCardButtonClick, onAddToFavourites, onRemoveFromFavourites }) {
   return (
     <section className="movies-card-list">
       <ul ul className="movies-card-list__cards-container">
@@ -26,7 +29,9 @@ function MoviesCardList({ typeOfList, cardsData, onCardButtonClick }) {
                 duration={film.duration}
                 image={typeOfList === 'default' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
                 trailerLink={typeOfList === 'default' ? film.trailerLink : film.trailer}
-                onCardButtonClick={onCardButtonClick}
+                // onCardButtonClick={onCardButtonClick}
+                onAddToFavourites={onAddToFavourites}
+                onRemoveFromFavourites={onRemoveFromFavourites}
                 id={film._id}
               />
             );
