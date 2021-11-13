@@ -18,6 +18,7 @@ function Profile({
   const { submitBtnText, logoutBtnText } = staticContent;
   const { changeBtnStatus, logoutBtnStatus } = isSubmitting;
   const currentUser = React.useContext(CurrentUserContext);
+  const [inputValuesHaveChanged, setInputValuesHaveChanged] = React.useState(true);
   const {
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
@@ -27,8 +28,17 @@ function Profile({
     resetFrom({
       name: currentUser.name,
       email: currentUser.email,
-    }, {}, true);
-  }, [currentUser, resetFrom]);
+    }, {}, false);
+  }, []);
+
+  // блокирование кнопки сабмита, если значения в полях не изменились
+  React.useEffect(() => {
+    if (values.name === currentUser.name && values.email === currentUser.email) {
+      setInputValuesHaveChanged(false);
+    } else {
+      setInputValuesHaveChanged(true);
+    }
+  }, [values]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -51,7 +61,7 @@ function Profile({
         submitBtnText={changeBtnStatus ? submitBtnText.default : submitBtnText.isLoading}
         logoutBtnText={logoutBtnStatus ? logoutBtnText.default : logoutBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={isValid}
+        submitButtonState={inputValuesHaveChanged}
         logoutSection={{
           onLogout: handleLogout,
         }}
