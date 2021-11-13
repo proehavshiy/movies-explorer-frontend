@@ -4,11 +4,20 @@ import PropTypes from 'prop-types';
 import './SearchForm.css';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, initialInputValue, isChecked }) {
   const {
     // eslint-disable-next-line no-unused-vars
     values, setValues, handleChangeInput, errors, isValid, resetFrom,
   } = useFormWithValidation();
+
+  // если необходимо, чтобы сохранось значение поиска и чекбокса,
+  // то нужно передать initialInputValue и isChecked
+  React.useEffect(() => {
+    resetFrom({
+      search: initialInputValue,
+      isShortFilms: isChecked,
+    }, {}, false);
+  }, [resetFrom, initialInputValue, isChecked]);
 
   return (
     <section className="form-wrapper">
@@ -45,6 +54,9 @@ function SearchForm({ onSubmit }) {
                   id="isShortFilms"
                   type="checkbox"
                   name="isShortFilms"
+                  onChange={handleChangeInput}
+                  value={values.isShortFilms || ''}
+                  checked={values.isShortFilms || ''}
                 />
                 <span className="search-form__checkbox-short-films search-form__checkbox-short-films_visible" />
                 Короткометражки
@@ -59,6 +71,13 @@ function SearchForm({ onSubmit }) {
 
 SearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  initialInputValue: PropTypes.string,
+  isChecked: PropTypes.bool,
+};
+
+SearchForm.defaultProps = {
+  initialInputValue: '',
+  isChecked: false,
 };
 
 export default SearchForm;

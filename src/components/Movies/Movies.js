@@ -32,7 +32,6 @@ function Movies({ openInfoPopup, cardsData }) {
   React.useEffect(() => {
     if (searchParameters) {
       setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
-      console.log('used!:');
     }
   }, []);
 
@@ -48,7 +47,8 @@ function Movies({ openInfoPopup, cardsData }) {
       openInfoPopup('searchMovies', 'error', 'searchValidationError');
     }
 
-    if (!movies) {
+    if (inputQuery && !movies) {
+      console.log('inputQuery:', inputQuery);
       // отображается прелоадер во время ожидания ответа
       setWaitingContent(Preloader);
       moviesApi.getMovies()
@@ -71,7 +71,7 @@ function Movies({ openInfoPopup, cardsData }) {
           );
         });
     }
-    if (movies) {
+    if (inputQuery && movies) {
       // поиск фильмов по запросу из формы
       const filteredMovies = filterResults(movies, inputQuery, isShortFilmsSelected);
       // если по поиску не найдено фильмов,
@@ -160,6 +160,8 @@ function Movies({ openInfoPopup, cardsData }) {
     <main className="movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
         onSubmit={handleSearchFormSubmit}
+        initialInputValue={searchParameters.inputQuery}
+        isChecked={searchParameters.isShortFilmsSelected}
       />
       {moviesForRendering ? (
         <MoviesCardList

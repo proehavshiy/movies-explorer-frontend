@@ -15,15 +15,24 @@ function useFormWithValidation() {
       const input = evt.target;
       const { name } = input;
       const { value } = input;
+      const { checked } = input;
+      const { type } = input;
       const error = input.validationMessage;
       const isFormValid = input.closest('form').checkValidity();
-
+      if (type === 'checkbox') {
+        setValues((prevState) => ({
+          ...prevState,
+          [name]: checked,
+        }));
+      }
       // setValues({ ...values, [name]: value })
       // записываем поле-значение
-      setValues((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      if (type !== 'checkbox') {
+        setValues((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      }
       // записываем ошибки
       setErrors((prevState) => ({
         ...prevState,
