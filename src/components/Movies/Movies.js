@@ -160,8 +160,8 @@ function Movies({ openInfoPopup, cardsData }) {
     <main className="movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
         onSubmit={handleSearchFormSubmit}
-        initialInputValue={searchParameters.inputQuery}
-        isChecked={searchParameters.isShortFilmsSelected}
+        initialInputValue={searchParameters && searchParameters.inputQuery}
+        isChecked={searchParameters && searchParameters.isShortFilmsSelected}
       />
       {moviesForRendering ? (
         <MoviesCardList

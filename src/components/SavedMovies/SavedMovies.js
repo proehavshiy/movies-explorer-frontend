@@ -92,6 +92,7 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
     <main className="saved-movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
         onSubmit={handleSearchFormSubmit}
+        isValidateForm={false}
       />
       {savedcards ? (
         <MoviesCardList
