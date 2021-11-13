@@ -69,13 +69,17 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
     // const movieForDeletion = cards.find((movie) => movie.nameRU === nameOfRemovable);
     deleteMovie(id)
       .then(({ data, result, statusCode }) => {
-        // удалить из карточек localstorage id,
+        // удалить из карточек localstorage _id,
         // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
-        // те синхронизировать
         const cardForDeletion = cards.find((card) => card._id === id);
-        const index = cards.indexOf(cardForDeletion);
-        delete cardForDeletion._id;
-        cards.splice(index, 1, cardForDeletion);
+        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
+        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
+        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
+        if (cardForDeletion) {
+          const index = cards.indexOf(cardForDeletion);
+          delete cardForDeletion._id;
+          cards.splice(index, 1, cardForDeletion);
+        }
         localStorage.setItem(`${_id} movies`, JSON.stringify(cards));
         // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
         setmoviesForRendering(moviesForRendering.filter((movie) => movie._id !== data.deletedMovie._id));
