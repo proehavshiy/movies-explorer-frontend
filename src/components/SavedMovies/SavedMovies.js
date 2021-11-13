@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-no-bind */
@@ -13,7 +14,7 @@ import filterResults from '../../hooks/filterResults';
 
 function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
   const { _id } = React.useContext(CurrentUserContext);
-  const [moviesForRendering, setmoviesForRendering] = React.useState([]);
+  const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const cards = JSON.parse(localStorage.getItem(`${_id} movies`));
   const savedcards = JSON.parse(localStorage.getItem(`${_id} savedMovies`));
   const [waitingContent, setWaitingContent] = React.useState(null);
@@ -31,28 +32,29 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
       .catch((err) => {
         console.log('err:', err);
       });
-  }, [_id]);
+  }, []);
 
   function handleSearchFormSubmit(evt) {
     evt.preventDefault();
     const inputQuery = evt.target.search.value;
-    console.log('sear:', inputQuery);
+    const isShortFilmsSelected = evt.target.isShortFilms.checked;
 
     // если в поле не введен запрос, сбрасываем поиск, отображаем все карточки
     if (!inputQuery) {
-      setmoviesForRendering(savedcards);
+      setmoviesForRendering(filterResults(savedcards, inputQuery, isShortFilmsSelected));
     }
 
     if (inputQuery) {
       // поиск фильмов по запросу из формы среди сохраненных в localstorage
-      const filteredMovies = filterResults(savedcards, inputQuery);
+      const filteredMovies = filterResults(savedcards, inputQuery, isShortFilmsSelected);
+      console.log('f m :', filteredMovies);
       // обновляем стейт для отображения отфильтрованными фильмами
       setmoviesForRendering(filteredMovies);
 
       // если по поиску не найдено фильмов,
       // обнуляем предыдущее хранилище и выводим сообщение
-      if (filteredMovies.length === 0) {
-        localStorage.clear(_id);
+      if (filteredMovies && filteredMovies.length === 0) {
+        setmoviesForRendering(null);
         setWaitingContent(
           <div>
             Ничего не найдено
@@ -63,10 +65,8 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
   }
 
   function deleteMovieFromFavourites(id) {
-    console.log('id sav:', id);
     // ищем нужную карточку в localstorage и получаем ее данные
 
-    // const movieForDeletion = cards.find((movie) => movie.nameRU === nameOfRemovable);
     deleteMovie(id)
       .then(({ data, result, statusCode }) => {
         // удалить из карточек localstorage _id,
@@ -94,7 +94,7 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
         onSubmit={handleSearchFormSubmit}
         isValidateForm={false}
       />
-      {savedcards ? (
+      {moviesForRendering ? (
         <MoviesCardList
           typeOfList="saved"
           cardsData={moviesForRendering}
