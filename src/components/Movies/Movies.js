@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-use-before-define */
@@ -27,8 +28,13 @@ function Movies({ openInfoPopup }) {
   const [waitingContent, setWaitingContent] = React.useState(null);
 
   React.useEffect(() => {
+    // при заходе на страницу - отображение результатов поиска по предыдущему поиску
+    // если результаты не найдены, выводится "Ничего не найдено"
     if (searchParameters) {
-      setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
+      const filteredMovies = filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected);
+      filteredMovies.length === 0
+        ? setWaitingContent(<SearchResultsBar phrase="Ничего не найдено" />)
+        : setmoviesForRendering(filteredMovies);
     }
   }, []);
 
