@@ -80,12 +80,12 @@ MoviesCard.propTypes = {
   image: PropTypes.string.isRequired,
   trailerLink: PropTypes.string.isRequired,
   onCardButtonClick: PropTypes.func,
-  id: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 MoviesCard.defaultProps = {
   cardType: 'default',
-  id: false,
+  id: '',
   onCardButtonClick: () => { },
 };
 

@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
 
-function MoviesCardList({ typeOfList, cardsData, onCardButtonClick, onAddToFavourites, onRemoveFromFavourites }) {
+function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFromFavourites }) {
   return (
     <section className="movies-card-list">
-      <ul ul className="movies-card-list__cards-container">
+      <ul className="movies-card-list__cards-container">
         {
           cardsData.map((v, index, arr) => {
             // итерируем с конца в начало,
@@ -24,12 +24,10 @@ function MoviesCardList({ typeOfList, cardsData, onCardButtonClick, onAddToFavou
               <MoviesCard
                 key={film.id}
                 cardType={typeOfList}
-                // isFavourite={film.isFavourite}
                 name={film.nameRU}
                 duration={film.duration}
                 image={typeOfList === 'default' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
                 trailerLink={typeOfList === 'default' ? film.trailerLink : film.trailer}
-                // onCardButtonClick={onCardButtonClick}
                 onAddToFavourites={onAddToFavourites}
                 onRemoveFromFavourites={onRemoveFromFavourites}
                 id={film._id}
@@ -56,7 +54,6 @@ function MoviesCardList({ typeOfList, cardsData, onCardButtonClick, onAddToFavou
 MoviesCardList.propTypes = {
   typeOfList: PropTypes.oneOf(['default', 'saved']),
   cardsData: PropTypes.arrayOf(PropTypes.any).isRequired,
-  onCardButtonClick: PropTypes.func.isRequired,
 };
 
 MoviesCardList.defaultProps = {

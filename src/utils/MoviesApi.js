@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable prefer-promise-reject-errors */
-const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+const BASE_REQUEST_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const BASE_URL = 'https://api.nomoreparties.co';
 
 function checkResponse(response) {
   // return (response.ok ? response.json() : Promise.reject(String(response.status)));
@@ -24,7 +25,7 @@ function checkResponse(response) {
 }
 
 export function getMovies() {
-  return fetch(BASE_URL, {
+  return fetch(BASE_REQUEST_URL, {
     method: 'GET',
     // credentials: 'include',
   }).then(checkResponse);

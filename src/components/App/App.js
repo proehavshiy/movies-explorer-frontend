@@ -40,9 +40,7 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
-  console.log('isLoggedIn:', isLoggedIn);
   const [currentUser, setCurrentUser] = React.useState({});
-  console.log('currentUser:', currentUser);
   const {
     infoPopupSettings, closeInfoPopup, openInfoPopup,
   } = useInfoPopupSettings();
@@ -158,9 +156,7 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
             <Movies
-              // onSearchFormSubmit={handleSearchFormSubmit}
               openInfoPopup={openInfoPopup}
-              cardsData={moviesMockCards}
             />
             <Footer />
           </ProtectedRoute>
@@ -172,9 +168,7 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
             <SavedMovies
-              // onSearchFormSubmit={() => { }}
               openInfoPopup={openInfoPopup}
-              cardsData={moviesMockCards}
             />
             <Footer />
           </ProtectedRoute>

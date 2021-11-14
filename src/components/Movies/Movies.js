@@ -16,18 +16,15 @@ import * as moviesApi from '../../utils/MoviesApi';
 import { saveMovie, deleteMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 
-function Movies({ openInfoPopup, cardsData }) {
+function Movies({ openInfoPopup }) {
   // id пользователя для localstorage и определения владельца фильма
   const { _id } = React.useContext(CurrentUserContext);
   const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
   const searchParameters = JSON.parse(localStorage.getItem(`${_id} search params`));
   const [waitingContent, setWaitingContent] = React.useState(null);
-
-  console.log('movies:', movies);
-  console.log('moviesForRendering:', moviesForRendering);
-  console.log('searchParameters localstorage:', searchParameters);
 
   React.useEffect(() => {
     if (searchParameters) {
@@ -40,7 +37,6 @@ function Movies({ openInfoPopup, cardsData }) {
     const inputQuery = evt.target.search.value;
     const isShortFilmsSelected = evt.target.isShortFilms.checked;
     localStorage.setItem(`${_id} search params`, JSON.stringify({ inputQuery, isShortFilmsSelected }));
-    console.log('isShortFilmsSelected 1:', isShortFilmsSelected);
 
     // если в поле не введен запрос, показываем попап с ошибкой
     if (!inputQuery) {
@@ -48,26 +44,24 @@ function Movies({ openInfoPopup, cardsData }) {
     }
 
     if (inputQuery && !movies) {
-      console.log('inputQuery:', inputQuery);
       // отображается прелоадер во время ожидания ответа
       setWaitingContent(Preloader);
       moviesApi.getMovies()
-        .then(({ data, result, statusCode }) => {
+        .then(({ data }) => {
           // сохраняем в localstorage исходный массив карточек.
           // Он нужен для поиска по нему фильмов и для запоминания, какие карточки в избранном
           localStorage.setItem(`${_id} movies`, JSON.stringify(data));
           // сохраняем в другой localstorage отфильтрованный массив.
           // Он нужен только для отображения результатов поиска
           const filteredMovies = filterResults(data, inputQuery, isShortFilmsSelected);
-          // localStorage.setItem(`${_id} filtered movies`, JSON.stringify(filteredMovies));
           setmoviesForRendering(filteredMovies);
           setWaitingContent(null);
         })
-        .catch(({ result, statusCode }) => {
+        .catch(() => {
           setWaitingContent(
-            <div>
-              Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз
-            </div>,
+            <SearchResultsBar
+              phrase="Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+            />,
           );
         });
     }
@@ -78,23 +72,17 @@ function Movies({ openInfoPopup, cardsData }) {
       // обнуляем предыдущее хранилище и выводим сообщение
       if (filteredMovies.length === 0) {
         setmoviesForRendering(null);
-        // localStorage.clear(`${_id} movies`);
         setWaitingContent(
-          <div>
-            Ничего не найдено
-          </div>,
+          <SearchResultsBar
+            phrase="Ничего не найдено"
+          />,
         );
       }
       // сохраняем полученные карточки в localstorage под _id пользователя,
       // чтобы у каждого пользователя был свой кэш поиска
       if (filteredMovies.length !== 0) {
         setWaitingContent(null);
-        console.log('isShortFilmsSelected 2:', isShortFilmsSelected);
-        console.log('filteredMovies:', filteredMovies);
-        // localStorage.setItem(`${_id} filtered movies`, JSON.stringify(filteredMovies));
-        // localStorage.setItem(`${_id} movies`, JSON.stringify(filteredMovies));
         setmoviesForRendering(filteredMovies);
-        // openInfoPopup('getMovies', ressult, statusCode);
       }
     }
   }
@@ -113,47 +101,48 @@ function Movies({ openInfoPopup, cardsData }) {
       country ?? 'Без страны',
       year,
       duration,
-      `https://api.nomoreparties.co${image.url}`,
+      `${moviesApi.BASE_URL}${image.url}`,
       trailerLink,
-      `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+      `${moviesApi.BASE_URL}${image.formats.thumbnail.url}`,
       id,
     )
-      .then(({ data, result, statusCode }) => {
-        console.log('favMovie:', favMovie);
+      .then(({ data }) => {
         // нужно пометить добавленную карточку _id, чтобы понимать, какую добавили
         // записать обратно в localstorage, чтобы потом по нему удалять карточку
         favMovie._id = data._id;
         // заменяем в localstorage карточку с _id (она теперь в избранном)
         const index = movies.indexOf(favMovie);
-        console.log('index of favmov:', index);
         movies.splice(index, 1, favMovie);
         // обновляем localstorage
         localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
         setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
       })
-      .catch((err) => {
-        console.log('err:', err);
+      .catch(() => {
+        openInfoPopup('addToFavourites', 'error', 'addToFavouritesError');
       });
   }
 
   function deleteMovieFromFavourites(id) {
-    console.log('id:', id);
     deleteMovie(id)
-      .then(({ data, result, statusCode }) => {
-        // нужно удалить из этой карточки в localstorage _id,
-        // чтобы пометить ее как неизбранную теперь
+      .then(({ data }) => {
+        // удалить из карточек localstorage _id,
+        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
         const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
-        const index = movies.indexOf(cardForDeletion);
-        // console.log('index:', index);
-        delete cardForDeletion._id;
-        // заменяем в localstorage карточку теперь без _id (она удалена из избранных)
-        movies.splice(index, 1, cardForDeletion);
+        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
+        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
+        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
+        if (cardForDeletion) {
+          const index = movies.indexOf(cardForDeletion);
+          delete cardForDeletion._id;
+          movies.splice(index, 1, cardForDeletion);
+        }
         // обновляем localstorage
         localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
+        // обновляем стейт для рендеринга карточек
         setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
       })
-      .catch((err) => {
-        console.log('deleted movie error:', err);
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('deleteMovie', result, statusCode);
       });
   }
   return (
@@ -177,7 +166,6 @@ function Movies({ openInfoPopup, cardsData }) {
 
 Movies.propTypes = {
   openInfoPopup: PropTypes.func,
-  cardsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 Movies.defaultProps = {
   openInfoPopup: () => { },

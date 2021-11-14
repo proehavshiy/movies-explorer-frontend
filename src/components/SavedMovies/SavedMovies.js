@@ -11,8 +11,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 import { getSavedMovies, deleteMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
+import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 
-function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
+function SavedMovies({ openInfoPopup }) {
   const { _id } = React.useContext(CurrentUserContext);
   const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const cards = JSON.parse(localStorage.getItem(`${_id} movies`));
@@ -47,7 +48,6 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
     if (inputQuery) {
       // поиск фильмов по запросу из формы среди сохраненных в localstorage
       const filteredMovies = filterResults(savedcards, inputQuery, isShortFilmsSelected);
-      console.log('f m :', filteredMovies);
       // обновляем стейт для отображения отфильтрованными фильмами
       setmoviesForRendering(filteredMovies);
 
@@ -56,19 +56,17 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
       if (filteredMovies && filteredMovies.length === 0) {
         setmoviesForRendering(null);
         setWaitingContent(
-          <div>
-            Ничего не найдено
-          </div>,
+          <SearchResultsBar
+            phrase="Ничего не найдено"
+          />,
         );
       }
     }
   }
 
   function deleteMovieFromFavourites(id) {
-    // ищем нужную карточку в localstorage и получаем ее данные
-
     deleteMovie(id)
-      .then(({ data, result, statusCode }) => {
+      .then(({ data }) => {
         // удалить из карточек localstorage _id,
         // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
         const cardForDeletion = cards.find((card) => card._id === id);
@@ -80,12 +78,13 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
           delete cardForDeletion._id;
           cards.splice(index, 1, cardForDeletion);
         }
+        // обновляем localstorage
         localStorage.setItem(`${_id} movies`, JSON.stringify(cards));
-        // удаляем из стейта удаленный фильм, чтобы он пропал со страницы
-        setmoviesForRendering(moviesForRendering.filter((movie) => movie._id !== data.deletedMovie._id));
+        // обновляем стейт для рендеринга карточек
+        setmoviesForRendering((prevState) => prevState.filter((movie) => movie._id !== data.deletedMovie._id));
       })
-      .catch((err) => {
-        console.log('deleted movie error:', err);
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('deleteMovie', result, statusCode);
       });
   }
   return (
@@ -106,8 +105,6 @@ function SavedMovies({ onSearchFormSubmit, openInfoPopup, cardsData }) {
 }
 
 SavedMovies.propTypes = {
-  onSearchFormSubmit: PropTypes.func.isRequired,
-  cardsData: PropTypes.arrayOf(PropTypes.object).isRequired,
   openInfoPopup: PropTypes.func,
 };
 SavedMovies.defaultProps = {
