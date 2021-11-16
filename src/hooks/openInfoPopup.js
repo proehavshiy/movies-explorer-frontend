@@ -1,23 +1,30 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import STATUS_MESSAGES from '../config/staticPageContent/statusMessages';
 
-// открыватель попапа
-
+// управление попапом
 function useInfoPopupSettings() {
   const [infoPopupSettings, setInfoPopupSettings] = React.useState({});
 
-  const openInfoPopup = React.useCallback(
-    (reqType = 'default', reqResult = 'error', reqStatusCode = 'defaultMessage') => {
-      const phrase = reqStatusCode === '500'
-        ? STATUS_MESSAGES.default.error
-        : STATUS_MESSAGES[reqType][reqResult][reqStatusCode];
+  function checkParametersDefiniteness(array) {
+    return array.every((item) => !Object.is(item, null || undefined));
+  }
 
-      setInfoPopupSettings({
-        type: reqResult,
-        isOpened: true,
-        heading: phrase,
-      });
+  const openInfoPopup = React.useCallback(
+    (reqType, reqResult, reqStatusCode) => {
+      // если хотя бы один параметр не определен, вызываем попап с дефолтной ошибкой
+      if (!checkParametersDefiniteness([reqType, reqResult, reqStatusCode])) {
+        setInfoPopupSettings({
+          type: 'error',
+          isOpened: true,
+          heading: STATUS_MESSAGES.default.error.message,
+        });
+      } else {
+        setInfoPopupSettings({
+          type: reqResult,
+          isOpened: true,
+          heading: STATUS_MESSAGES[reqType][reqResult][reqStatusCode],
+        });
+      }
     }, [setInfoPopupSettings],
   );
 
@@ -29,15 +36,5 @@ function useInfoPopupSettings() {
     infoPopupSettings, closeInfoPopup, openInfoPopup,
   };
 }
-// function openInfoPopup(fetchType, result, statusCode) {
-//   const phrase = statusCode === '500'
-//     ? STATUS_MESSAGES.default.error
-//     : STATUS_MESSAGES[fetchType][result][statusCode];
-//   setInfoToolTipStatus({
-//     type: result,
-//     isOpened: true,
-//     heading: phrase,
-//   });
-// }
 
 export default useInfoPopupSettings;

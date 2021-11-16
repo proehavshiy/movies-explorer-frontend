@@ -134,7 +134,7 @@ function App() {
     const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
     // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
     if (!movies) {
-      openInfoPopup('default', 'error', 'message');
+      openInfoPopup();
     } else if (movies) {
       const favMovie = movies.find((movie) => movie.nameRU === movieName);
       const {
@@ -142,14 +142,14 @@ function App() {
       } = favMovie;
       mainApi.saveMovie(
         nameRU,
-        nameEN,
+        nameEN ?? 'No eng name',
         description,
         director,
         country ?? 'Без страны',
         year,
         duration,
         `${moviesApi.BASE_URL}${image.url}`,
-        trailerLink,
+        trailerLink ?? 'http://example.com/',
         `${moviesApi.BASE_URL}${image.formats.thumbnail.url}`,
         id,
       )
@@ -166,7 +166,7 @@ function App() {
           updateMoviesForRendering();
         })
         .catch(() => {
-          openInfoPopup('addToFavourites', 'error', 'addToFavouritesError');
+          openInfoPopup('addToFavourites', 'error', 'message');
         });
     }
   };
@@ -175,7 +175,7 @@ function App() {
     const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
     // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
     if (!movies) {
-      openInfoPopup('default', 'error', 'message');
+      openInfoPopup();
     } else if (movies) {
       mainApi.deleteMovie(id)
         .then(({ data }) => {

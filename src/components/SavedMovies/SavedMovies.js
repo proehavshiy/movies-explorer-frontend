@@ -28,7 +28,7 @@ function SavedMovies({ openInfoPopup, onDeleteCard }) {
         setmoviesForRendering(mySavedMovies);
       })
       .catch(() => {
-        openInfoPopup('default', 'error', 'message');
+        openInfoPopup();
       });
   }, [_id, openInfoPopup]);
 

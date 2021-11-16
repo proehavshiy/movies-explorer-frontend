@@ -7,14 +7,14 @@ import PropTypes from 'prop-types';
 function InfoToolTip({ settings, onClose }) {
   const { type, isOpened, heading } = settings;
 
-  function handleClick(evt) {
+  const handleClick = (evt) => {
     if (evt.target.dataset.closeCatcher) onClose();
-  }
+  };
 
   if (type === 'success' && isOpened) {
     setTimeout(() => {
       onClose();
-    }, 1500);
+    }, 1000);
   }
 
   return (
