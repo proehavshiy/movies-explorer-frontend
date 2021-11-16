@@ -8,7 +8,7 @@ function useInfoPopupSettings() {
   const [infoPopupSettings, setInfoPopupSettings] = React.useState({});
 
   const openInfoPopup = React.useCallback(
-    (reqType, reqResult, reqStatusCode) => {
+    (reqType = 'default', reqResult = 'error', reqStatusCode = 'defaultMessage') => {
       const phrase = reqStatusCode === '500'
         ? STATUS_MESSAGES.default.error
         : STATUS_MESSAGES[reqType][reqResult][reqStatusCode];

@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable eqeqeq */
@@ -140,15 +141,16 @@ function App() {
   }
 
   function handleDeleteMovie(id, updateMoviesForRendering) {
+    const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
     mainApi.deleteMovie(id)
       .then(({ data }) => {
-        // удалить из карточек localstorage _id,
-        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
-        const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
         // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
         // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
         // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
-        if (cardForDeletion) {
+        if (movies) {
+          // удалить из карточек localstorage _id,
+          // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
+          const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
           const index = movies.indexOf(cardForDeletion);
           delete cardForDeletion._id;
           movies.splice(index, 1, cardForDeletion);
