@@ -13,7 +13,7 @@ import { getSavedMovies, deleteMovie } from '../../utils/MainApi';
 import filterResults from '../../hooks/filterResults';
 import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 
-function SavedMovies({ openInfoPopup }) {
+function SavedMovies({ openInfoPopup, onDeleteCard }) {
   const { _id } = React.useContext(CurrentUserContext);
   const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const cards = JSON.parse(localStorage.getItem(`${_id} movies`));
@@ -65,28 +65,10 @@ function SavedMovies({ openInfoPopup }) {
   }
 
   function deleteMovieFromFavourites(id) {
-    deleteMovie(id)
-      .then(({ data }) => {
-        // удалить из карточек localstorage _id,
-        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
-        const cardForDeletion = cards.find((card) => card._id === id);
-        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
-        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
-        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
-        if (cardForDeletion) {
-          const index = cards.indexOf(cardForDeletion);
-          delete cardForDeletion._id;
-          cards.splice(index, 1, cardForDeletion);
-        }
-        // обновляем localstorage
-        localStorage.setItem(`${_id} movies`, JSON.stringify(cards));
-        // обновляем стейт для рендеринга карточек
-        setmoviesForRendering((prevState) => prevState.filter((movie) => movie._id !== data.deletedMovie._id));
-      })
-      .catch(({ result, statusCode }) => {
-        openInfoPopup('deleteMovie', result, statusCode);
-      });
+    // вторым параметром обновляем стейт для рендеринга карточек
+    onDeleteCard(id, () => setmoviesForRendering((prevState) => prevState.filter((movie) => movie._id !== id)));
   }
+
   return (
     <main className="saved-movies page__main-content page__main-content-padding-top page__animation">
       <SearchForm
@@ -106,6 +88,7 @@ function SavedMovies({ openInfoPopup }) {
 
 SavedMovies.propTypes = {
   openInfoPopup: PropTypes.func,
+  onDeleteCard: PropTypes.func.isRequired,
 };
 SavedMovies.defaultProps = {
   openInfoPopup: () => { },

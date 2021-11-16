@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable object-curly-newline */
@@ -19,7 +20,7 @@ import filterResults from '../../hooks/filterResults';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 
-function Movies({ openInfoPopup }) {
+function Movies({ openInfoPopup, onDeleteCard }) {
   // id пользователя для localstorage и определения владельца фильма
   const { _id } = React.useContext(CurrentUserContext);
   const [moviesForRendering, setmoviesForRendering] = React.useState(null);
@@ -129,27 +130,8 @@ function Movies({ openInfoPopup }) {
   }
 
   function deleteMovieFromFavourites(id) {
-    deleteMovie(id)
-      .then(({ data }) => {
-        // удалить из карточек localstorage _id,
-        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
-        const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
-        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
-        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
-        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
-        if (cardForDeletion) {
-          const index = movies.indexOf(cardForDeletion);
-          delete cardForDeletion._id;
-          movies.splice(index, 1, cardForDeletion);
-        }
-        // обновляем localstorage
-        localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
-        // обновляем стейт для рендеринга карточек
-        setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
-      })
-      .catch(({ result, statusCode }) => {
-        openInfoPopup('deleteMovie', result, statusCode);
-      });
+    // вторым параметром обновляем стейт для рендеринга карточек
+    onDeleteCard(id, () => setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected)));
   }
   return (
     <main className="movies page__main-content page__main-content-padding-top page__animation">
@@ -172,6 +154,7 @@ function Movies({ openInfoPopup }) {
 
 Movies.propTypes = {
   openInfoPopup: PropTypes.func,
+  onDeleteCard: PropTypes.func.isRequired,
 };
 Movies.defaultProps = {
   openInfoPopup: () => { },

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-undef */
@@ -41,6 +43,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
+  const { _id } = currentUser;
+  const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
   const {
     infoPopupSettings, closeInfoPopup, openInfoPopup,
   } = useInfoPopupSettings();
@@ -135,6 +139,30 @@ function App() {
       });
   }
 
+  function handleDeleteMovie(id, updateMoviesForRendering) {
+    mainApi.deleteMovie(id)
+      .then(({ data }) => {
+        // удалить из карточек localstorage _id,
+        // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
+        const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
+        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
+        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
+        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
+        if (cardForDeletion) {
+          const index = movies.indexOf(cardForDeletion);
+          delete cardForDeletion._id;
+          movies.splice(index, 1, cardForDeletion);
+        }
+        // обновляем localstorage
+        localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
+        // обновляем стейт для рендеринга карточек для компонента через колбэк
+        updateMoviesForRendering();
+      })
+      .catch(({ result, statusCode }) => {
+        openInfoPopup('deleteMovie', result, statusCode);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -157,6 +185,7 @@ function App() {
             />
             <Movies
               openInfoPopup={openInfoPopup}
+              onDeleteCard={handleDeleteMovie}
             />
             <Footer />
           </ProtectedRoute>
@@ -169,6 +198,7 @@ function App() {
             />
             <SavedMovies
               openInfoPopup={openInfoPopup}
+              onDeleteCard={handleDeleteMovie}
             />
             <Footer />
           </ProtectedRoute>
