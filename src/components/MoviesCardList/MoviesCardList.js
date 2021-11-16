@@ -1,15 +1,11 @@
 /* eslint-disable object-curly-newline */
-/* eslint-disable max-len */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import './MoviesCardList.css';
 import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
+import { BASE_URL } from '../../utils/MoviesApi';
 
 function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFromFavourites }) {
   return (
@@ -26,7 +22,7 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
                 cardType={typeOfList}
                 name={film.nameRU}
                 duration={film.duration}
-                image={typeOfList === 'default' ? `https://api.nomoreparties.co${film.image.url}` : film.image}
+                image={typeOfList === 'default' ? `${BASE_URL}${film.image.url}` : film.image}
                 trailerLink={typeOfList === 'default' ? film.trailerLink : film.trailer}
                 onAddToFavourites={onAddToFavourites}
                 onRemoveFromFavourites={onRemoveFromFavourites}
@@ -54,10 +50,13 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
 MoviesCardList.propTypes = {
   typeOfList: PropTypes.oneOf(['default', 'saved']),
   cardsData: PropTypes.arrayOf(PropTypes.any).isRequired,
+  onAddToFavourites: PropTypes.func,
+  onRemoveFromFavourites: PropTypes.func.isRequired,
 };
 
 MoviesCardList.defaultProps = {
   typeOfList: 'default',
+  onAddToFavourites: () => { },
 };
 
 export default MoviesCardList;

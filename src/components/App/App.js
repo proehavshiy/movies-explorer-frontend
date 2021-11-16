@@ -1,13 +1,5 @@
-/* eslint-disable no-shadow */
-/* eslint-disable max-len */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-undef */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import './App.css';
 import {
@@ -27,7 +19,6 @@ import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // статичный контент страниц
 import MAIN_PAGE from '../../config/staticPageContent/mainPageContent';
-import moviesMockCards from '../../config/staticPageContent/moviesPageContent';
 import PROFILE_PAGE from '../../config/staticPageContent/profilePageContent';
 import LOGIN_PAGE from '../../config/staticPageContent/loginPageContent';
 import REGISTER_PAGE from '../../config/staticPageContent/registerPageContent';
@@ -45,14 +36,13 @@ function App() {
   const [isSubmitting, setIsSubmitting] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
   const { _id } = currentUser;
-  const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
   const {
     infoPopupSettings, closeInfoPopup, openInfoPopup,
   } = useInfoPopupSettings();
   const history = useHistory();
 
   // функция авторизации пользователя
-  function authorizeUser() {
+  const authorizeUser = () => {
     mainApi.getUserInfo()
       .then(({ data }) => {
         setCurrentUser(data);
@@ -61,7 +51,7 @@ function App() {
       }).catch(({ result, statusCode }) => {
         openInfoPopup('getUserInfo', result, statusCode);
       });
-  }
+  };
 
   // получаем данные пользователя при успешной авторизации
   React.useEffect(() => {
@@ -71,14 +61,14 @@ function App() {
   }, []);
 
   // установить статус кнопки во время запроса
-  function setButtonStatus(button, status) {
+  const setButtonStatus = (button, status) => {
     setIsSubmitting((prevState) => ({
       ...prevState,
       [button]: status,
     }));
-  }
+  };
 
-  function handleLogin(email, password) {
+  const handleLogin = (email, password) => {
     setButtonStatus('loginBtnStatus', false);
     mainApi.login(email, password)
       .then(({ result, statusCode }) => {
@@ -91,9 +81,9 @@ function App() {
       .finally(() => {
         setButtonStatus('loginBtnStatus', true);
       });
-  }
+  };
 
-  function handleRegister(name, email, password) {
+  const handleRegister = (name, email, password) => {
     setButtonStatus('registerBtnStatus', false);
     mainApi.register(name, email, password)
       .then(({ data }) => {
@@ -107,9 +97,9 @@ function App() {
       .finally(() => {
         setButtonStatus('registerBtnStatus', true);
       });
-  }
+  };
 
-  function handleChangeProfile(name, email) {
+  const handleChangeProfile = (name, email) => {
     setButtonStatus('changeBtnStatus', false);
     mainApi.updateUserInfo(name, email)
       .then(({ data, result, statusCode }) => {
@@ -122,9 +112,9 @@ function App() {
       .finally(() => {
         setButtonStatus('changeBtnStatus', true);
       });
-  }
+  };
 
-  function handleLogOut() {
+  const handleLogOut = () => {
     setButtonStatus('logoutBtnStatus', false);
     mainApi.logOut()
       .then(({ result, statusCode }) => {
@@ -138,9 +128,9 @@ function App() {
       .finally(() => {
         setButtonStatus('logoutBtnStatus', true);
       });
-  }
+  };
 
-  function handleAddMovie(movieName, updateMoviesForRendering) {
+  const handleAddMovie = (movieName, updateMoviesForRendering) => {
     const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
     // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
     if (!movies) {
@@ -179,9 +169,9 @@ function App() {
           openInfoPopup('addToFavourites', 'error', 'addToFavouritesError');
         });
     }
-  }
+  };
 
-  function handleDeleteMovie(id, updateMoviesForRendering) {
+  const handleDeleteMovie = (id, updateMoviesForRendering) => {
     const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
     // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
     if (!movies) {
@@ -202,7 +192,7 @@ function App() {
           openInfoPopup('deleteMovie', result, statusCode);
         });
     }
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

@@ -1,19 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-shadow */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable max-len */
 import React from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, name, duration, image, trailerLink, onCardButtonClick, id, onAddToFavourites, onRemoveFromFavourites,
+  cardType, name, duration, image, trailerLink, id, onAddToFavourites, onRemoveFromFavourites,
 }) {
   const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(id);
 
@@ -27,15 +20,15 @@ function MoviesCard({
   }
   const stringDuration = converseDurationToString(duration);
 
-  function addToFavourites() {
+  const addToFavourites = () => {
     onAddToFavourites(name);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
-  }
+  };
 
-  function removeFromFavourites() {
+  const removeFromFavourites = () => {
     onRemoveFromFavourites(id);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
-  }
+  };
 
   return (
     <li className="movies-card">
@@ -79,14 +72,15 @@ MoviesCard.propTypes = {
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   trailerLink: PropTypes.string.isRequired,
-  onCardButtonClick: PropTypes.func,
   id: PropTypes.string,
+  onAddToFavourites: PropTypes.func,
+  onRemoveFromFavourites: PropTypes.func.isRequired,
 };
 
 MoviesCard.defaultProps = {
   cardType: 'default',
   id: '',
-  onCardButtonClick: () => { },
+  onAddToFavourites: () => { },
 };
 
 export default MoviesCard;

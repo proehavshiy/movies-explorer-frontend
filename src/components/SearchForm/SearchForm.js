@@ -1,5 +1,5 @@
-/* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable object-curly-newline */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchForm.css';
@@ -7,18 +7,17 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) {
   const {
-    // eslint-disable-next-line no-unused-vars
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, isValid, resetFrom,
   } = useFormWithValidation();
 
-  // если необходимо, чтобы сохранось значение поиска и чекбокса,
+  // если необходимо, чтобы сохранилось значение поиска и чекбокса,
   // то нужно передать initialInputValue и isChecked
   React.useEffect(() => {
     resetFrom({
       search: initialInputValue,
       isShortFilms: isChecked,
     }, {}, true);
-  }, [resetFrom, initialInputValue, isChecked]);
+  }, [initialInputValue, isChecked, resetFrom]);
 
   return (
     <section className="form-wrapper">
