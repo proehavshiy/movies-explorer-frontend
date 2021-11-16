@@ -140,29 +140,68 @@ function App() {
       });
   }
 
+  function handleAddMovie(movieName, updateMoviesForRendering) {
+    const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
+    // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
+    if (!movies) {
+      openInfoPopup('default', 'error', 'message');
+    } else if (movies) {
+      const favMovie = movies.find((movie) => movie.nameRU === movieName);
+      const {
+        nameRU, nameEN, description, director, country, year, duration, image, trailerLink, id,
+      } = favMovie;
+      mainApi.saveMovie(
+        nameRU,
+        nameEN,
+        description,
+        director,
+        country ?? 'Без страны',
+        year,
+        duration,
+        `${moviesApi.BASE_URL}${image.url}`,
+        trailerLink,
+        `${moviesApi.BASE_URL}${image.formats.thumbnail.url}`,
+        id,
+      )
+        .then(({ data }) => {
+          // нужно пометить добавленную карточку полем _id, чтобы понимать, что она в избранном
+          // записать обратно в localstorage, чтобы потом по нему удалять карточку
+          favMovie._id = data._id;
+          // заменяем в localstorage карточку с _id (она теперь в избранном)
+          const index = movies.indexOf(favMovie);
+          movies.splice(index, 1, favMovie);
+          // обновляем localstorage
+          localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
+          // обновляем стейт для рендеринга карточек для компонента через колбэк
+          updateMoviesForRendering();
+        })
+        .catch(() => {
+          openInfoPopup('addToFavourites', 'error', 'addToFavouritesError');
+        });
+    }
+  }
+
   function handleDeleteMovie(id, updateMoviesForRendering) {
     const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
-    mainApi.deleteMovie(id)
-      .then(({ data }) => {
-        // в if заворачиваем удаление _id из фильма в общем localstorage потому, что
-        // если localstorage будет утерян или заменен, а код будет искать карточку по наличию в ней _id
-        // и не найдет, то будет ошибка, карточка с сервера удалится, а со страницы нет
-        if (movies) {
-          // удалить из карточек localstorage _id,
-          // чтобы убрать удаленным из избранного карточкам на странице фильмов лайк
+    // если localstorage по какой-то причине не будет, то выведется попап с ошибкой
+    if (!movies) {
+      openInfoPopup('default', 'error', 'message');
+    } else if (movies) {
+      mainApi.deleteMovie(id)
+        .then(({ data }) => {
           const cardForDeletion = movies.find((card) => card._id === data.deletedMovie._id);
           const index = movies.indexOf(cardForDeletion);
           delete cardForDeletion._id;
           movies.splice(index, 1, cardForDeletion);
-        }
-        // обновляем localstorage
-        localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
-        // обновляем стейт для рендеринга карточек для компонента через колбэк
-        updateMoviesForRendering();
-      })
-      .catch(({ result, statusCode }) => {
-        openInfoPopup('deleteMovie', result, statusCode);
-      });
+          // обновляем localstorage
+          localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
+          // обновляем стейт для рендеринга карточек для компонента через колбэк
+          updateMoviesForRendering();
+        })
+        .catch(({ result, statusCode }) => {
+          openInfoPopup('deleteMovie', result, statusCode);
+        });
+    }
   }
 
   return (
@@ -187,6 +226,7 @@ function App() {
             />
             <Movies
               openInfoPopup={openInfoPopup}
+              onAddCard={handleAddMovie}
               onDeleteCard={handleDeleteMovie}
             />
             <Footer />

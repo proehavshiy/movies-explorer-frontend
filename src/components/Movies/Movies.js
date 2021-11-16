@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -20,7 +22,7 @@ import filterResults from '../../hooks/filterResults';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 
-function Movies({ openInfoPopup, onDeleteCard }) {
+function Movies({ openInfoPopup, onAddCard, onDeleteCard }) {
   // id пользователя для localstorage и определения владельца фильма
   const { _id } = React.useContext(CurrentUserContext);
   const [moviesForRendering, setmoviesForRendering] = React.useState(null);
@@ -94,44 +96,22 @@ function Movies({ openInfoPopup, onDeleteCard }) {
     }
   }
 
-  function addMovieToFavourites(nameOfFavourite) {
-    // ищем нужную карточку в localstorage по названию и получаем ее данные
-    const favMovie = movies.find((movie) => movie.nameRU === nameOfFavourite);
-    // нужно проверить по наличию _id, добавлена ли уже эта карточка в избранные,
-    // чтобы нельзя было добавить тот же фильм второй раз
-    const { nameRU, nameEN, description, director, country, year, duration, image, trailerLink, id } = favMovie;
-    saveMovie(
-      nameRU,
-      nameEN,
-      description,
-      director,
-      country ?? 'Без страны',
-      year,
-      duration,
-      `${moviesApi.BASE_URL}${image.url}`,
-      trailerLink,
-      `${moviesApi.BASE_URL}${image.formats.thumbnail.url}`,
-      id,
-    )
-      .then(({ data }) => {
-        // нужно пометить добавленную карточку _id, чтобы понимать, какую добавили
-        // записать обратно в localstorage, чтобы потом по нему удалять карточку
-        favMovie._id = data._id;
-        // заменяем в localstorage карточку с _id (она теперь в избранном)
-        const index = movies.indexOf(favMovie);
-        movies.splice(index, 1, favMovie);
-        // обновляем localstorage
-        localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
-        setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
-      })
-      .catch(() => {
-        openInfoPopup('addToFavourites', 'error', 'addToFavouritesError');
-      });
+  // функция обновления стейта для рендеринга карточек
+  function updateRenderingState(setState) {
+    const movies = JSON.parse(localStorage.getItem(`${_id} movies`));
+    const searchParameters = JSON.parse(localStorage.getItem(`${_id} search params`));
+    if (!movies || !searchParameters) return;
+    return setState(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected));
+  }
+
+  function addMovieToFavourites(movieName) {
+    // вторым параметром обновляем стейт для рендеринга карточек
+    onAddCard(movieName, () => updateRenderingState(setmoviesForRendering));
   }
 
   function deleteMovieFromFavourites(id) {
     // вторым параметром обновляем стейт для рендеринга карточек
-    onDeleteCard(id, () => setmoviesForRendering(filterResults(movies, searchParameters.inputQuery, searchParameters.isShortFilmsSelected)));
+    onDeleteCard(id, () => updateRenderingState(setmoviesForRendering));
   }
   return (
     <main className="movies page__main-content page__main-content-padding-top page__animation">
@@ -154,6 +134,7 @@ function Movies({ openInfoPopup, onDeleteCard }) {
 
 Movies.propTypes = {
   openInfoPopup: PropTypes.func,
+  onAddCard: PropTypes.func.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
 };
 Movies.defaultProps = {
