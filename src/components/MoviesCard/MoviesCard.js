@@ -71,7 +71,7 @@ MoviesCard.propTypes = {
   name: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  trailerLink: PropTypes.string.isRequired,
+  trailerLink: PropTypes.string,
   id: PropTypes.string,
   onAddToFavourites: PropTypes.func,
   onRemoveFromFavourites: PropTypes.func.isRequired,
@@ -79,6 +79,7 @@ MoviesCard.propTypes = {
 
 MoviesCard.defaultProps = {
   cardType: 'default',
+  trailerLink: '',
   id: '',
   onAddToFavourites: () => { },
 };

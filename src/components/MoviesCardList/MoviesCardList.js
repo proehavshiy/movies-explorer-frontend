@@ -16,7 +16,6 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
             // итерируем с конца в начало,
             // чтобы свежие добавленные фильмы были в начале
             const film = arr[arr.length - 1 - index];
-            console.log('film:', film);
             const key = typeOfList === 'default' ? film.id : film._id;
             const imageLink = typeOfList === 'default' ? `${BASE_URL}${film.image.url}` : film.image;
             const trailerLink = typeOfList === 'default' ? film.trailerLink : film.trailer;
@@ -27,7 +26,7 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
                 name={film.nameRU}
                 duration={film.duration}
                 image={imageLink}
-                trailerLink={trailerLink ?? 'http://example.com/'}
+                trailerLink={trailerLink}
                 onAddToFavourites={onAddToFavourites}
                 onRemoveFromFavourites={onRemoveFromFavourites}
                 id={film._id}

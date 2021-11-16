@@ -28,7 +28,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as mainApi from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
 // хуки
-import useInfoPopupSettings from '../../hooks/openInfoPopup';
+import useInfoPopupSettings from '../../hooks/useInfoPopupSettings';
 
 function App() {
   // eslint-disable-next-line no-unused-vars

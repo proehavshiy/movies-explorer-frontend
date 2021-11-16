@@ -78,9 +78,8 @@
   text-align: right;
 }
 
-.fieldset__input:invalid {
+.fieldset__input_error {
   outline-color: #FF4062;
-  /* color: #FF4062; */
 }
 
 .fieldset__input-error {
