@@ -22,7 +22,7 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
             const film = arr[arr.length - 1 - index];
             return (
               <MoviesCard
-                key={film.id}
+                key={typeOfList === 'default' ? film.id : film._id}
                 cardType={typeOfList}
                 name={film.nameRU}
                 duration={film.duration}
