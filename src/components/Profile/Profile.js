@@ -20,7 +20,7 @@ function Profile({
   const currentUser = React.useContext(CurrentUserContext);
   const [inputValuesHaveChanged, setInputValuesHaveChanged] = React.useState(true);
   const {
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, errors, resetFrom,
   } = useFormWithValidation();
 
   // подстановка значений в форму из контекста

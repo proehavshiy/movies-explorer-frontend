@@ -1,10 +1,6 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-use-before-define */
-/* eslint-disable semi */
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-return-assign */
+/* eslint-disable arrow-body-style */
 import React, { useCallback } from 'react';
 import validator from 'validator';
 
@@ -15,34 +11,21 @@ function useFormWithValidation() {
   const [errors, setErrors] = React.useState({});
   const [areAllInputsValid, setAreAllInputsValid] = React.useState({});
   const [numOfInputs, setNumOfInputs] = React.useState(null);
-  const [isValid, setIsValid] = React.useState(false);
-  // const isEmailValid = (value) => validator.isEmail(value, {
-  //   allow_utf8_local_part: false,
-  // })
-  const isEmailValid = (value) => validator.isEmail(value)
-  console.log('render:');
-
-  // const checkVal = useCallback(
-  //   (obj, num) => {
-  //     const valuess = Object.values(obj)
-  //     if (valuess.length !== num) return false;
-
-  //     return valuess.every((val) => val === true)
-  //     // console.log('values:', values);
-  //   },
-  // )
+  const [isFormValid, setIsFormValid] = React.useState(false);
+  // валидатор емейла
+  const isEmailValid = (value) => validator.isEmail(value, {
+    allow_utf8_local_part: false,
+  });
 
   React.useEffect(() => {
-    const checkVal = (obj, num) => {
-      const valuess = Object.values(obj)
+    function checkVal(obj, num) {
+      const valuess = Object.values(obj);
       if (valuess.length !== num) return false;
 
-      return valuess.every((val) => val === true)
-      // console.log('values:', values);
+      return valuess.every((val) => val === true);
     }
-    setIsValid(checkVal(areAllInputsValid, numOfInputs))
-    console.log('isValid:', isValid);
-  }, [areAllInputsValid]);
+    setIsFormValid(checkVal(areAllInputsValid, numOfInputs));
+  }, [areAllInputsValid, numOfInputs]);
 
   // управлятор инпутами:
   // заполняет хранилище
@@ -58,13 +41,16 @@ function useFormWithValidation() {
         if (isEmailValid(value)) {
           error = '';
         } else {
-          error = input.validationMessage ? input.validationMessage : 'Введите email вида username@postname.country'
+          error = input.validationMessage ? input.validationMessage : 'Введите email вида username@postname.country';
         }
       }
       // const isFormValid = input.closest('form').checkValidity();
       const isInputValid = input.validity.valid;
-      // кол-во всех инпутов формы
-      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => v.nodeName === 'INPUT').length)
+      // кол-во всех инпутов формы для валидации формы (без учета чекбокса)
+      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => {
+        const input2 = v.nodeName === 'INPUT' && v.name !== 'isShortFilms';
+        return input2;
+      }).length);
       console.log('numOfInputs:', numOfInputs);
       // записываем поле-значение
       if (type === 'checkbox') {
@@ -89,46 +75,29 @@ function useFormWithValidation() {
           ...prevState,
           [name]: isEmailValid(value),
         }));
+      } else if (type === 'checkbox') {
+        return;
       } else {
         setAreAllInputsValid((prevState) => ({
           ...prevState,
           [name]: isInputValid,
         }));
       }
-      // setAreAllInputsValid((prevState) => ({
-      //   ...prevState,
-      //   [name]: isEmailValid(value),
-      //   [name]: isInputValid,
-      // }));
-      console.log('areAllInputsValid:', areAllInputsValid);
-      // checkVal(areAllInputsValid, numOfInputs);
-      // console.log('checkVal(areAllInputsValid);:', checkVal(areAllInputsValid, numOfInputs));
-      // ставим валидность всей форме
-      // const val = checkVal(areAllInputsValid, numOfInputs)
-      // console.log('val:', val);
-      // setIsValid(val)
-      // console.log('setIsValid:', isValid);
-
-      // setIsValid(() => {
-      //   for (value of areAllInputsValid) {
-      //     console.log('value:', value);
-      //   }
-      // })
-    }, [setValues, setAreAllInputsValid, areAllInputsValid, setIsValid, isValid],
+    }, [setValues, setAreAllInputsValid, areAllInputsValid],
   );
 
   // сброс ошибок
   const resetFrom = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = {}, newErrors = {}, newIsFormValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
-      setIsValid(newIsValid);
+      setIsFormValid(newIsFormValid);
     },
-    [setValues, setErrors, setIsValid],
+    [setValues, setErrors, setIsFormValid],
   );
 
   return {
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, setValues, handleChangeInput, errors, isFormValid, resetFrom,
   };
 }
 

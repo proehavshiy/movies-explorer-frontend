@@ -14,7 +14,7 @@ function Register({
   const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
   const {
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, errors, isFormValid,
   } = useFormWithValidation();
 
   function handleSubmit(evt) {
@@ -30,7 +30,7 @@ function Register({
         formName="register"
         submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={isValid && isSubmitting}
+        submitButtonState={isFormValid && isSubmitting}
         redirectionSection={redirectionSection}
       >
         <FormFieldset

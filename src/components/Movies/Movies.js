@@ -112,6 +112,7 @@ function Movies({ openInfoPopup, onAddCard, onDeleteCard }) {
         onSubmit={handleSearchFormSubmit}
         initialInputValue={searchParameters && searchParameters.inputQuery}
         isChecked={searchParameters && searchParameters.isShortFilmsSelected}
+        isValidateForm
       />
       {moviesForRendering ? (
         <MoviesCardList

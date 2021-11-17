@@ -7,8 +7,9 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) {
   const {
-    values, handleChangeInput, isValid, resetFrom,
+    values, handleChangeInput, isFormValid, resetFrom,
   } = useFormWithValidation();
+  console.log('isFormValid:', isFormValid);
 
   // если необходимо, чтобы сохранилось значение поиска и чекбокса,
   // то нужно передать initialInputValue и isChecked
@@ -39,7 +40,7 @@ function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) 
               <button
                 className="search-form__submit"
                 type="submit"
-                disabled={isValidateForm && !isValid}
+                disabled={isValidateForm && !isFormValid}
                 aria-label="кнопка найти"
               />
             </div>
