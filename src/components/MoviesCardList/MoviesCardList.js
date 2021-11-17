@@ -1,24 +1,89 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import './MoviesCardList.css';
 import PropTypes from 'prop-types';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Ui/Button/Button';
 import { BASE_URL } from '../../utils/MoviesApi';
+import useWindowSize from '../../hooks/useWindowSize';
+
+// настройки отображения карточек
+function calculateCards(currentWidth) {
+  if (currentWidth >= 1670) {
+    return {
+      initialCardsVisible: 24,
+      visibleOnButtonClick: 4,
+    };
+  }
+  if (currentWidth >= 1280) {
+    return {
+      initialCardsVisible: 12,
+      visibleOnButtonClick: 3,
+    };
+  }
+  if (currentWidth >= 768) {
+    return {
+      initialCardsVisible: 8,
+      visibleOnButtonClick: 2,
+    };
+  }
+  return {
+    initialCardsVisible: 5,
+    visibleOnButtonClick: 2,
+  };
+}
 
 function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFromFavourites }) {
+  // актуальная ширина экрана
+  const [windowWidth] = useWindowSize();
+  // массив фильтрованных карточек для отображения
+  const [cardsForRendering, setCardsForRendering] = React.useState([]);
+  // кол-во карточек, которое нужно отрендерить еще по кнопке
+  const [visible, setVisible] = React.useState(0);
+
+  const defineCardsRendering = React.useCallback(() => {
+    // исходя из ширины экрана, получаем настройки отображения
+    const { initialCardsVisible, visibleOnButtonClick } = calculateCards(windowWidth);
+    setVisible(visibleOnButtonClick);
+
+    // изначальное кол-во карточек пакуем в рендер-стейт
+    if (!cardsForRendering.length) {
+      return setCardsForRendering(cardsData.slice(0, initialCardsVisible));
+    }
+    // актуальзируем рендеринг-стейт, чтобы при поиске отображались актуальные результаты
+    return setCardsForRendering(cardsData.slice(0, cardsForRendering.length));
+  }, [cardsData, cardsForRendering.length, visible, windowWidth]);
+
+  // вызываю функцию через таймаут в эффекте, чтобы зацикленность убрать
+  React.useEffect(() => {
+    setTimeout(() => defineCardsRendering(), 200);
+    return () => clearTimeout(defineCardsRendering);
+  }, [cardsData, windowWidth]);
+
+  // колбэк отображения доп карточек
+  const renderNewCards = () => {
+    // уже отрисованные + новая порция по кнопке
+    setCardsForRendering(cardsData.slice(0, cardsForRendering.length + visible));
+  };
+
+  // настройки параметров типа карточки
+  const renderingCardInterface = (val, index, arr) => {
+    const film = typeOfList === 'default' ? val : arr[arr.length - 1 - index];
+    const key = typeOfList === 'default' ? film.id : film._id;
+    const imageLink = typeOfList === 'default' ? `${BASE_URL}${film.image.url}` : film.image;
+    const trailerLink = typeOfList === 'default' ? film.trailerLink : film.trailer;
+    return { film, key, imageLink, trailerLink };
+  };
+
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__cards-container">
         {
-          cardsData.map((v, index, arr) => {
-            // итерируем с конца в начало,
-            // чтобы свежие добавленные фильмы были в начале
-            const film = arr[arr.length - 1 - index];
-            const key = typeOfList === 'default' ? film.id : film._id;
-            const imageLink = typeOfList === 'default' ? `${BASE_URL}${film.image.url}` : film.image;
-            const trailerLink = typeOfList === 'default' ? film.trailerLink : film.trailer;
+          cardsForRendering.map((v, index, arr) => {
+            // если страница сохраненных, то итерация с конца массива
+            const { film, key, imageLink, trailerLink } = renderingCardInterface(v, index, arr);
             return (
               <MoviesCard
                 key={key}
@@ -35,14 +100,14 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
           })
         }
       </ul>
-      {typeOfList === 'default' && (
+      {typeOfList === 'default' && cardsForRendering.length < cardsData.length && (
         <div className="movies-card-list__button-container">
           <Button
             text="Ещё"
             label="кнопка Загрузить больше карточек"
             btnStyle="load-more-cards"
             disabled={false}
-            onClick={() => { }}
+            onClick={renderNewCards}
           />
         </div>
       )}
