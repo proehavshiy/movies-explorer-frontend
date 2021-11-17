@@ -9,7 +9,6 @@ function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) 
   const {
     values, handleChangeInput, isFormValid, resetFrom,
   } = useFormWithValidation();
-  console.log('isFormValid:', isFormValid);
 
   // если необходимо, чтобы сохранилось значение поиска и чекбокса,
   // то нужно передать initialInputValue и isChecked
