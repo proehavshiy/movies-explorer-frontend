@@ -53,8 +53,8 @@ function useFormWithValidation() {
       }
       // const isFormValid = input.closest('form').checkValidity();
       const isInputValid = input.validity.valid;
-      // кол-во всех инпутов формы для валидации формы
-      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => v.nodeName === 'INPUT').length);
+      // кол-во всех инпутов формы для валидации формы без учета чекбоксов
+      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => v.nodeName === 'INPUT' && v.type !== 'checkbox').length);
       // записываем поле-значение
       setValues((prevState) => ({
         ...prevState,
