@@ -57,7 +57,7 @@ function SavedMovies({ openInfoPopup, onDeleteCard }) {
     // если в поле не введен запрос, сбрасываем поиск, отображаем все карточки
     // если при этом карточек нет, выводим статус, что карточек нет
     if (!inputQuery) {
-      setmoviesForRendering(savedCards);
+      setmoviesForRendering(filteredMovies);
     }
     // поиск фильмов по запросу из формы среди сохраненных в localstorage
     // обновляем стейт для отображения отфильтрованными фильмами

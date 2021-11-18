@@ -20,7 +20,7 @@ function Profile({
   const currentUser = React.useContext(CurrentUserContext);
   const [inputValuesHaveChanged, setInputValuesHaveChanged] = React.useState(true);
   const {
-    values, handleChangeInput, errors, resetFrom,
+    values, handleChangeInput, errors, resetFrom, isFormValid,
   } = useFormWithValidation();
 
   // подстановка значений в форму из контекста
@@ -49,7 +49,8 @@ function Profile({
     evt.preventDefault();
     onLogout();
   }
-
+  console.log('inputValuesHaveChanged:', inputValuesHaveChanged);
+  console.log('isFormValid:', isFormValid);
   return (
     <main className="profile page__main-content page__main-content-padding-top page__animation">
       <PageWithForm

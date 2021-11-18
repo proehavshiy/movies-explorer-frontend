@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-curly-newline */
 import React from 'react';
@@ -11,13 +12,20 @@ function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) 
   } = useFormWithValidation();
 
   // если необходимо, чтобы сохранилось значение поиска и чекбокса,
-  // то нужно передать initialInputValue и isChecked
+  // то нужно передать initialInputValue в валидацию, а isChecked в useeffect
+  // isChecked в валидацию не вносим, чтобы он не влиял на валидацию
+  const [checkboxValue, setCheckboxValue] = React.useState(isChecked);
+  const checkboxRef = React.useRef();
+
+  React.useEffect(() => {
+    checkboxRef.current.checked = isChecked;
+  }, [isChecked]);
+
   React.useEffect(() => {
     resetFrom({
       search: initialInputValue,
-      isShortFilms: isChecked,
     }, {}, true);
-  }, [initialInputValue, isChecked, resetFrom]);
+  }, [initialInputValue, resetFrom]);
 
   return (
     <section className="form-wrapper">
@@ -52,9 +60,9 @@ function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) 
                   id="isShortFilms"
                   type="checkbox"
                   name="isShortFilms"
-                  onChange={handleChangeInput}
-                  value={values.isShortFilms || ''}
-                  checked={values.isShortFilms || ''}
+                  ref={checkboxRef}
+                  onChange={setCheckboxValue}
+                  value={checkboxValue}
                 />
                 <span className="search-form__checkbox-short-films search-form__checkbox-short-films_visible" />
                 Короткометражки
