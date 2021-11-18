@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -48,12 +49,19 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
     const { initialCardsVisible, visibleOnButtonClick } = calculateCards(windowWidth);
     setVisible(visibleOnButtonClick);
 
-    // изначальное кол-во карточек пакуем в рендер-стейт
-    if (!cardsForRendering.length) {
-      return setCardsForRendering(cardsData.slice(0, initialCardsVisible));
+    // используем отображение по кнопке
+    if (typeOfList === 'default') {
+      // изначальное кол-во карточек пакуем в рендер-стейт
+      if (!cardsForRendering.length) {
+        return setCardsForRendering(cardsData.slice(0, initialCardsVisible));
+      }
+      // актуальзируем рендеринг-стейт, чтобы при поиске отображались актуальные результаты
+      return setCardsForRendering(cardsData.slice(0, cardsForRendering.length));
     }
-    // актуальзируем рендеринг-стейт, чтобы при поиске отображались актуальные результаты
-    return setCardsForRendering(cardsData.slice(0, cardsForRendering.length));
+    // не используем
+    if (typeOfList === 'saved') {
+      return setCardsForRendering(cardsData);
+    }
   }, [cardsData, cardsForRendering.length, visible, windowWidth]);
 
   // вызываю функцию через таймаут в эффекте, чтобы зацикленность убрать

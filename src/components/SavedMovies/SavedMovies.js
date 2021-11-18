@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,12 +12,12 @@ import SearchResultsBar from '../SearchResultsBar/SearchResultsBar';
 function SavedMovies({ openInfoPopup, onDeleteCard }) {
   // id пользователя для localstorage и определения владельца фильма
   const { _id } = React.useContext(CurrentUserContext);
-  const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const savedCards = JSON.parse(localStorage.getItem(`${_id} savedMovies`));
+  const [moviesForRendering, setmoviesForRendering] = React.useState(null);
   const [waitingContent, setWaitingContent] = React.useState(null);
 
-  // получение сохраненных фильмов пользоваетля при загрузке страницы
-  React.useEffect(() => {
+  // получить с сервера сохраненки и обновить рендер-стейт
+  const pullSavedMovies = React.useCallback(() => {
     getSavedMovies()
       .then(({ data }) => {
         // отфильтровываем только сохраненные данным пользователем фильмы
@@ -32,9 +31,14 @@ function SavedMovies({ openInfoPopup, onDeleteCard }) {
       });
   }, [_id, openInfoPopup]);
 
+  // получение сохраненных фильмов пользоваетля при загрузке страницы и их рендер
+  React.useEffect(() => {
+    pullSavedMovies();
+  }, [pullSavedMovies]);
+
   // в случае отсутствия фильмов, рендерит статус
   React.useEffect(() => {
-    if (moviesForRendering && moviesForRendering.length === 0) {
+    if (moviesForRendering && !moviesForRendering.length) {
       setmoviesForRendering(null);
       setWaitingContent(
         <SearchResultsBar
@@ -53,9 +57,7 @@ function SavedMovies({ openInfoPopup, onDeleteCard }) {
     // если в поле не введен запрос, сбрасываем поиск, отображаем все карточки
     // если при этом карточек нет, выводим статус, что карточек нет
     if (!inputQuery) {
-      if (filteredMovies.length !== 0) {
-        setmoviesForRendering(filteredMovies);
-      }
+      setmoviesForRendering(savedCards);
     }
     // поиск фильмов по запросу из формы среди сохраненных в localstorage
     // обновляем стейт для отображения отфильтрованными фильмами
@@ -76,8 +78,8 @@ function SavedMovies({ openInfoPopup, onDeleteCard }) {
   };
 
   const deleteMovieFromFavourites = (id) => {
-    // вторым параметром обновляем стейт для рендеринга карточек
-    onDeleteCard(id, () => setmoviesForRendering((prevState) => prevState.filter((movie) => movie._id !== id)));
+    // вторым параметром обновляем localstorage и рендеринг-стейт актуальными данными
+    onDeleteCard(id, pullSavedMovies);
   };
 
   return (

@@ -186,7 +186,7 @@ function App() {
           // обновляем localstorage
           localStorage.setItem(`${_id} movies`, JSON.stringify(movies));
           // обновляем стейт для рендеринга карточек для компонента через колбэк
-          updateMoviesForRendering();
+          updateMoviesForRendering(data);
         })
         .catch(({ result, statusCode }) => {
           openInfoPopup('deleteMovie', result, statusCode);
