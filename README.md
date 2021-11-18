@@ -5,6 +5,9 @@
 * Изменение персональных данных
 * Поиск фильмов
 * Добавление/удаление фильмов из избранного
+* Сохранение результатов поиска с предыдущей сессии
+* Информационные попапы об ошибках
+* Валидация форм
 
 ## Технологии
 * `HTML`, `CSS`, `JavaScript`
@@ -19,7 +22,7 @@
 * [фронтенд -> домен](https://filmsexplorer.nomoredomains.club/)
 * [API бэкенд -> домен](https://api.filmsexplorer.nomoredomains.club/)
 * [Репозиторий бэкенда](https://github.com/proehavshiy/movies-explorer-api/tree/main)
-* Макет в Figma
+* [Макет в Figma](https://www.figma.com/file/ZyInhnZG3QQWL3gGrSzRoN/Diploma-(Copy))
 
 ## Команды
 * `npm run start` - запуск проект в режиме отладки
