@@ -1,9 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-return-assign */
-/* eslint-disable max-len */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import './Profile.css';
 import PropTypes from 'prop-types';
@@ -38,19 +33,18 @@ function Profile({
     } else {
       setInputValuesHaveChanged(true);
     }
-  }, [values]);
+  }, [currentUser.email, currentUser.name, values]);
 
-  function handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit(values.name, values.email);
-  }
+  };
 
-  function handleLogout(evt) {
+  const handleLogout = (evt) => {
     evt.preventDefault();
     onLogout();
-  }
-  console.log('inputValuesHaveChanged:', inputValuesHaveChanged);
-  console.log('isFormValid:', isFormValid);
+  };
+
   return (
     <main className="profile page__main-content page__main-content-padding-top page__animation">
       <PageWithForm
@@ -62,7 +56,7 @@ function Profile({
         submitBtnText={changeBtnStatus ? submitBtnText.default : submitBtnText.isLoading}
         logoutBtnText={logoutBtnStatus ? logoutBtnText.default : logoutBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={inputValuesHaveChanged}
+        submitButtonState={inputValuesHaveChanged && isFormValid}
         logoutSection={{
           onLogout: handleLogout,
         }}

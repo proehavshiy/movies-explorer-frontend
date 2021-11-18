@@ -1,18 +1,17 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-useless-return */
 /* eslint-disable consistent-return */
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import validator from 'validator';
 
 // кастомный хук по управляемой валидации инпутов
 function useFormWithValidation() {
   // хранилище инпут-значение
-  const [values, setValues] = React.useState({});
-  const [errors, setErrors] = React.useState({});
-  const [areAllInputsValid, setAreAllInputsValid] = React.useState({});
-  const [numOfInputs, setNumOfInputs] = React.useState(null);
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [areAllInputsValid, setAreAllInputsValid] = useState({});
+  const [numOfInputs, setNumOfInputs] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
   // валидатор емейла
   const isEmailValid = (value) => validator.isEmail(value, {
     allow_utf8_local_part: false,
@@ -40,7 +39,6 @@ function useFormWithValidation() {
       const input = evt.target;
       const { name } = input;
       const { value } = input;
-      const { checked } = input;
       const { type } = input;
       // установка сообщения об ошибке
       // для всех - дефолтная, для емейла -
@@ -55,22 +53,13 @@ function useFormWithValidation() {
       }
       // const isFormValid = input.closest('form').checkValidity();
       const isInputValid = input.validity.valid;
-      // кол-во всех инпутов формы для валидации формы (без учета чекбокса)
-      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => v.nodeName === 'INPUT' && v.name !== 'isShortFilms').length);
+      // кол-во всех инпутов формы для валидации формы
+      setNumOfInputs(Array.from(input.closest('form').elements).filter((v) => v.nodeName === 'INPUT').length);
       // записываем поле-значение
-      // для чекбокса - значение checked,
-      // для всех остальных - значение value
-      if (type === 'checkbox') {
-        setValues((prevState) => ({
-          ...prevState,
-          [name]: checked,
-        }));
-      } else {
-        setValues((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-      }
+      setValues((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
       // записываем ошибки
       setErrors((prevState) => ({
         ...prevState,
@@ -85,8 +74,6 @@ function useFormWithValidation() {
           ...prevState,
           [name]: isEmailValid(value),
         }));
-      } else if (type === 'checkbox') {
-        // return;
       } else {
         setAreAllInputsValid((prevState) => ({
           ...prevState,
@@ -102,6 +89,13 @@ function useFormWithValidation() {
       setValues(newValues);
       setErrors(newErrors);
       setIsFormValid(newIsFormValid);
+      // ставим изначальное значение валидности каждому полю
+      setAreAllInputsValid(Object.keys(newValues).reduce((acc, curr) => {
+        acc[curr] = true;
+        return acc;
+      }, {}));
+      // указываем начальное кол-во полей
+      setNumOfInputs(Object.keys(newValues).length);
     },
     [setValues, setErrors, setIsFormValid],
   );
