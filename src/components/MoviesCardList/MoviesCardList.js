@@ -24,7 +24,7 @@ function calculateCards(currentWidth) {
       visibleOnButtonClick: 3,
     };
   }
-  if (currentWidth >= 768) {
+  if (currentWidth >= 630) {
     return {
       initialCardsVisible: 8,
       visibleOnButtonClick: 2,
@@ -47,6 +47,10 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
   const defineCardsRendering = React.useCallback(() => {
     // исходя из ширины экрана, получаем настройки отображения
     const { initialCardsVisible, visibleOnButtonClick } = calculateCards(windowWidth);
+    console.log('windowWidth:', windowWidth);
+    console.log('initialCardsVisible:', initialCardsVisible);
+    console.log('visibleOnButtonClick:', visibleOnButtonClick);
+    console.log('cardsForRendering len:', cardsForRendering.length);
     setVisible(visibleOnButtonClick);
 
     // используем отображение по кнопке
@@ -56,7 +60,7 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
         return setCardsForRendering(cardsData.slice(0, initialCardsVisible));
       }
       // актуальзируем рендеринг-стейт, чтобы при поиске отображались актуальные результаты
-      return setCardsForRendering(cardsData.slice(0, cardsForRendering.length));
+      // return setCardsForRendering(cardsData.slice(0, cardsForRendering.length));
     }
     // не используем
     if (typeOfList === 'saved') {
@@ -65,9 +69,15 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
   }, [cardsData, cardsForRendering.length, visible, windowWidth]);
 
   // вызываю функцию через таймаут в эффекте, чтобы зацикленность убрать
+  // через реф карточки не бликуют при смене ресайза
+  const limiter = React.useRef();
   React.useEffect(() => {
-    setTimeout(() => defineCardsRendering(), 200);
-    return () => clearTimeout(defineCardsRendering);
+    clearTimeout(limiter.current);
+    limiter.current = setTimeout(defineCardsRendering, 200);
+
+    // также обновляю рендер-стейт на initial кол-во карточек, чтобы ряд был всегда заполненный
+    const { initialCardsVisible } = calculateCards(windowWidth);
+    setCardsForRendering(cardsData.slice(0, initialCardsVisible));
   }, [cardsData, windowWidth]);
 
   // колбэк отображения доп карточек
