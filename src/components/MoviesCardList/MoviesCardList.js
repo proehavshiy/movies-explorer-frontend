@@ -47,10 +47,6 @@ function MoviesCardList({ typeOfList, cardsData, onAddToFavourites, onRemoveFrom
   const defineCardsRendering = React.useCallback(() => {
     // исходя из ширины экрана, получаем настройки отображения
     const { initialCardsVisible, visibleOnButtonClick } = calculateCards(windowWidth);
-    console.log('windowWidth:', windowWidth);
-    console.log('initialCardsVisible:', initialCardsVisible);
-    console.log('visibleOnButtonClick:', visibleOnButtonClick);
-    console.log('cardsForRendering len:', cardsForRendering.length);
     setVisible(visibleOnButtonClick);
 
     // используем отображение по кнопке
