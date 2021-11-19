@@ -49,15 +49,17 @@ function App() {
         setIsLoggedIn(true);
         history.push('/movies');
       }).catch(({ result, statusCode }) => {
-        openInfoPopup('getUserInfo', result, statusCode);
+        if (isLoggedIn) {
+          openInfoPopup('getUserInfo', result, statusCode);
+        }
       });
   };
 
-  // получаем данные пользователя при успешной авторизации
+  // логинимся
   React.useEffect(() => {
-    if (!isLoggedIn) return;
-
-    authorizeUser();
+    if (!isLoggedIn) {
+      authorizeUser();
+    }
   }, []);
 
   // установить статус кнопки во время запроса
