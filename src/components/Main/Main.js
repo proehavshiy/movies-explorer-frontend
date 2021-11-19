@@ -13,7 +13,7 @@ function Main({ staticContent }) {
   } = staticContent;
 
   return (
-    <main className="landing page__main-content">
+    <main className="landing page__main-content page__animation">
       <Promo
         headingText={headingText}
       />

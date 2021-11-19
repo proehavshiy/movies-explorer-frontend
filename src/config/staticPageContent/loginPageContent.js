@@ -1,4 +1,4 @@
-const loginPageContent = {
+const LOGIN_PAGE = {
   heading: 'Рады видеть!',
   submitBtnText: {
     default: 'Войти',
@@ -11,4 +11,4 @@ const loginPageContent = {
   },
 };
 
-export default loginPageContent;
+export default LOGIN_PAGE;

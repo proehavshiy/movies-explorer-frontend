@@ -10,27 +10,28 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
 function Login({
-  onLogin, isSubmitting, serverRequestStatus, staticContent,
+  onLogin, isSubmitting, staticContent,
 }) {
   const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
   const {
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, errors, isFormValid,
   } = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onLogin();
+    if (!values.email || !values.password) return;
+    onLogin(values.email, values.password);
   }
 
   return (
-    <main className="login page__main-content">
+    <main className="login page__main-content page__animation">
       <PageWithForm
         heading={heading}
         formName="login"
         submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={isValid}
+        submitButtonState={isFormValid && isSubmitting}
         redirectionSection={redirectionSection}
       >
         <FormFieldset
@@ -72,7 +73,6 @@ function Login({
 Login.propTypes = {
   onLogin: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
-  serverRequestStatus: PropTypes.string,
   staticContent: PropTypes.shape({
     heading: PropTypes.string.isRequired,
     submitBtnText: PropTypes.shape({
@@ -89,7 +89,6 @@ Login.propTypes = {
 
 Login.defaultProps = {
   isSubmitting: true,
-  serverRequestStatus: 'success',
 };
 
 export default Login;

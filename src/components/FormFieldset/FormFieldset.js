@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable no-multi-assign */
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './FormFieldset.css';
@@ -27,7 +30,7 @@ function FormFieldset({ inputs }) {
                 {labelName}
               </label>
               <input
-                className={`fieldset__input fieldset__input_style_${inputStyle}`}
+                className={`fieldset__input fieldset__input_style_${inputStyle} ${error && 'fieldset__input_error'}`}
                 value={inputValue}
                 onChange={onChange}
                 id={inputName}

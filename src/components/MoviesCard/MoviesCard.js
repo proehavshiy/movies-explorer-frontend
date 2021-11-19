@@ -1,16 +1,14 @@
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable max-len */
 import React from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
 import Button from '../Ui/Button/Button';
 
 function MoviesCard({
-  cardType, isFavourite, name, duration, image,
+  cardType, name, duration, image, trailerLink, id, onAddToFavourites, onRemoveFromFavourites,
 }) {
-  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(isFavourite);
+  const [isCardAddedToFavourites, setIsCardAddedToFavourites] = React.useState(id);
 
   function converseDurationToString(num) {
     let minutes;
@@ -22,9 +20,15 @@ function MoviesCard({
   }
   const stringDuration = converseDurationToString(duration);
 
-  function handleDefaultCard() {
+  const addToFavourites = () => {
+    onAddToFavourites(name);
     setIsCardAddedToFavourites(!isCardAddedToFavourites);
-  }
+  };
+
+  const removeFromFavourites = () => {
+    onRemoveFromFavourites(id);
+    setIsCardAddedToFavourites(!isCardAddedToFavourites);
+  };
 
   return (
     <li className="movies-card">
@@ -33,7 +37,11 @@ function MoviesCard({
           <h2 className="movies-card__title" title={name}>{name}</h2>
           <p className="movies-card__duration" title={`${duration} ${stringDuration}`}>{`${duration} ${stringDuration}`}</p>
         </figcaption>
-        <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} />
+        <div className="movies-card__image-wrapper">
+          <a className="movies-card__link" href={trailerLink} target="_blank" rel="noreferrer">
+            <img className="movies-card__image" src={image} alt={`картинка фильма ${name}`} />
+          </a>
+        </div>
       </figure>
       <div className="movies-card__button-wrapper">
         {cardType === 'default' ? (
@@ -42,7 +50,7 @@ function MoviesCard({
             label="кнопка Сохранить"
             btnStyle={isCardAddedToFavourites ? 'added-to-fav-movie-card' : 'default-movie-card'}
             disabled={false}
-            onClick={handleDefaultCard}
+            onClick={isCardAddedToFavourites ? removeFromFavourites : addToFavourites}
           />
         ) : (
           <Button
@@ -50,7 +58,7 @@ function MoviesCard({
             label="кнопка Удалить из избранного"
             btnStyle="delete-from-fav-movie-card"
             disabled={false}
-            onClick={() => { }}
+            onClick={removeFromFavourites}
           />
         )}
       </div>
@@ -60,15 +68,20 @@ function MoviesCard({
 
 MoviesCard.propTypes = {
   cardType: PropTypes.oneOf(['default', 'saved']),
-  isFavourite: PropTypes.bool,
   name: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  trailerLink: PropTypes.string,
+  id: PropTypes.string,
+  onAddToFavourites: PropTypes.func,
+  onRemoveFromFavourites: PropTypes.func.isRequired,
 };
 
 MoviesCard.defaultProps = {
   cardType: 'default',
-  isFavourite: false,
+  trailerLink: '',
+  id: '',
+  onAddToFavourites: () => { },
 };
 
 export default MoviesCard;

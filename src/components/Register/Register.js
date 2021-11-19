@@ -9,27 +9,28 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import FormFieldset from '../FormFieldset/FormFieldset';
 
 function Register({
-  onRegister, isSubmitting, serverRequestStatus, staticContent,
+  onRegister, isSubmitting, staticContent,
 }) {
   const { heading, submitBtnText, redirectionSection } = staticContent;
   // контроль инпутов и валидация
   const {
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, errors, isFormValid,
   } = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onRegister();
+    if (!values.name || !values.email || !values.password) return;
+    onRegister(values.name, values.email, values.password);
   }
 
   return (
-    <main className="register page__main-content">
+    <main className="register page__main-content page__animation">
       <PageWithForm
         heading={heading}
         formName="register"
         submitBtnText={isSubmitting ? submitBtnText.default : submitBtnText.isLoading}
         onSubmit={handleSubmit}
-        submitButtonState={isValid}
+        submitButtonState={isFormValid && isSubmitting}
         redirectionSection={redirectionSection}
       >
         <FormFieldset
@@ -85,7 +86,6 @@ function Register({
 Register.propTypes = {
   onRegister: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool,
-  serverRequestStatus: PropTypes.string,
   staticContent: PropTypes.shape({
     heading: PropTypes.string.isRequired,
     submitBtnText: PropTypes.shape({
@@ -102,7 +102,6 @@ Register.propTypes = {
 
 Register.defaultProps = {
   isSubmitting: true,
-  serverRequestStatus: 'success',
 };
 
 export default Register;

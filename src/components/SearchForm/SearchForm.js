@@ -1,14 +1,31 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable object-curly-newline */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchForm.css';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, initialInputValue, isChecked, isValidateForm }) {
   const {
-    // eslint-disable-next-line no-unused-vars
-    values, setValues, handleChangeInput, errors, isValid, resetFrom,
+    values, handleChangeInput, isFormValid, resetFrom,
   } = useFormWithValidation();
+
+  // если необходимо, чтобы сохранилось значение поиска и чекбокса,
+  // то нужно передать initialInputValue в валидацию, а isChecked в useeffect
+  // isChecked в валидацию не вносим, чтобы он не влиял на валидацию
+  const [checkboxValue, setCheckboxValue] = React.useState(isChecked);
+  const checkboxRef = React.useRef();
+
+  React.useEffect(() => {
+    checkboxRef.current.checked = isChecked;
+  }, [isChecked]);
+
+  React.useEffect(() => {
+    resetFrom({
+      search: initialInputValue,
+    }, {}, true);
+  }, [initialInputValue, resetFrom]);
 
   return (
     <section className="form-wrapper">
@@ -26,12 +43,11 @@ function SearchForm({ onSubmit }) {
                 type="text"
                 name="search"
                 required
-                minLength="2"
               />
               <button
                 className="search-form__submit"
                 type="submit"
-                disabled={!isValid}
+                disabled={isValidateForm && !isFormValid}
                 aria-label="кнопка найти"
               />
             </div>
@@ -41,10 +57,12 @@ function SearchForm({ onSubmit }) {
               <label className="search-form__input-label search-form__input-label_checkbox" htmlFor="isShortFilms">
                 <input
                   className="search-form__checkbox-short-films search-form__checkbox-short-films_invisible"
-                  value="true"
                   id="isShortFilms"
                   type="checkbox"
                   name="isShortFilms"
+                  ref={checkboxRef}
+                  onChange={setCheckboxValue}
+                  value={checkboxValue}
                 />
                 <span className="search-form__checkbox-short-films search-form__checkbox-short-films_visible" />
                 Короткометражки
@@ -59,6 +77,15 @@ function SearchForm({ onSubmit }) {
 
 SearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  initialInputValue: PropTypes.string,
+  isChecked: PropTypes.bool,
+  isValidateForm: PropTypes.bool,
+};
+
+SearchForm.defaultProps = {
+  initialInputValue: '',
+  isChecked: false,
+  isValidateForm: true,
 };
 
 export default SearchForm;

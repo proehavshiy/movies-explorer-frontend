@@ -1,0 +1,23 @@
+.search-results-bar {
+  width: 100%;
+}
+
+.search-results-bar__phrase {
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #000000;
+}
+
+@media screen and (max-width: 450px) {
+  .search-results-bar__phrase {
+    font-size: 11px;
+  }
+}
+
+
