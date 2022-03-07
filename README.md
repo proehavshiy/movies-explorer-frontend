@@ -6,6 +6,9 @@
 * Поиск фильмов
 * Добавление/удаление фильмов из избранного
 
+## Demo
+[![my diploma video demo](https://i9.ytimg.com/vi/8pLbhXddLYo/mq1.jpg?sqp=CPTCmJEG&rs=AOn4CLDiwCVzWQMUbD2w-6ij7xRenduNig)](https://youtu.be/8pLbhXddLYo)
+
 ## Технологии
 * `HTML`, `CSS`, `JavaScript`
 * SPA на `React` (используя библиотеки `prop-types`, `react-router-dom`, `react-router-hash-link`)
