@@ -7,7 +7,7 @@
 * Добавление/удаление фильмов из избранного
 
 ## Demo
-[![my diploma video demo](https://i9.ytimg.com/vi/8pLbhXddLYo/mq1.jpg?sqp=CPTCmJEG&rs=AOn4CLDiwCVzWQMUbD2w-6ij7xRenduNig)](https://youtu.be/8pLbhXddLYo)
+[![my diploma video demo](https://disk.yandex.com/i/X7BC16kwaoz49A)](https://youtu.be/8pLbhXddLYo)
 
 ## Технологии
 * `HTML`, `CSS`, `JavaScript`
