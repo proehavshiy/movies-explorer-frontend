@@ -1,31 +1,36 @@
-# Фронтенд-часть дипломного SPA-приложения в Яндекс.Практикуме - `MoviesExplorer`
-## Реализованный функционал:
-* Авторизация
-* Регистрация пользователей
-* Изменение персональных данных
-* Поиск фильмов
-* Добавление/удаление фильмов из избранного
+# Movies Searcher
+Frontend-part of my Diploma in Yandex.Practicum. It is the React SPA that helps users to search and save loved movies.
+<br />
+<a href="https://filmsexplorer.nomoredomains.club/" target="_blank">Ready project is here</a>
 
-## Demo
-[![my diploma video demo](https://disk.yandex.com/i/X7BC16kwaoz49A)](https://youtu.be/8pLbhXddLYo)
+## What can it do:
+* Search movies through user's search query
+* Like and add movies to favorites
+* Filter short movies or not
+* User's auth & registration via cookies
+* Change personal information
 
-## Технологии
+## Watch the demo
+[![my diploma video demo](https://i9.ytimg.com/vi/8pLbhXddLYo/mq2.jpg?sqp=CKDFmJEG&rs=AOn4CLAI7BS0QibXVhptYs5TR4M-tXNPlg)](https://youtu.be/8pLbhXddLYo)
+
+## Technologes
 * `HTML`, `CSS`, `JavaScript`
-* SPA на `React` (используя библиотеки `prop-types`, `react-router-dom`, `react-router-hash-link`)
-* Весь статический контент страниц сгруппирован в объекты и вынесен в контентную папку
-* Линтер `Eslint` по стайлгайду `Airbnb`
+* `React`SPA (with `prop-types`, `react-router-dom`, `react-router-hash-link` libraries)
+* All static content is grouped by objects and is in <a href="https://github.com/proehavshiy/movies-explorer-frontend/tree/main/src/utils/staticPageContent" target="_blank">StaticPageContent</a>. As a result, you are able to easy change page's content 
+* Project use `Eslint` with `Airbnb` style guide
 
-## Гайдлайны и дополнительные ресурсы
-* [Чеклист](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html)
-* [Правила написания кода](https://code.s3.yandex.net/web-developer/landings/design-rules/index.html)
-* Публичный IP: `217.28.229.36`
-* [фронтенд -> домен](https://filmsexplorer.nomoredomains.club/)
-* [API бэкенд -> домен](https://api.filmsexplorer.nomoredomains.club/)
-* [Репозиторий бэкенда](https://github.com/proehavshiy/movies-explorer-api/tree/main)
-* Макет в Figma
+## Guidelines for the project
+* <a href="https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html" target="_blank">Checklist(rus)</a>
+* <a href="https://code.s3.yandex.net/web-developer/landings/design-rules/index.html" target="_blank">HTML and CSS standards from Yandex(rus)</a>
+* Public IP: `217.28.229.36`
+* <a href="https://filmsexplorer.nomoredomains.club/" target="_blank">Frontend part domain</a>
+* <a href="https://api.filmsexplorer.nomoredomains.club/" target="_blank">Backend domain</a>
+* <a href="https://github.com/proehavshiy/movies-explorer-api/tree/main" target="_blank">Backend repo</a>
+* <a href="https://www.figma.com/file/ZyInhnZG3QQWL3gGrSzRoN/Diploma-(Copy)?node-id=891%3A3857" target="_blank">Figma layouts</a>
 
-## Команды
-* `npm run start` - запуск проект в режиме отладки
-* `npm run build` - собрать проект
-* `npm run lint` - запустить линтер
-* `npm run deploy` - собрать проект и отправить на удаленный сервер
+## You can run this project locally:
+* clone branch with `git clone git@github.com:proehavshiy/movies-explorer-api.git`
+* `npm run start` - run the project
+* `npm run build` - build final version
+* `npm run lint` - check linter errors
+* `npm run deploy` - build and deploy
