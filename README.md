@@ -29,7 +29,7 @@ Frontend-part of my Diploma in Yandex.Practicum. It is the React SPA that helps 
 * [Figma layouts](https://www.figma.com/file/ZyInhnZG3QQWL3gGrSzRoN/Diploma-(Copy)?node-id=891%3A3857)
 
 ## You can run this project locally:
-* clone branch with `git clone git@github.com:proehavshiy/movies-explorer-api.git`
+* clone branch with `git clone git@github.com:proehavshiy/movies-explorer-frontend.git`
 * `npm run start` - run the project
 * `npm run build` - build final version
 * `npm run lint` - check linter errors
